@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Globe, ArrowRight, Mail, MapPin, Code2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Globe, ArrowRight, Mail, MapPin, Code2, Terminal, Cpu, Database, Layers, CheckCircle2, Copy } from "lucide-react";
 import styles from "./portfolio.module.css";
 import { PROJECTS, PROCESS_STEPS, TESTIMONIALS, Project } from "@/data/portfolioData";
 import {
@@ -16,8 +15,8 @@ import {
   WebflowIcon,
   GithubIcon,
   LinkedinIcon,
+  InstagramIcon,
 } from "@/components/ToolIcons";
-
 import ProjectModal from "@/components/ProjectModal";
 import ContactModal from "@/components/ContactModal";
 
@@ -25,6 +24,26 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [activeConsoleTab, setActiveConsoleTab] = useState<"profile" | "shefware" | "architecture">("profile");
+  const [currentTime, setCurrentTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString("en-US", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("shivanshu@shefware.com");
@@ -32,12 +51,45 @@ export default function Home() {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
+  const consoleTabs = {
+    profile: [
+      { line: 1, content: <><span className={styles.codeKeyword}>const</span> <span className={styles.codeVariable}>engineer</span> = &#123;</> },
+      { line: 2, content: <>  name: <span className={styles.codeString}>&quot;Shivanshu Chauhan&quot;</span>,</> },
+      { line: 3, content: <>  title: <span className={styles.codeString}>&quot;Software Engineer &amp; Full Stack&quot;</span>,</> },
+      { line: 4, content: <>  experience: <span className={styles.codeString}>&quot;Shefware (shefware.com)&quot;</span>,</> },
+      { line: 5, content: <>  languages: [<span className={styles.codeString}>&quot;Java&quot;</span>, <span className={styles.codeString}>&quot;C# / .NET&quot;</span>, <span className={styles.codeString}>&quot;TypeScript&quot;</span>],</> },
+      { line: 6, content: <>  frameworks: [<span className={styles.codeString}>&quot;Next.js&quot;</span>, <span className={styles.codeString}>&quot;React Native&quot;</span>, <span className={styles.codeString}>&quot;Spring Boot&quot;</span>],</> },
+      { line: 7, content: <>  infrastructure: [<span className={styles.codeString}>&quot;Docker&quot;</span>, <span className={styles.codeString}>&quot;Kubernetes&quot;</span>, <span className={styles.codeString}>&quot;CI/CD&quot;</span>],</> },
+      { line: 8, content: <>  availableForHire: <span className={styles.codeBool}>true</span>,</> },
+      { line: 9, content: <>&#125;;</> },
+    ],
+    shefware: [
+      { line: 1, content: <><span className={styles.codeComment}>// Shefware Enterprise Cloud Migration Engine</span></> },
+      { line: 2, content: <><span className={styles.codeKeyword}>public async</span> Task&lt;MigrationResult&gt; <span className={styles.codeVariable}>MigrateMailboxAsync</span>() &#123;</> },
+      { line: 3, content: <>  <span className={styles.codeKeyword}>var</span> pipeline = <span className={styles.codeKeyword}>new</span> CloudStreamPipeline();</> },
+      { line: 4, content: <>  pipeline.EnforceZeroPacketLoss(<span className={styles.codeBool}>true</span>);</> },
+      { line: 5, content: <>  <span className={styles.codeKeyword}>await</span> pipeline.ProcessItemsAsync(500_000);</> },
+      { line: 6, content: <>  <span className={styles.codeKeyword}>return</span> MigrationResult.Success(uptime: <span className={styles.codeString}>&quot;99.98%&quot;</span>);</> },
+      { line: 7, content: <>&#125;</> },
+    ],
+    architecture: [
+      { line: 1, content: <><span className={styles.codeComment}>// Full-Stack Monorepo: Next.js + React Native</span></> },
+      { line: 2, content: <><span className={styles.codeKeyword}>export function</span> <span className={styles.codeVariable}>useSharedCoreState</span>() &#123;</> },
+      { line: 3, content: <>  <span className={styles.codeKeyword}>const</span> [sharedLogic] = useSyncExternalStore();</> },
+      { line: 4, content: <>  <span className={styles.codeKeyword}>return</span> &#123;</> },
+      { line: 5, content: <>    codeReuseRatio: <span className={styles.codeString}>&quot;85%&quot;</span>,</> },
+      { line: 6, content: <>    latency: <span className={styles.codeString}>&quot;&lt;80ms global&quot;</span>,</> },
+      { line: 7, content: <>    deployTarget: [<span className={styles.codeString}>&quot;Web&quot;</span>, <span className={styles.codeString}>&quot;iOS&quot;</span>, <span className={styles.codeString}>&quot;Android&quot;</span>]</> },
+      { line: 8, content: <>  &#125;;</> },
+      { line: 9, content: <>&#125;</> },
+    ],
+  };
+
   return (
     <div className={styles.pageWrapper}>
-      {/* Subtle Ambient Floral Overlays */}
-      <div className={styles.ambientFloralLeft} aria-hidden="true" />
-      <div className={styles.ambientFloralRight} aria-hidden="true" />
-      <div className={styles.ambientFloralBottom} aria-hidden="true" />
+      {/* Pure CSS Ambient Velvet Orbs */}
+      <div className={styles.ambientOrbLeft} aria-hidden="true" />
+      <div className={styles.ambientOrbRight} aria-hidden="true" />
 
       {/* =====================================================================
           TOP BAR / HEADER
@@ -52,14 +104,81 @@ export default function Home() {
             <a href="#projects" className={styles.navLink}>Projects</a>
             <a href="#process" className={styles.navLink}>Process</a>
             <a href="#tools" className={styles.navLink}>Stack</a>
-            <a href="#words" className={styles.navLink}>Testimonials</a>
+            <a href="#words" className={styles.navLink}>Endorsements</a>
+            <a href="#contact" className={styles.navLink}>Contact</a>
           </div>
           <span className={styles.creativeTag}>CREATIVE PORTFOLIO</span>
         </div>
       </header>
 
       {/* =====================================================================
-          HERO SECTION
+          KINETIC MARQUEE / TICKER
+          ===================================================================== */}
+      <div className={styles.tickerTrack} aria-hidden="true">
+        <div className={styles.tickerContent}>
+          <div className={styles.tickerItem}>
+            <span>JAVA &amp; SPRING BOOT</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>.NET CORE &amp; C#</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>DEVOPS &amp; DOCKER</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>REACT NATIVE &amp; NEXT.JS</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>SHEFWARE.COM CLOUD ARCHITECTURE</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>KUBERNETES &amp; CI/CD</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>HAUTE-COUTURE UI/UX</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+        </div>
+        <div className={styles.tickerContent}>
+          <div className={styles.tickerItem}>
+            <span>JAVA &amp; SPRING BOOT</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>.NET CORE &amp; C#</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>DEVOPS &amp; DOCKER</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>REACT NATIVE &amp; NEXT.JS</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>SHEFWARE.COM CLOUD ARCHITECTURE</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>KUBERNETES &amp; CI/CD</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+          <div className={styles.tickerItem}>
+            <span>HAUTE-COUTURE UI/UX</span>
+            <span className={styles.tickerStar}>✦</span>
+          </div>
+        </div>
+      </div>
+
+      {/* =====================================================================
+          HERO SECTION (Text & Code-Driven Developer Showcase)
           ===================================================================== */}
       <section className={styles.heroSection} id="hero">
         {/* Giant Editorial Title */}
@@ -67,7 +186,7 @@ export default function Home() {
           <h1 className={styles.heroTitle}>PORTFOLIO</h1>
         </div>
 
-        {/* 3-Column Content & Portrait */}
+        {/* 3-Column Content & Interactive Code Monolith */}
         <div className={styles.heroContentGrid}>
           {/* Left Hero Column */}
           <div className={styles.heroLeft}>
@@ -89,21 +208,56 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Center Portrait */}
+          {/* Center: Pure Code & Architecture Developer Console */}
           <div className={styles.heroCenter}>
-            <div className={styles.heroImageFrame}>
-              <Image
-                src="/images/coder-hero.jpg"
-                alt="Shivanshu Chauhan - Software Engineer"
-                width={800}
-                height={1067}
-                priority
-                className={styles.heroImage}
-              />
-              <div className={styles.heroImageOverlay} />
+            <div className={styles.consoleCard}>
+              <div className={styles.consoleHeader}>
+                <div className={styles.consoleDots}>
+                  <div className={styles.dotRed} />
+                  <div className={styles.dotYellow} />
+                  <div className={styles.dotGreen} />
+                </div>
+
+                <div className={styles.consoleTabs}>
+                  <button
+                    onClick={() => setActiveConsoleTab("profile")}
+                    className={`${styles.consoleTabBtn} ${activeConsoleTab === "profile" ? styles.activeTab : ""}`}
+                  >
+                    profile.ts
+                  </button>
+                  <button
+                    onClick={() => setActiveConsoleTab("shefware")}
+                    className={`${styles.consoleTabBtn} ${activeConsoleTab === "shefware" ? styles.activeTab : ""}`}
+                  >
+                    shefware.cs
+                  </button>
+                  <button
+                    onClick={() => setActiveConsoleTab("architecture")}
+                    className={`${styles.consoleTabBtn} ${activeConsoleTab === "architecture" ? styles.activeTab : ""}`}
+                  >
+                    stack.tsx
+                  </button>
+                </div>
+              </div>
+
+              <div className={styles.consoleBody}>
+                {consoleTabs[activeConsoleTab].map((item) => (
+                  <div key={item.line} className={styles.codeLine}>
+                    <span className={styles.lineNum}>{item.line}</span>
+                    <span>{item.content}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.consoleFooter}>
+                <div className={styles.statusIndicator}>
+                  <div className={styles.liveDot} />
+                  <span>SYSTEM OPERATIONAL &bull; 99.98% UPTIME</span>
+                </div>
+                <span>NODE V24 &bull; NEXT 16</span>
+              </div>
             </div>
           </div>
-
 
           {/* Right Hero Column */}
           <div className={styles.heroRight}>
@@ -112,34 +266,51 @@ export default function Home() {
             </p>
 
             <div className={styles.heroLocation}>
-              <div className={styles.locationText}>
-                <span>BASED IN INDIA</span>
-                <span>WORKING WORLDWIDE</span>
-              </div>
               <div className={styles.locationGlobe} title="Working Worldwide with Global Clients">
                 <Globe size={18} className="animate-spin-slow" />
               </div>
+              <div className={styles.locationText}>
+                <span>NEW DELHI, INDIA</span>
+                <span>WORKING WORLDWIDE</span>
+              </div>
             </div>
 
-            {/* Quick Developer Links */}
-            <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", flexWrap: "wrap" }}>
+            {/* Quick Developer Badges */}
+            <div className={styles.devSocialRow}>
               <a
                 href="https://github.com/shivanshuofficials"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.68rem", color: "var(--text-secondary)", letterSpacing: "0.15em", textTransform: "uppercase" }}
+                className={styles.devBadgeLink}
               >
-                <Code2 size={13} color="#d8838e" />
+                <GithubIcon />
                 <span>GITHUB</span>
               </a>
-
+              <a
+                href="https://www.linkedin.com/in/shivanshu-chauhan-202317336/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.devBadgeLink}
+              >
+                <LinkedinIcon />
+                <span>LINKEDIN</span>
+              </a>
+              <a
+                href="https://instagram.com/shivu.__01"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.devBadgeLink}
+              >
+                <InstagramIcon />
+                <span>INSTAGRAM</span>
+              </a>
               <a
                 href="https://shefware.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.68rem", color: "var(--text-secondary)", letterSpacing: "0.15em", textTransform: "uppercase" }}
+                className={styles.devBadgeLink}
               >
-                <Globe size={13} color="#d8838e" />
+                <Globe size={13} />
                 <span>SHEFWARE.COM</span>
               </a>
             </div>
@@ -174,7 +345,7 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          SELECTED PROJECTS SECTION
+          SELECTED PROJECTS SECTION (Text & Code-Rendered Preview)
           ===================================================================== */}
       <section className={styles.projectsSection} id="projects">
         <div className={styles.sectionHeaderBar}>
@@ -194,8 +365,7 @@ export default function Home() {
         </div>
 
         <div className={styles.projectsGrid}>
-
-          {PROJECTS.map((project) => (
+          {PROJECTS.map((project, idx) => (
             <article
               key={project.id}
               className={styles.projectCard}
@@ -215,21 +385,47 @@ export default function Home() {
                 <span className={styles.projectCategory}>{project.category}</span>
               </div>
 
-              {/* Browser mockup with window dots */}
-              <div className={styles.browserMockup}>
-                <div className={styles.browserHeader}>
-                  <div className={styles.browserDot} />
-                  <div className={styles.browserDot} />
-                  <div className={styles.browserDot} />
+              {/* Code-Rendered Project Architectural Preview Window */}
+              <div className={styles.codeProjectPreview}>
+                <div className={styles.previewHeader}>
+                  <div className={styles.consoleDots}>
+                    <div className={styles.dotRed} />
+                    <div className={styles.dotYellow} />
+                    <div className={styles.dotGreen} />
+                  </div>
+                  <span className={styles.previewFileTitle}>
+                    {idx === 0 ? "shefware-migration-stream.cs" : idx === 1 ? "nexus-sync-engine.tsx" : "docker-compose.k8s.yml"}
+                  </span>
                 </div>
-                <div className={styles.browserImageWrapper}>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className={styles.browserImg}
-                  />
+
+                <div className={styles.previewBody}>
+                  {idx === 0 ? (
+                    <div>
+                      <div style={{ color: "#d8838e", fontWeight: 600 }}>// ENTERPRISE CLOUD ENGINE</div>
+                      <div style={{ color: "#e5b382" }}>&gt; target: Microsoft 365 / Google Workspace</div>
+                      <div style={{ color: "#5ec498" }}>&gt; packetLoss: 0.00% [TRANSACTIONAL]</div>
+                      <div style={{ color: "#dfd2c8", marginTop: "0.4rem" }}>throughput: 48.6 MB/s &bull; threads: 32</div>
+                    </div>
+                  ) : idx === 1 ? (
+                    <div>
+                      <div style={{ color: "#d8838e", fontWeight: 600 }}>// FULL STACK &amp; MOBILE SYNC</div>
+                      <div style={{ color: "#e5b382" }}>&gt; client: Next.js 16 + React Native</div>
+                      <div style={{ color: "#5ec498" }}>&gt; latency: 74ms &bull; offlineCache: true</div>
+                      <div style={{ color: "#dfd2c8", marginTop: "0.4rem" }}>sharedBusinessLogic: 85% &bull; REST/GraphQL</div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div style={{ color: "#d8838e", fontWeight: 600 }}>// DEVOPS &amp; ORCHESTRATION</div>
+                      <div style={{ color: "#e5b382" }}>&gt; container: Docker Engine &bull; Pods: 12</div>
+                      <div style={{ color: "#5ec498" }}>&gt; staging: Automated CI/CD Blue/Green</div>
+                      <div style={{ color: "#dfd2c8", marginTop: "0.4rem" }}>downtime: 0ms &bull; telemetry: Prometheus</div>
+                    </div>
+                  )}
+
+                  <div className={styles.previewActionPrompt}>
+                    <span>Click to inspect case study</span>
+                    <ArrowRight size={12} />
+                  </div>
                 </div>
               </div>
 
@@ -270,17 +466,14 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Medallion */}
+            {/* Geometric Orbit Medallion (Pure CSS/SVG) */}
             <div className={styles.processMedallionWrapper}>
-              <div className={styles.medallionArch}>
-                <div className={styles.medallionInner}>
-                  <Image
-                    src="/images/floral-accent.jpg"
-                    alt="Process Floral Detail"
-                    fill
-                    sizes="155px"
-                    className={styles.medallionImg}
-                  />
+              <div className={styles.geometricOrbitFrame}>
+                <div className={styles.geometricCore}>
+                  <Cpu size={32} color="#d8838e" />
+                  <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-primary)" }}>
+                    ARCHITECTURE
+                  </span>
                 </div>
               </div>
               <p className={styles.medallionQuote}>
@@ -391,7 +584,6 @@ export default function Home() {
                   {item.name.slice(0, 2)}
                 </div>
                 <div className={styles.authorInfo}>
-
                   <span className={styles.authorName}>{item.name}</span>
                   <span className={styles.authorRole}>{item.role}</span>
                 </div>
@@ -402,7 +594,7 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          FOOTER / CONTACT SECTION
+          FOOTER / CONTACT SECTION (Typographic Executive Card)
           ===================================================================== */}
       <footer className={styles.footerContactSection} id="contact">
         {/* Left Column: Let's Create Something Amazing */}
@@ -464,15 +656,24 @@ export default function Home() {
               <span>GITHUB.COM/SHIVANSHUOFFICIALS</span>
             </a>
 
-
             <a
-              href="https://linkedin.com/in/shivanshu-chauhan"
+              href="https://www.linkedin.com/in/shivanshu-chauhan-202317336/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.contactLinkItem}
             >
               <LinkedinIcon className={styles.contactIcon} />
-              <span>LINKEDIN.COM/IN/SHIVANSHU-CHAUHAN</span>
+              <span>LINKEDIN.COM/IN/SHIVANSHU-CHAUHAN-202317336</span>
+            </a>
+
+            <a
+              href="https://instagram.com/shivu.__01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.contactLinkItem}
+            >
+              <InstagramIcon className={styles.contactIcon} />
+              <span>INSTAGRAM.COM/SHIVU.__01</span>
             </a>
 
             <div className={styles.contactLinkItem}>
@@ -482,18 +683,33 @@ export default function Home() {
           </div>
         </div>
 
-
-        {/* Right Column: Monochrome Portrait */}
+        {/* Right Column: Typographic Executive Card */}
         <div className={styles.footerColRight}>
-          <div className={styles.footerPortraitFrame}>
-            <Image
-              src="/images/coder-footer.jpg"
-              alt="Shivanshu Chauhan Editorial Coder Portrait"
-              width={560}
-              height={747}
-              className={styles.footerPortraitImg}
-            />
+          <div className={styles.execDevCard}>
+            <div className={styles.execCardHeader}>
+              <span className={styles.execMonogram}>SC</span>
+              <span className={styles.execBadge}>VERIFIED</span>
+            </div>
 
+            <div className={styles.execCardBody}>
+              <span className={styles.execName}>Shivanshu Chauhan</span>
+              <span className={styles.execRole}>Software Engineer &bull; Shefware</span>
+            </div>
+
+            <div className={styles.execMeta}>
+              <div className={styles.execMetaItem}>
+                <div className={styles.liveDot} />
+                <span>AVAILABLE FOR HIRE</span>
+              </div>
+              <div className={styles.execMetaItem}>
+                <Globe size={11} color="#d8838e" />
+                <span>{currentTime ? `${currentTime} IST` : "NEW DELHI, INDIA"}</span>
+              </div>
+              <div className={styles.execMetaItem}>
+                <Code2 size={11} color="#d8838e" />
+                <span>JAVA &bull; .NET &bull; DEVOPS &bull; REACT</span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
@@ -502,7 +718,7 @@ export default function Home() {
       <div className={styles.bottomBar}>
         <span>THANK YOU FOR VISITING</span>
         <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-        <span>&copy; 2025 SHIVANSHU CHAUHAN &bull; ALL RIGHTS RESERVED</span>
+        <span>&copy; 2026 SHIVANSHU CHAUHAN &bull; ALL RIGHTS RESERVED</span>
       </div>
 
       {/* Interactive Modals */}
