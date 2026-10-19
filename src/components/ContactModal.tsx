@@ -20,6 +20,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -37,26 +38,46 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message. Please try again.");
+      }
+
       setIsSubmitted(true);
-    }, 900);
+    } catch (err: any) {
+      console.error("Form submission failed:", err);
+      setErrorMessage(err.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setErrorMessage("");
     setFormData({
       name: "",
       email: "",
-      service: "UI/UX Design",
-      budget: "$5,000 - $10,000",
-      message: ""
+      service: "Full Stack & Next.js Systems",
+      budget: "Full-time Engineering Role",
+      message: "",
     });
     onClose();
   };
+
 
   return (
     <div className={styles.modalBackdrop} onClick={onClose} role="dialog" aria-modal="true">
@@ -82,14 +103,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             </div>
 
             <h3 style={{ fontSize: "1.3rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.8rem", color: "var(--text-primary)" }}>
-              Message Received
+              Message Dispatched
             </h3>
             <p style={{ color: "var(--text-secondary)", fontSize: "0.88rem", lineHeight: "1.6", maxWidth: "420px", margin: "0 auto 2rem" }}>
-              Thank you for reaching out, {formData.name || "friend"}. Mariana will review your project brief and reply within 24 business hours.
+              Thank you for reaching out, {formData.name || "friend"}. Shivanshu Chauhan will review your inquiry and reply via email within 24 hours.
             </p>
 
             <button onClick={handleReset} className={styles.formSubmitBtn}>
-              Close & Return to Portfolio
+              Close &amp; Return to Portfolio
             </button>
           </div>
         ) : (
@@ -102,9 +123,26 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 Let&apos;s Create Together
               </h2>
               <p style={{ color: "var(--text-secondary)", fontSize: "0.82rem", marginTop: "0.4rem" }}>
-                Currently booking select digital experiences, branding systems, and bespoke web platforms.
+                Send a message directly to Shivanshu Chauhan &bull; Available worldwide for engineering roles &amp; consultations.
               </p>
             </div>
+
+            {errorMessage && (
+              <div
+                style={{
+                  background: "rgba(142, 28, 48, 0.3)",
+                  border: "1px solid var(--text-accent-rose)",
+                  padding: "0.75rem 1rem",
+                  borderRadius: "4px",
+                  fontSize: "0.78rem",
+                  color: "#ede0d4",
+                  marginBottom: "1.2rem",
+                }}
+              >
+                {errorMessage}
+              </div>
+            )}
+
 
             <form onSubmit={handleSubmit}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
