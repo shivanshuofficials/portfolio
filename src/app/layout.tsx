@@ -102,6 +102,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://shivanshuchauhan.com",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
+
   openGraph: {
     title: "Shivanshu Chauhan — Software Engineer & Full Stack Developer",
     description:

@@ -681,7 +681,7 @@ export default function Home() {
         <div className={styles.sectionHeaderBar}>
           <div className={styles.sectionTitle} id="faq-section-title">
             <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-            <span>05 / FREQUENTLY ASKED QUESTIONS &bull; AEO ENGINE</span>
+            <span>05 / FREQUENTLY ASKED QUESTIONS &bull;</span>
           </div>
           <span className={styles.sectionLink} style={{ cursor: "default" }}>
             INDEXED FOR AI &amp; SEARCH
@@ -746,14 +746,25 @@ export default function Home() {
           ===================================================================== */}
 
       <footer className={styles.footerContactSection} id="contact">
-        {/* Left Column: Let's Create Something Amazing */}
+        {/* Left Column: Let's Create Something Amazing & SC Monogram */}
         <div className={styles.footerColLeft}>
+          <Link href="#hero" className={styles.footerLogoBadge} title="Shivanshu Chauhan — Back to top">
+            <div className={styles.footerLogoSC}>
+              <span className={styles.footerLogoText}>SC</span>
+            </div>
+            <div className={styles.footerLogoLabel}>
+              <span className={styles.footerLogoTitle}>SHIVANSHU CHAUHAN</span>
+              <span className={styles.footerLogoSubtitle}>SOFTWARE ENGINEER &bull; PORTFOLIO</span>
+            </div>
+          </Link>
+
           <div className={styles.footerBigHeadline}>
             <div>LET&apos;S BUILD</div>
             <div>SOMETHING</div>
             <span className={styles.footerScriptWord}>Amazing</span>
           </div>
         </div>
+
 
         {/* Center Column: Status & Contact */}
         <div className={styles.footerColCenter}>
@@ -896,7 +907,7 @@ export default function Home() {
           <span>&bull;</span>
           <a href="#tools" style={{ color: "var(--text-muted)", textDecoration: "none" }}>TECH STACK</a>
           <span>&bull;</span>
-          <a href="#faq" style={{ color: "var(--text-muted)", textDecoration: "none" }}>AEO FAQS</a>
+          <a href="#faq" style={{ color: "var(--text-muted)", textDecoration: "none" }}> FAQS</a>
           <span>&bull;</span>
           <a href="https://its.edu.in/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)", textDecoration: "none" }}>I.T.S GHAZIABAD (BCA)</a>
         </div>

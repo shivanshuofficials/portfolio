@@ -1352,9 +1352,93 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1.8rem;
+}
+
+.footerLogoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.footerLogoSC {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid rgba(216, 131, 142, 0.35);
+  background: radial-gradient(circle at 45% 35%, #2a0b16 0%, #120408 70%, #080204 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 22, 38, 0.3);
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.footerLogoSC::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #d8838e;
+}
+
+.footerLogoText {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, #ffffff 0%, #f4c2c8 35%, #d8838e 70%, #9e1f36 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  user-select: none;
+  filter: drop-shadow(0 2px 6px rgba(216, 131, 142, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.footerLogoBadge:hover .footerLogoSC {
+  transform: translateY(-2px) scale(1.04);
+  border-color: var(--text-accent-rose);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 30px rgba(216, 131, 142, 0.45);
+}
+
+.footerLogoBadge:hover .footerLogoText {
+  transform: scale(1.05);
+}
+
+.footerLogoLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footerLogoTitle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footerLogoSubtitle {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-accent-rose);
+  font-weight: 500;
 }
 
 .footerBigHeadline {
+
   font-size: clamp(1.2rem, 1.6vw, 1.7rem);
   font-weight: 500;
   letter-spacing: 0.16em;

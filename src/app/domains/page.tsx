@@ -270,7 +270,7 @@ export default function DomainsPage() {
               <span>EXPLORE CASE STUDIES</span>
             </Link>
             <Link href="/#faq" className={styles.secondaryPillBtn}>
-              <span>VIEW AEO FAQ</span>
+              <span>VIEW FAQ</span>
             </Link>
             <Link href="/" className={styles.secondaryPillBtn}>
               <span>RETURN TO HOME</span>
