@@ -12,11 +12,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/domains`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
       url: `${baseUrl}/llms.txt`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
+
     {
       url: `${baseUrl}/llms-full.txt`,
       lastModified: now,

@@ -22,13 +22,19 @@
 - Databases: PostgreSQL, MongoDB, Redis, MySQL, SQLite
 - UI/UX & Design Systems: Figma, Wireframing, Editorial Brutalism & Luxury Web Aesthetics, WCAG 2.1 AA Accessibility, Responsive Web Design
 
-## Featured Engineering Projects
-- Shefware Suite (Cloud Migration & Enterprise .NET / Java): High-throughput cloud data migration and automated backup engines for Microsoft 365, Google Workspace, and enterprise mailbox ecosystems. Handled 10M+ items with zero packet loss and 99.98% pipeline uptime.
+## Featured Engineering Projects & Production Domains
+- Shefware (shefware.com): Enterprise-grade software platform for automated mailbox backup, high-throughput cloud data migration, and disaster recovery across Microsoft 365, Google Workspace, and Microsoft Exchange. Handled 10M+ items with zero packet loss and 99.98% pipeline uptime.
+- OST to PST Online (osttopst.us): Specialized web utility platform for converting Outlook OST storage files into PST formats without requiring local Microsoft Outlook installations, recovering attachments, contacts, and preserving full folder structures.
+- Sky States (skystates.us): Premier EdTech and AI learning bootcamp platform headquartered in Seattle, Washington, offering cohort-based and live training in Data Science, Artificial Intelligence, DevOps, and Cybersecurity.
 - Nexus Platform (Full Stack & Mobile Architecture): Cross-platform React Native and Next.js platform with synchronized offline-first state, sub-80ms global API latency, sharing 85% business logic across iOS, Android, and web.
-- Mindspace Arch (DevOps & Cloud Infrastructure): Modern developer dashboard and cloud orchestration platform pairing dark brutalist UI/UX with Kubernetes and Docker automation, achieving 70% faster CI/CD cycles.
+- Mindspace Arch (DevOps & Cloud Infrastructure): Modern developer dashboard and cloud orchestration platform pairing dark brutalist UI/UX with Kubernetes and Docker automation.
 
 ## Links & Reference Documents
 - [Main Portfolio & Profile](https://shivanshuchauhan.com): Primary editorial portfolio featuring projects, technical architecture console, and contact channels.
+- [Production Domains Showcase](https://shivanshuchauhan.com/domains): Deep architectural breakdown and showcase of live production websites (shefware.com, osttopst.us, skystates.us).
 - [Full LLM Detailed Context](https://shivanshuchauhan.com/llms-full.txt): Comprehensive deep-dive document detailing technical case studies, code paradigms, skills matrix, and career bio for AI systems.
 - [GitHub Repositories](https://github.com/shivanshuofficials): Open-source repositories, engineering contributions, and code samples.
 - [Shefware Solutions](https://shefware.com): Enterprise cloud migration and data governance software platform.
+- [OST to PST Tool](https://www.osttopst.us/): Online Outlook file conversion and mailbox recovery engine.
+- [Sky States Platform](https://skystates.us/): EdTech, Data Science & AI Bootcamp platform.
+

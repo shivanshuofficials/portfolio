@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Globe, ArrowRight, Mail, MapPin, Code2, Terminal, Cpu, Database, Layers, CheckCircle2, Copy } from "lucide-react";
+import Link from "next/link";
+import { Globe, ArrowRight, Mail, MapPin, Code2, Terminal, Cpu, Database, Layers, CheckCircle2, Copy, ExternalLink } from "lucide-react";
 import styles from "./portfolio.module.css";
+
 import { PROJECTS, PROCESS_STEPS, TESTIMONIALS, FAQ_ITEMS, Project } from "@/data/portfolioData";
 import {
   JavaIcon,
@@ -103,12 +105,16 @@ export default function Home() {
         <div className={styles.topBarRight}>
           <div className={styles.navLinksGroup}>
             <a href="#projects" className={styles.navLink}>Projects</a>
+            <Link href="/domains" className={styles.navLink} style={{ color: "var(--text-accent-rose)", fontWeight: 600 }}>
+              Live Domains ✦
+            </Link>
             <a href="#process" className={styles.navLink}>Process</a>
             <a href="#tools" className={styles.navLink}>Stack</a>
             <a href="#words" className={styles.navLink}>Endorsements</a>
             <a href="#faq" className={styles.navLink}>FAQ</a>
             <a href="#contact" className={styles.navLink}>Contact</a>
           </div>
+
           <span className={styles.creativeTag}>CREATIVE PORTFOLIO</span>
         </div>
       </header>
@@ -445,11 +451,26 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        {/* Live Production Domains Banner */}
+        <div className={styles.domainsShowcaseBanner}>
+          <div className={styles.domainsBannerLeft}>
+            <span className={styles.domainsBannerBadge}>LIVE ECOSYSTEM</span>
+            <p className={styles.domainsBannerText}>
+              Explore production platforms engineered &amp; powered by Shivanshu Chauhan: <strong>shefware.com</strong>, <strong>osttopst.us</strong>, &amp; <strong>skystates.us</strong>
+            </p>
+          </div>
+          <Link href="/domains" className={styles.domainsBannerBtn}>
+            <span>VIEW PRODUCTION DOMAINS</span>
+            <ArrowRight size={13} />
+          </Link>
+        </div>
       </section>
 
       {/* =====================================================================
           SPLIT SECTION: MY PROCESS & TOOLS I USE
           ===================================================================== */}
+
       <section className={styles.processToolsSection} id="process">
         {/* Left: My Process */}
         <div className={styles.processColumn}>

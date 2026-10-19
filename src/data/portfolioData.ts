@@ -161,4 +161,92 @@ export const FAQ_ITEMS: FAQItem[] = [
   }
 ];
 
+export interface DomainShowcase {
+  id: string;
+  name: string;
+  url: string;
+  displayUrl: string;
+  tagline: string;
+  category: string;
+  role: string;
+  image: string;
+  description: string;
+  engineeringHighlights: string[];
+  stack: string[];
+  metrics: { label: string; value: string }[];
+}
+
+export const DOMAIN_SHOWCASE: DomainShowcase[] = [
+  {
+    id: "shefware",
+    name: "Shefware",
+    url: "https://www.shefware.com/",
+    displayUrl: "shefware.com",
+    tagline: "Enterprise Data Migration, Backup & Disaster Recovery Suite",
+    category: "Cloud Migration & Enterprise Infrastructure",
+    role: "Core Software Engineering & System Architecture",
+    image: "/images/showcase-shefware.jpg",
+    description: "Shefware delivers enterprise-grade software solutions for automated mailbox backup, high-throughput cloud data migration, data governance, and recovery across Microsoft 365, Google Workspace, and Microsoft Exchange ecosystems.",
+    engineeringHighlights: [
+      "Engineered multi-threaded data streaming pipelines processing petabytes of mailbox archives.",
+      "Achieved 99.98% pipeline uptime with zero packet loss and transactional integrity.",
+      "Automated OAuth2 token rotation and throttling handling for Microsoft Graph and Google Workspace APIs.",
+      "Architected secure file conversion protocols and distributed recovery microservices."
+    ],
+    stack: [".NET Core", "Java / Spring Boot", "Next.js", "Docker", "PostgreSQL", "OAuth2", "Cloud Streams"],
+    metrics: [
+      { label: "Items Migrated", value: "10M+" },
+      { label: "Pipeline Uptime", value: "99.98%" },
+      { label: "Data Loss", value: "0%" }
+    ]
+  },
+  {
+    id: "osttopst",
+    name: "OST to PST Online",
+    url: "https://www.osttopst.us/",
+    displayUrl: "osttopst.us",
+    tagline: "High-Performance Mailbox & Attachment Recovery Platform",
+    category: "Data Conversion & Systems Utility",
+    role: "Full Stack Engineering, Conversion Engine & Performance Optimization",
+    image: "/images/showcase-osttopst.jpg",
+    description: "OSTtoPST.us is a specialized web-driven utility platform for converting Outlook OST storage files into PST formats without requiring local Microsoft Outlook installations. It safely recovers emails, contacts, calendar entries, and nested attachments while strictly preserving hierarchical folder structures.",
+    engineeringHighlights: [
+      "Built resilient streaming parser capable of reading corrupted and orphaned OST files.",
+      "Engineered secure browser-to-server encrypted upload pipeline with automatic artifact cleanup.",
+      "Preserved complex MIME headers, metadata timestamps, and nested folder trees.",
+      "Optimized front-end conversion dashboard with sub-second feedback and live status telemetry."
+    ],
+    stack: ["C# / .NET", "Java", "Vite / Modern JS", "Tailwind CSS", "REST APIs", "AWS S3 Encrypted Storage"],
+    metrics: [
+      { label: "Outlook Required", value: "No" },
+      { label: "Folder Integrity", value: "100%" },
+      { label: "Processing Speed", value: "High-Speed" }
+    ]
+  },
+  {
+    id: "skystates",
+    name: "Sky States",
+    url: "https://skystates.us/",
+    displayUrl: "skystates.us",
+    tagline: "Premier EdTech, AI, Data Science & Cybersecurity Bootcamp Platform",
+    category: "EdTech, AI & Cloud Training Systems",
+    role: "Web Architecture, Full Stack Development & SEO/Performance Engineering",
+    image: "/images/showcase-skystates.jpg",
+    description: "Sky States is a modern EdTech and technical workforce development platform headquartered in Seattle, Washington. It offers comprehensive online instructor-led and cohort-based training in Data Science, Artificial Intelligence, DevOps, and Cybersecurity with hands-on labs and career support.",
+    engineeringHighlights: [
+      "Designed and developed scalable high-performance web architecture with Astro and modern JavaScript.",
+      "Engineered course delivery modules, interactive syllabus navigators, and lead generation funnels.",
+      "Implemented comprehensive structured SEO, Schema.org graph, and Core Web Vitals optimization.",
+      "Architected responsive learning dashboards and mock interview integration channels."
+    ],
+    stack: ["Astro", "TypeScript", "Tailwind CSS", "Node.js", "SEO & Schema.org", "Cloudflare CDN"],
+    metrics: [
+      { label: "Learning Paths", value: "AI, DevOps, Sec" },
+      { label: "Platform Latency", value: "<100ms" },
+      { label: "Core Web Vitals", value: "98+" }
+    ]
+  }
+];
+
+
 
