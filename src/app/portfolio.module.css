@@ -101,6 +101,28 @@
   font-weight: 600;
 }
 
+.creativeSignatureTag {
+  font-family: var(--font-cursive);
+  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
+  color: var(--text-accent-rose);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  text-transform: none;
+  white-space: nowrap;
+  text-shadow: 0 0 15px rgba(216, 131, 142, 0.45);
+  transition: all 0.3s ease;
+  user-select: none;
+  display: inline-block;
+}
+
+.creativeSignatureTag:hover {
+  color: #fff;
+  text-shadow: 0 0 20px rgba(216, 131, 142, 0.8);
+  transform: scale(1.04);
+}
+
+
 /* ==========================================================================
    KINETIC TICKER / MARQUEE
    ========================================================================== */
@@ -1718,6 +1740,11 @@
     letter-spacing: 0.1em;
     white-space: nowrap;
   }
+
+  .creativeSignatureTag {
+    font-size: 1.25rem;
+  }
+
 
   .tickerTrack {
     padding: 0.6rem 0;

@@ -116,9 +116,10 @@ export default function Home() {
             <a href="#contact" className={styles.navLink}>Contact</a>
           </div>
 
-          <span className={styles.creativeTag}>CREATIVE PORTFOLIO</span>
+          <span className={styles.creativeSignatureTag}>Shivanshu Chauhan</span>
         </div>
       </header>
+
 
       {/* =====================================================================
           KINETIC MARQUEE / TICKER
