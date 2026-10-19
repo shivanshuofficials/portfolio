@@ -113,7 +113,7 @@ export default function Home() {
             </Link>
             <a href="#process" className={styles.navLink}>Process</a>
             <a href="#tools" className={styles.navLink}>Stack</a>
-            <a href="#words" className={styles.navLink}>Endorsements</a>
+            {/* <a href="#words" className={styles.navLink}>Endorsements</a> */}
             <a href="#faq" className={styles.navLink}>FAQ</a>
             <a href="#contact" className={styles.navLink}>Contact</a>
           </div>
@@ -630,8 +630,9 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          KIND WORDS / TESTIMONIALS SECTION
+          KIND WORDS / TESTIMONIALS SECTION (Commented out for now)
           ===================================================================== */}
+      {/* 
       <section className={styles.testimonialsSection} id="words">
         <div className={styles.sectionHeaderBar}>
           <h2 className={styles.sectionTitle}>
@@ -673,6 +674,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      */}
 
       {/* =====================================================================
           FAQ SECTION (Answer Engine Optimization & Generative Discovery)
@@ -681,8 +683,9 @@ export default function Home() {
         <div className={styles.sectionHeaderBar}>
           <div className={styles.sectionTitle} id="faq-section-title">
             <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-            <span>05 / FREQUENTLY ASKED QUESTIONS &bull;</span>
+            <span>04 / FREQUENTLY ASKED QUESTIONS &bull;</span>
           </div>
+
           <span className={styles.sectionLink} style={{ cursor: "default" }}>
             INDEXED FOR AI &amp; SEARCH
           </span>
