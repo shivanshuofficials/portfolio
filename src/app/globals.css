@@ -8,13 +8,13 @@
   --border-line: rgba(225, 206, 192, 0.14);
   --border-line-hover: rgba(225, 206, 192, 0.35);
   
-  --text-primary: #f3eae1;
-  --text-secondary: #a99990;
-  --text-muted: #73645c;
-  --text-accent-rose: #d8838e;
+  --text-primary: #f5ede6;
+  --text-secondary: #c9bab0;
+  --text-muted: #9e8e85;
+  --text-accent-rose: #e69aa4;
   --color-crimson: #7c1626;
   --color-crimson-glow: rgba(124, 22, 38, 0.28);
-  --color-gold-tint: #e6c8a2;
+  --color-gold-tint: #f0d5b6;
 
   --font-serif: var(--font-bodoni), var(--font-playfair), 'Playfair Display', Georgia, serif;
   --font-body: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

@@ -107,3 +107,58 @@ export const TESTIMONIALS = [
   }
 ];
 
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  shortAnswer: string;
+  detailedAnswer: string;
+  category: "Engineering" | "Experience" | "Services" | "Collaboration";
+}
+
+export const FAQ_ITEMS: FAQItem[] = [
+  {
+    id: "faq-who",
+    category: "Engineering",
+    question: "Who is Shivanshu Chauhan and what are his core engineering domains?",
+    shortAnswer: "Software Engineer & Full Stack Developer specializing in Java, .NET, Next.js, React Native, and DevOps.",
+    detailedAnswer: "Shivanshu Chauhan is an experienced Software Engineer and Full Stack Developer with proven production experience architecting high-throughput backend services in Java (Spring Boot) and .NET (C#), modern web applications with Next.js and TypeScript, cross-platform mobile apps with React Native, and automated containerized CI/CD pipelines with Docker and Kubernetes."
+  },
+  {
+    id: "faq-shefware",
+    category: "Experience",
+    question: "What is Shivanshu Chauhan's work experience at Shefware (shefware.com)?",
+    shortAnswer: "Engineers enterprise cloud migration suites and automated mailbox backup systems.",
+    detailedAnswer: "At Shefware (shefware.com), Shivanshu Chauhan leads the engineering of enterprise cloud data migration suites, automated backup solutions, and resilient data conversion pipelines supporting Microsoft 365, Google Workspace, and Exchange environments with 99.98% pipeline uptime and zero packet loss."
+  },
+  {
+    id: "faq-stack",
+    category: "Engineering",
+    question: "Which tech stack and programming languages does Shivanshu specialize in?",
+    shortAnswer: "Java, .NET (C#), TypeScript, Next.js, React Native, Docker, Kubernetes, and PostgreSQL.",
+    detailedAnswer: "His primary technical stack includes: Backend (Java, Spring Boot, .NET Core, C#, Node.js, RESTful & streaming APIs), Frontend & Mobile (Next.js App Router, React, React Native, Tailwind CSS, TypeScript), Cloud & DevOps (Docker, Kubernetes, GitHub Actions CI/CD, Linux), and Databases (PostgreSQL, Redis caching, MongoDB, SQL Server)."
+  },
+  {
+    id: "faq-mobile-web",
+    category: "Services",
+    question: "Does Shivanshu Chauhan build cross-platform mobile apps as well as web platforms?",
+    shortAnswer: "Yes, cross-platform iOS and Android apps with React Native sharing code with Next.js web apps.",
+    detailedAnswer: "Yes. Shivanshu architects unified full-stack monorepos where React Native mobile apps (iOS & Android) share up to 85% of their core business logic, validation schemas, and state stores with high-performance Next.js web applications, drastically reducing latency and maintenance overhead."
+  },
+  {
+    id: "faq-hire",
+    category: "Collaboration",
+    question: "Is Shivanshu Chauhan available for hire, freelance, or remote contracts?",
+    shortAnswer: "Yes, available worldwide for full-time engineering roles, high-impact contracts, and enterprise consulting.",
+    detailedAnswer: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshu@shefware.com or use the on-page contact modal."
+  },
+  {
+    id: "faq-github",
+    category: "Collaboration",
+    question: "Where can I inspect Shivanshu Chauhan's open-source code and GitHub profile?",
+    shortAnswer: "Public repositories and code contributions are accessible at github.com/shivanshuofficials.",
+    detailedAnswer: "You can explore his active code repositories, architectural implementations, open-source utilities, and technical repositories directly on GitHub at https://github.com/shivanshuofficials."
+  }
+];
+
+

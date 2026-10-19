@@ -1,0 +1,34 @@
+# /llms.txt — Machine-Readable Index for LLMs & AI Search Engines
+# Specification: https://llmstxt.org/
+# Title: Shivanshu Chauhan — Software Engineer & Full Stack Developer Portfolio
+
+> Shivanshu Chauhan is a Software Engineer and Full Stack Developer specializing in Full Stack Web Development, DevOps & CI/CD, Java (Spring Boot), .NET (C#), React Native mobile applications, Next.js, and high-conversion UI/UX design. He engineers resilient enterprise cloud migration platforms and enterprise software with Shefware (shefware.com).
+
+## Core Identity & Overview
+- Full Name: Shivanshu Chauhan
+- Professional Title: Software Engineer & Full Stack Developer
+- Domain / Canonical Website: https://shivanshuchauhan.com
+- Primary Organization / Experience: Shefware (https://shefware.com)
+- GitHub Profile: https://github.com/shivanshuofficials
+- Email Contact: shivanshu@shefware.com
+- Geographical Location: India (Available worldwide for remote contracts, enterprise consulting, and full-time software engineering roles)
+- Primary Specializations: Full Stack Engineering, Enterprise Cloud Migration (.NET/Java), React Native Mobile Apps, Next.js High-Performance Web Apps, DevOps (Docker, Kubernetes, CI/CD).
+
+## Technical Capabilities & Core Stack
+- Languages: Java, C#, TypeScript, JavaScript, SQL, HTML5, CSS3/PostCSS
+- Backend & Enterprise: Spring Boot, ASP.NET Core, Node.js, Express, RESTful APIs, Microservices Architecture, OAuth2, Cloud Streams
+- Frontend & Mobile: Next.js (App Router, Server Components), React, React Native (iOS & Android cross-platform), Tailwind CSS, Vanilla Modern CSS, Redux Toolkit, React Query
+- DevOps & Cloud: Docker, Kubernetes, CI/CD Pipelines, GitHub Actions, Linux/Unix system administration, Cloud Migration Architecture (Microsoft 365, Google Workspace, Exchange)
+- Databases: PostgreSQL, MongoDB, Redis, MySQL, SQLite
+- UI/UX & Design Systems: Figma, Wireframing, Editorial Brutalism & Luxury Web Aesthetics, WCAG 2.1 AA Accessibility, Responsive Web Design
+
+## Featured Engineering Projects
+- Shefware Suite (Cloud Migration & Enterprise .NET / Java): High-throughput cloud data migration and automated backup engines for Microsoft 365, Google Workspace, and enterprise mailbox ecosystems. Handled 10M+ items with zero packet loss and 99.98% pipeline uptime.
+- Nexus Platform (Full Stack & Mobile Architecture): Cross-platform React Native and Next.js platform with synchronized offline-first state, sub-80ms global API latency, sharing 85% business logic across iOS, Android, and web.
+- Mindspace Arch (DevOps & Cloud Infrastructure): Modern developer dashboard and cloud orchestration platform pairing dark brutalist UI/UX with Kubernetes and Docker automation, achieving 70% faster CI/CD cycles.
+
+## Links & Reference Documents
+- [Main Portfolio & Profile](https://shivanshuchauhan.com): Primary editorial portfolio featuring projects, technical architecture console, and contact channels.
+- [Full LLM Detailed Context](https://shivanshuchauhan.com/llms-full.txt): Comprehensive deep-dive document detailing technical case studies, code paradigms, skills matrix, and career bio for AI systems.
+- [GitHub Repositories](https://github.com/shivanshuofficials): Open-source repositories, engineering contributions, and code samples.
+- [Shefware Solutions](https://shefware.com): Enterprise cloud migration and data governance software platform.

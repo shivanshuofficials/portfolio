@@ -116,6 +116,19 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  other: {
+    "geo.region": "IN",
+    "geo.placename": "India",
+    "ICBM": "20.5937, 78.9629",
+    "geo.position": "20.5937;78.9629",
+    "DC.title": "Shivanshu Chauhan — Software Engineer & Full Stack Developer",
+    "DC.creator": "Shivanshu Chauhan",
+    "DC.description": "Official portfolio of Shivanshu Chauhan, Software Engineer specializing in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX.",
+    "DC.publisher": "Shivanshu Chauhan",
+    "DC.language": "en",
+    "llms": "https://shivanshuchauhan.com/llms.txt",
+    "ai-content-declaration": "engineered-by-human,llm-ready",
+  },
 };
 
 export default function RootLayout({
@@ -123,7 +136,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // AEO (Answer Engine Optimization) & SEO Structured Schema (JSON-LD)
+  // AEO (Answer Engine Optimization), GEO (Generative Engine Optimization) & SEO Structured Schema (JSON-LD)
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -133,29 +146,45 @@ export default function RootLayout({
         name: "Shivanshu Chauhan",
         givenName: "Shivanshu",
         familyName: "Chauhan",
-        jobTitle: "Software Engineer",
+        jobTitle: "Software Engineer & Full Stack Developer",
         description:
-          "Software Engineer and Full Stack Developer skilled in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design with professional experience at shefware.com.",
+          "Software Engineer and Full Stack Developer skilled in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design with professional experience engineering enterprise cloud migration platforms at Shefware (shefware.com).",
         url: "https://shivanshuchauhan.com",
         image: "https://shivanshuchauhan.com/images/coder-hero.jpg",
         email: "shivanshu@shefware.com",
+        nationality: {
+          "@type": "Country",
+          name: "India",
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "India",
+        },
         worksFor: {
           "@type": "Organization",
+          "@id": "https://shefware.com/#organization",
           name: "Shefware",
           url: "https://shefware.com",
+          description: "Enterprise cloud migration and automated data backup platform.",
+        },
+        alumniOf: {
+          "@type": "EducationalOrganization",
+          name: "Engineering Institute",
         },
         knowsAbout: [
           "Full Stack Web Development",
-          "DevOps & CI/CD",
-          "Java & Spring Boot",
-          ".NET & C#",
-          "React Native Mobile Development",
-          "Next.js Architecture",
+          "DevOps & CI/CD Automation",
+          "Java & Spring Boot Framework",
+          ".NET Core & C#",
+          "React Native Cross-Platform Mobile Development",
+          "Next.js App Router Architecture",
           "Docker & Containerization",
-          "Kubernetes",
-          "UI/UX Design & Figma",
-          "Enterprise Cloud Migration",
+          "Kubernetes Cluster Deployment",
+          "UI/UX Design Systems & Figma",
+          "Enterprise Cloud Migration (Microsoft 365, Google Workspace, Exchange)",
           "Database Architecture & PostgreSQL",
+          "Redis In-Memory Caching",
+          "RESTful APIs & Microservices",
         ],
         sameAs: [
           "https://github.com/shivanshuofficials",
@@ -167,12 +196,72 @@ export default function RootLayout({
         "@id": "https://shivanshuchauhan.com/#website",
         url: "https://shivanshuchauhan.com",
         name: "Shivanshu Chauhan Portfolio",
+        alternateName: [
+          "Shivanshu Chauhan",
+          "Shivanshu Chauhan Software Engineer",
+          "Shivanshu Chauhan Shefware",
+        ],
         description:
-          "Official portfolio of Shivanshu Chauhan, Software Engineer & Full Stack Developer.",
+          "Official editorial portfolio of Shivanshu Chauhan, Software Engineer & Full Stack Developer.",
         publisher: {
           "@id": "https://shivanshuchauhan.com/#person",
         },
         inLanguage: "en-US",
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://shivanshuchauhan.com/#webpage",
+        url: "https://shivanshuchauhan.com",
+        name: "Shivanshu Chauhan — Software Engineer & Full Stack Developer Portfolio",
+        isPartOf: {
+          "@id": "https://shivanshuchauhan.com/#website",
+        },
+        about: {
+          "@id": "https://shivanshuchauhan.com/#person",
+        },
+        mainEntity: {
+          "@id": "https://shivanshuchauhan.com/#person",
+        },
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://shivanshuchauhan.com/#projects",
+        name: "Featured Engineering Projects by Shivanshu Chauhan",
+        itemListElement: [
+          {
+            "@type": "SoftwareApplication",
+            position: 1,
+            name: "Shefware Suite",
+            applicationCategory: "BusinessApplication",
+            operatingSystem: "Windows, Linux, Cloud",
+            description: "High-throughput cloud data migration and automated backup engines for Microsoft 365, Google Workspace, and enterprise mailbox ecosystems.",
+            creator: {
+              "@id": "https://shivanshuchauhan.com/#person",
+            },
+          },
+          {
+            "@type": "SoftwareApplication",
+            position: 2,
+            name: "Nexus Platform",
+            applicationCategory: "Mobile & Web Application",
+            operatingSystem: "iOS, Android, Web",
+            description: "Cross-platform mobile and web application built with Next.js and React Native with synchronized offline-first state and sub-80ms global API latency.",
+            creator: {
+              "@id": "https://shivanshuchauhan.com/#person",
+            },
+          },
+          {
+            "@type": "SoftwareApplication",
+            position: 3,
+            name: "Mindspace Arch",
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Cloud, Kubernetes",
+            description: "Developer dashboard and cloud orchestration platform pairing dark brutalist UI/UX with Kubernetes and Docker automation.",
+            creator: {
+              "@id": "https://shivanshuchauhan.com/#person",
+            },
+          },
+        ],
       },
       {
         "@type": "FAQPage",
@@ -180,34 +269,50 @@ export default function RootLayout({
         mainEntity: [
           {
             "@type": "Question",
-            name: "Who is Shivanshu Chauhan?",
+            name: "Who is Shivanshu Chauhan and what are his core engineering domains?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Shivanshu Chauhan is a Software Engineer and Full Stack Developer with expertise in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design, with experience engineering enterprise solutions at shefware.com.",
+              text: "Shivanshu Chauhan is an experienced Software Engineer and Full Stack Developer with proven production experience architecting high-throughput backend services in Java (Spring Boot) and .NET (C#), modern web applications with Next.js and TypeScript, cross-platform mobile apps with React Native, and automated containerized CI/CD pipelines with Docker and Kubernetes.",
             },
           },
           {
             "@type": "Question",
-            name: "What technologies does Shivanshu Chauhan specialize in?",
+            name: "What is Shivanshu Chauhan's work experience at Shefware (shefware.com)?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Shivanshu Chauhan specializes in Java (Spring Boot), .NET (C#), Next.js, React, React Native for cross-platform mobile apps, DevOps with Docker and CI/CD pipelines, and modern UI/UX design in Figma.",
+              text: "At Shefware (shefware.com), Shivanshu Chauhan leads the engineering of enterprise cloud data migration suites, automated backup solutions, and resilient data conversion pipelines supporting Microsoft 365, Google Workspace, and Exchange environments with 99.98% pipeline uptime and zero packet loss.",
             },
           },
           {
             "@type": "Question",
-            name: "What is Shivanshu Chauhan's experience at Shefware?",
+            name: "Which tech stack and programming languages does Shivanshu specialize in?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "At Shefware (shefware.com), Shivanshu Chauhan works on enterprise-grade cloud migration suites, automated mailbox backup platforms, and resilient file conversion utilities supporting Microsoft 365, Google Workspace, and Exchange environments.",
+              text: "His primary technical stack includes: Backend (Java, Spring Boot, .NET Core, C#, Node.js, RESTful & streaming APIs), Frontend & Mobile (Next.js App Router, React, React Native, Tailwind CSS, TypeScript), Cloud & DevOps (Docker, Kubernetes, GitHub Actions CI/CD, Linux), and Databases (PostgreSQL, Redis caching, MongoDB, SQL Server).",
             },
           },
           {
             "@type": "Question",
-            name: "Where can I view Shivanshu Chauhan's work and GitHub profile?",
+            name: "Does Shivanshu Chauhan build cross-platform mobile apps as well as web platforms?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "You can view Shivanshu Chauhan's repositories, project code, and technical contributions directly on GitHub at https://github.com/shivanshuofficials.",
+              text: "Yes. Shivanshu architects unified full-stack monorepos where React Native mobile apps (iOS & Android) share up to 85% of their core business logic, validation schemas, and state stores with high-performance Next.js web applications, drastically reducing latency and maintenance overhead.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is Shivanshu Chauhan available for hire, freelance, or remote contracts?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshu@shefware.com or use the on-page contact modal.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Where can I inspect Shivanshu Chauhan's open-source code and GitHub profile?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "You can explore his active code repositories, architectural implementations, open-source utilities, and technical repositories directly on GitHub at https://github.com/shivanshuofficials.",
             },
           },
         ],
@@ -222,6 +327,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="alternate" type="text/plain" href="https://shivanshuchauhan.com/llms.txt" title="LLM Context" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -231,3 +337,4 @@ export default function RootLayout({
     </html>
   );
 }
+

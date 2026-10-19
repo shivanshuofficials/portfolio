@@ -1040,6 +1040,129 @@
 }
 
 /* ==========================================================================
+   FAQ SECTION (AEO & AI Search Direct Answers Accordion)
+   ========================================================================== */
+.faqSection {
+  border-bottom: 1px solid var(--border-line);
+  width: 100%;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--border-line);
+  border-right: 1px solid var(--border-line);
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.faqItem:nth-child(2n) {
+  border-right: none;
+}
+
+.faqItem:hover {
+  background: rgba(24, 10, 15, 0.4);
+}
+
+.faqHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.8rem clamp(1.2rem, 3vw, 2.5rem);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faqHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.faqCategoryBadge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-accent-rose);
+}
+
+.faqQuestion {
+  font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.faqToggleIcon {
+  font-size: 1.25rem;
+  color: var(--text-accent-rose);
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(216, 131, 142, 0.25);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+}
+
+.faqItemOpen .faqToggleIcon {
+  transform: rotate(45deg);
+  background: rgba(216, 131, 142, 0.15);
+}
+
+.faqBody {
+  padding: 0 clamp(1.2rem, 3vw, 2.5rem) 1.8rem clamp(1.2rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  animation: fadeInFAQ 0.3s ease;
+}
+
+@keyframes fadeInFAQ {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.faqShortAnswer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #ede0d4;
+  background: rgba(142, 28, 48, 0.2);
+  padding: 0.5rem 0.8rem;
+  border-left: 2px solid var(--text-accent-rose);
+}
+
+.faqDetailedAnswer {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* ==========================================================================
    FOOTER / CONTACT SECTION (Typographic Executive Card)
    ========================================================================== */
 .footerContactSection {
@@ -1464,7 +1587,16 @@
     grid-template-columns: 1fr;
   }
 
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .faqItem {
+    border-right: none;
+  }
+
   .testimonialCard {
+
     border-right: none;
     border-bottom: 1px solid var(--border-line);
   }

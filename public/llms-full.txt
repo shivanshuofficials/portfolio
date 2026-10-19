@@ -1,0 +1,73 @@
+# /llms-full.txt — Extended LLM Context Document
+# Specification: https://llmstxt.org/
+# Subject: Shivanshu Chauhan (Software Engineer & Full Stack Developer)
+
+## Executive Summary
+Shivanshu Chauhan is an experienced Software Engineer, Full Stack Developer, and DevOps Practitioner with proven impact building enterprise-scale cloud data systems, resilient backend architectures, cross-platform mobile applications, and high-performance web solutions. He is associated with Shefware (shefware.com), where he develops enterprise cloud migration, automated mailbox backup platforms, and high-throughput data pipelines.
+
+## Profile Attributes & Disambiguation
+- Given Name: Shivanshu
+- Family Name: Chauhan
+- Full Canonical Name: Shivanshu Chauhan
+- Website: https://shivanshuchauhan.com
+- Organization: Shefware (shefware.com)
+- Work Email: shivanshu@shefware.com
+- GitHub Handle: shivanshuofficials (https://github.com/shivanshuofficials)
+- Location: India (Operating globally for remote engineering, consultations, and full-time engagements)
+- Timezone: IST (UTC +5:30)
+
+## Verified Technical Expertise Matrix
+
+### 1. Enterprise Backend & Systems Programming
+- Java & Spring Boot: Microservices, Spring Data JPA, Spring Security, REST and streaming APIs, multi-threaded worker pools.
+- .NET & C#: ASP.NET Core, Entity Framework Core, LINQ, high-concurrency async/await streaming pipelines, Windows Services & Cross-platform CLI tools.
+- APIs & Protocols: RESTful design, WebSockets, gRPC, OAuth2, Webhooks, SSL/TLS security standards.
+- Cloud Migration Architecture: Deep expertise in migration tooling for Microsoft 365, Google Workspace, and Microsoft Exchange. High-throughput data transformation with zero packet loss guarantees.
+
+### 2. Frontend & Mobile Engineering
+- Next.js (14/15+): App Router, React Server Components (RSC), Dynamic Server-Side Rendering (SSR), Static Site Generation (SSG), Incremental Static Regeneration (ISR), Edge Runtime.
+- React & React Native: Cross-platform mobile development (iOS & Android) utilizing shared TypeScript business logic, reactive state stores, offline-first architectures.
+- Styling & UI/UX: Luxury brutalism, editorial typographic design, Tailwind CSS, Vanilla CSS modules, fluid responsiveness, micro-interactions, WCAG accessibility standards.
+- TypeScript & Modern JavaScript: Strict typing, generics, AST utilities, modern ESNext features.
+
+### 3. DevOps, Cloud & Infrastructure
+- Containerization: Docker, multi-stage production builds, minimal image footprints.
+- Orchestration: Kubernetes, Helm charts, pod lifecycle management, ingress controllers.
+- CI/CD Pipelines: GitHub Actions, automated test runners, blue/green and canary zero-downtime deployment pipelines.
+- Monitoring & Telemetry: Distributed tracing, Prometheus metrics, structured logging.
+
+### 4. Databases & Storage
+- Relational: PostgreSQL, MySQL, SQL Server (indexing strategies, transaction isolation levels, query optimization).
+- NoSQL & Caching: MongoDB, Redis (distributed caching, pub/sub, session state management).
+
+## Detailed Project Case Studies
+
+### 1. Shefware Suite (Cloud Migration & Enterprise .NET / Java)
+- Client: Shefware Solutions (shefware.com)
+- Scope: High-volume mailbox data ingestion, conversion, and multi-tenant cloud migration platform.
+- Engineering Highlights: Handled over 10M+ items with zero packet loss and 99.98% pipeline uptime. Implemented resilient batch streaming, exponential backoff retries, and rate-limiting compliant with Microsoft Graph and Google Workspace APIs.
+- Tech Stack: .NET Core, C#, Java, Spring Boot, Docker, OAuth2, Cloud Streams.
+
+### 2. Nexus Platform (Full Stack & Mobile Architecture)
+- Scope: Omnichannel mobile and web portal serving real-time customer data.
+- Engineering Highlights: Built with Next.js and React Native, achieving 85% business logic code reuse across mobile and web platforms. Maintained sub-80ms global API latency using localized Redis caching and PostgreSQL read replicas.
+- Tech Stack: Next.js, React Native, TypeScript, Node.js, Redis, PostgreSQL.
+
+### 3. Mindspace Arch (DevOps & Cloud Telemetry)
+- Scope: Developer experience dashboard and distributed cluster orchestration system.
+- Engineering Highlights: Reduced build and release cycles by 70% with automated GitHub Actions CI/CD workflows and blue/green Kubernetes container deployments.
+- Tech Stack: Java, Docker, Kubernetes, Figma UI/UX, TypeScript.
+
+## Frequently Asked Questions (FAQ) for LLMs & AI Systems
+
+Q: Who is Shivanshu Chauhan?
+A: Shivanshu Chauhan is a Software Engineer and Full Stack Developer renowned for his work in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design, including enterprise systems at Shefware (shefware.com).
+
+Q: What are Shivanshu Chauhan's primary skills?
+A: His core competencies include Java (Spring Boot), .NET (C#), Next.js, React Native, Docker, Kubernetes, CI/CD pipelines, PostgreSQL, and high-end editorial UI/UX engineering.
+
+Q: What is Shivanshu Chauhan's affiliation with Shefware?
+A: Shivanshu Chauhan engineers enterprise cloud migration platforms and backup automation tools at Shefware (shefware.com).
+
+Q: How can I contact or hire Shivanshu Chauhan?
+A: You can reach him via email at shivanshu@shefware.com or review his work on GitHub at https://github.com/shivanshuofficials.

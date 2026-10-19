@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Globe, ArrowRight, Mail, MapPin, Code2, Terminal, Cpu, Database, Layers, CheckCircle2, Copy } from "lucide-react";
 import styles from "./portfolio.module.css";
-import { PROJECTS, PROCESS_STEPS, TESTIMONIALS, Project } from "@/data/portfolioData";
+import { PROJECTS, PROCESS_STEPS, TESTIMONIALS, FAQ_ITEMS, Project } from "@/data/portfolioData";
 import {
   JavaIcon,
   DotNetIcon,
@@ -26,6 +26,7 @@ export default function Home() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [activeConsoleTab, setActiveConsoleTab] = useState<"profile" | "shefware" | "architecture">("profile");
   const [currentTime, setCurrentTime] = useState("");
+  const [openFaqId, setOpenFaqId] = useState<string | null>("faq-who");
 
   useEffect(() => {
     const updateTime = () => {
@@ -105,6 +106,7 @@ export default function Home() {
             <a href="#process" className={styles.navLink}>Process</a>
             <a href="#tools" className={styles.navLink}>Stack</a>
             <a href="#words" className={styles.navLink}>Endorsements</a>
+            <a href="#faq" className={styles.navLink}>FAQ</a>
             <a href="#contact" className={styles.navLink}>Contact</a>
           </div>
           <span className={styles.creativeTag}>CREATIVE PORTFOLIO</span>
@@ -178,9 +180,13 @@ export default function Home() {
       </div>
 
       {/* =====================================================================
-          HERO SECTION (Text & Code-Driven Developer Showcase)
+          MAIN LANDMARK
           ===================================================================== */}
-      <section className={styles.heroSection} id="hero">
+      <main id="main-content">
+        {/* =====================================================================
+            HERO SECTION (Text & Code-Driven Developer Showcase)
+            ===================================================================== */}
+        <section className={styles.heroSection} id="hero">
         {/* Giant Editorial Title */}
         <div className={styles.heroTitleContainer}>
           <h1 className={styles.heroTitle}>PORTFOLIO</h1>
@@ -349,10 +355,10 @@ export default function Home() {
           ===================================================================== */}
       <section className={styles.projectsSection} id="projects">
         <div className={styles.sectionHeaderBar}>
-          <div className={styles.sectionTitle}>
+          <h2 className={styles.sectionTitle}>
             <span>FEATURED ENGINEERING WORK</span>
             <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-          </div>
+          </h2>
 
           <button
             onClick={() => setSelectedProject(PROJECTS[0])}
@@ -370,7 +376,6 @@ export default function Home() {
               key={project.id}
               className={styles.projectCard}
               onClick={() => setSelectedProject(project)}
-              role="button"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") setSelectedProject(project);
@@ -448,10 +453,10 @@ export default function Home() {
       <section className={styles.processToolsSection} id="process">
         {/* Left: My Process */}
         <div className={styles.processColumn}>
-          <div className={styles.sectionTitle}>
+          <h2 className={styles.sectionTitle}>
             <span>ENGINEERING PROCESS</span>
             <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-          </div>
+          </h2>
 
           <div className={styles.processContentGrid}>
             <div className={styles.processList}>
@@ -459,7 +464,7 @@ export default function Home() {
                 <div key={step.number} className={styles.processItem}>
                   <div className={styles.processItemHeader}>
                     <span className={styles.processStepNum}>{step.number}</span>
-                    <h4 className={styles.processStepTitle}>{step.title}</h4>
+                    <h3 className={styles.processStepTitle}>{step.title}</h3>
                   </div>
                   <p className={styles.processStepDesc}>{step.description}</p>
                 </div>
@@ -485,10 +490,10 @@ export default function Home() {
 
         {/* Right: Tools & Stack */}
         <div className={styles.toolsColumn} id="tools">
-          <div className={styles.sectionTitle}>
+          <h2 className={styles.sectionTitle}>
             <span>CORE TECH STACK</span>
             <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-          </div>
+          </h2>
 
           <div className={styles.toolsGrid}>
             <div className={styles.toolCard}>
@@ -553,10 +558,10 @@ export default function Home() {
           ===================================================================== */}
       <section className={styles.testimonialsSection} id="words">
         <div className={styles.sectionHeaderBar}>
-          <div className={styles.sectionTitle}>
+          <h2 className={styles.sectionTitle}>
             <span>ENDORSEMENTS &amp; KIND WORDS</span>
             <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
-          </div>
+          </h2>
         </div>
 
         <div className={styles.testimonialsGrid}>
@@ -594,8 +599,76 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
+          FAQ SECTION (Answer Engine Optimization & Generative Discovery)
+          ===================================================================== */}
+      <section className={styles.faqSection} id="faq" aria-labelledby="faq-section-title">
+        <div className={styles.sectionHeaderBar}>
+          <div className={styles.sectionTitle} id="faq-section-title">
+            <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
+            <span>05 / FREQUENTLY ASKED QUESTIONS &bull; AEO ENGINE</span>
+          </div>
+          <span className={styles.sectionLink} style={{ cursor: "default" }}>
+            INDEXED FOR AI &amp; SEARCH
+          </span>
+        </div>
+
+        <div className={styles.faqGrid}>
+          {FAQ_ITEMS.map((faq) => {
+            const isOpen = openFaqId === faq.id;
+            return (
+              <div
+                key={faq.id}
+                className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ""}`}
+                itemScope
+                itemProp="mainEntity"
+                itemType="https://schema.org/Question"
+              >
+                <button
+                  type="button"
+                  className={styles.faqHeader}
+                  onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${faq.id}`}
+                >
+                  <div className={styles.faqHeaderLeft}>
+                    <span className={styles.faqCategoryBadge}>{faq.category}</span>
+                    <h3 className={styles.faqQuestion} itemProp="name">
+                      {faq.question}
+                    </h3>
+                  </div>
+                  <span className={styles.faqToggleIcon} aria-hidden="true">
+                    +
+                  </span>
+                </button>
+
+                {isOpen && (
+                  <div
+                    className={styles.faqBody}
+                    id={`faq-answer-${faq.id}`}
+                    itemScope
+                    itemProp="acceptedAnswer"
+                    itemType="https://schema.org/Answer"
+                  >
+                    <div className={styles.faqShortAnswer}>
+                      <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
+                      <span>{faq.shortAnswer}</span>
+                    </div>
+                    <p className={styles.faqDetailedAnswer} itemProp="text">
+                      {faq.detailedAnswer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+      </main>
+
+      {/* =====================================================================
           FOOTER / CONTACT SECTION (Typographic Executive Card)
           ===================================================================== */}
+
       <footer className={styles.footerContactSection} id="contact">
         {/* Left Column: Let's Create Something Amazing */}
         <div className={styles.footerColLeft}>
