@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://github.com/shivanshuofficials"),
+  metadataBase: new URL("https://shivanshuchauhan.com"),
   title: {
     default: "Shivanshu Chauhan — Software Engineer & Full Stack Developer",
     template: "%s | Shivanshu Chauhan",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     "TypeScript",
     "Enterprise Software Solutions"
   ],
-  authors: [{ name: "Shivanshu Chauhan", url: "https://github.com/shivanshuofficials" }],
+  authors: [{ name: "Shivanshu Chauhan", url: "https://shivanshuchauhan.com" }],
   creator: "Shivanshu Chauhan",
   publisher: "Shivanshu Chauhan",
   formatDetection: {
@@ -75,13 +75,13 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "https://github.com/shivanshuofficials",
+    canonical: "https://shivanshuchauhan.com",
   },
   openGraph: {
     title: "Shivanshu Chauhan — Software Engineer & Full Stack Developer",
     description:
       "Aesthetic editorial luxury portfolio of Shivanshu Chauhan. Full Stack, DevOps, Java, .NET, React Native, UI/UX, and Shefware cloud engineering.",
-    url: "https://github.com/shivanshuofficials",
+    url: "https://shivanshuchauhan.com",
     siteName: "Shivanshu Chauhan Portfolio",
     images: [
       {
@@ -129,15 +129,15 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://github.com/shivanshuofficials/#person",
+        "@id": "https://shivanshuchauhan.com/#person",
         name: "Shivanshu Chauhan",
         givenName: "Shivanshu",
         familyName: "Chauhan",
         jobTitle: "Software Engineer",
         description:
           "Software Engineer and Full Stack Developer skilled in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design with professional experience at shefware.com.",
-        url: "https://github.com/shivanshuofficials",
-        image: "https://github.com/shivanshuofficials/images/coder-hero.jpg",
+        url: "https://shivanshuchauhan.com",
+        image: "https://shivanshuchauhan.com/images/coder-hero.jpg",
         email: "shivanshu@shefware.com",
         worksFor: {
           "@type": "Organization",
@@ -164,19 +164,19 @@ export default function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://github.com/shivanshuofficials/#website",
-        url: "https://github.com/shivanshuofficials",
+        "@id": "https://shivanshuchauhan.com/#website",
+        url: "https://shivanshuchauhan.com",
         name: "Shivanshu Chauhan Portfolio",
         description:
           "Official portfolio of Shivanshu Chauhan, Software Engineer & Full Stack Developer.",
         publisher: {
-          "@id": "https://github.com/shivanshuofficials/#person",
+          "@id": "https://shivanshuchauhan.com/#person",
         },
         inLanguage: "en-US",
       },
       {
         "@type": "FAQPage",
-        "@id": "https://github.com/shivanshuofficials/#faq",
+        "@id": "https://shivanshuchauhan.com/#faq",
         mainEntity: [
           {
             "@type": "Question",
