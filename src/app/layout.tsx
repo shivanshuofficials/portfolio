@@ -216,14 +216,18 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${bodoni.variable} ${jakarta.variable} ${pinyon.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`${bodoni.variable} ${jakarta.variable} ${pinyon.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
