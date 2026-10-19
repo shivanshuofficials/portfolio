@@ -10,8 +10,9 @@
 - Domain / Canonical Website: https://shivanshuchauhan.com
 - Primary Organization / Experience: Shefware (https://shefware.com)
 - GitHub Profile: https://github.com/shivanshuofficials
-- Email Contact: shivanshu@shefware.com
+- Email Contact: shivanshuchauhanofficials@gmail.com
 - Geographical Location: India (Available worldwide for remote contracts, enterprise consulting, and full-time software engineering roles)
+
 - Primary Specializations: Full Stack Engineering, Enterprise Cloud Migration (.NET/Java), React Native Mobile Apps, Next.js High-Performance Web Apps, DevOps (Docker, Kubernetes, CI/CD).
 
 ## Technical Capabilities & Core Stack

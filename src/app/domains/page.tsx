@@ -250,11 +250,12 @@ export default function DomainsPage() {
             Whether you need enterprise data migration engines, high-speed file conversion pipelines, or modern full-stack web platforms, I build solutions with speed, aesthetic elegance, and zero downtime.
           </p>
           <div className={styles.calloutButtons}>
-            <a href="mailto:shivanshu@shefware.com" className={styles.primaryPillBtn}>
-              <span>GET IN TOUCH &bull; SHIVANSHU@SHEFWARE.COM</span>
+            <a href="mailto:shivanshuchauhanofficials@gmail.com" className={styles.primaryPillBtn}>
+              <span>GET IN TOUCH &bull; SHIVANSHUCHAUHANOFFICIALS@GMAIL.COM</span>
               <span className={styles.pillStar}>✦</span>
             </a>
             <Link href="/" className={styles.secondaryPillBtn}>
+
               <span>RETURN TO HOME</span>
             </Link>
           </div>

@@ -151,7 +151,8 @@ export default function RootLayout({
           "Software Engineer and Full Stack Developer skilled in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design with professional experience engineering enterprise cloud migration platforms at Shefware (shefware.com).",
         url: "https://shivanshuchauhan.com",
         image: "https://shivanshuchauhan.com/images/coder-hero.jpg",
-        email: "shivanshu@shefware.com",
+        email: "shivanshuchauhanofficials@gmail.com",
+
         nationality: {
           "@type": "Country",
           name: "India",
@@ -304,7 +305,8 @@ export default function RootLayout({
             name: "Is Shivanshu Chauhan available for hire, freelance, or remote contracts?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshu@shefware.com or use the on-page contact modal.",
+              text: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshuchauhanofficials@gmail.com or use the on-page contact modal.",
+
             },
           },
           {

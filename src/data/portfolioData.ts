@@ -150,7 +150,8 @@ export const FAQ_ITEMS: FAQItem[] = [
     category: "Collaboration",
     question: "Is Shivanshu Chauhan available for hire, freelance, or remote contracts?",
     shortAnswer: "Yes, available worldwide for full-time engineering roles, high-impact contracts, and enterprise consulting.",
-    detailedAnswer: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshu@shefware.com or use the on-page contact modal."
+    detailedAnswer: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshuchauhanofficials@gmail.com or use the on-page contact modal."
+
   },
   {
     id: "faq-github",

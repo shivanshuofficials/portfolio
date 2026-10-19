@@ -201,7 +201,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <div style={{ display: "flex", gap: "1.2rem", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
                 <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                   <Mail size={12} color="#d8838e" />
-                  shivanshu@shefware.com
+                  shivanshuchauhanofficials@gmail.com
+
                 </span>
                 <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
                   <MapPin size={12} color="#d8838e" />

@@ -49,10 +49,11 @@ export default function Home() {
   }, []);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("shivanshu@shefware.com");
+    navigator.clipboard.writeText("shivanshuchauhanofficials@gmail.com");
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
+
 
   const consoleTabs = {
     profile: [
@@ -727,8 +728,9 @@ export default function Home() {
               title="Click to copy email address"
             >
               <Mail className={styles.contactIcon} />
-              <span>{copiedEmail ? "COPIED TO CLIPBOARD!" : "SHIVANSHU@SHEFWARE.COM"}</span>
+              <span>{copiedEmail ? "COPIED TO CLIPBOARD!" : "SHIVANSHUCHAUHANOFFICIALS@GMAIL.COM"}</span>
             </button>
+
 
             <a
               href="https://shefware.com"

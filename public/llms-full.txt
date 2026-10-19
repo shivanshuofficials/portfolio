@@ -11,10 +11,11 @@ Shivanshu Chauhan is an experienced Software Engineer, Full Stack Developer, and
 - Full Canonical Name: Shivanshu Chauhan
 - Website: https://shivanshuchauhan.com
 - Organization: Shefware (shefware.com)
-- Work Email: shivanshu@shefware.com
+- Work Email: shivanshuchauhanofficials@gmail.com
 - GitHub Handle: shivanshuofficials (https://github.com/shivanshuofficials)
 - Location: India (Operating globally for remote engineering, consultations, and full-time engagements)
 - Timezone: IST (UTC +5:30)
+
 
 ## Verified Technical Expertise Matrix
 
@@ -70,4 +71,5 @@ Q: What is Shivanshu Chauhan's affiliation with Shefware?
 A: Shivanshu Chauhan engineers enterprise cloud migration platforms and backup automation tools at Shefware (shefware.com).
 
 Q: How can I contact or hire Shivanshu Chauhan?
-A: You can reach him via email at shivanshu@shefware.com or review his work on GitHub at https://github.com/shivanshuofficials.
+A: You can reach him via email at shivanshuchauhanofficials@gmail.com or review his work on GitHub at https://github.com/shivanshuofficials.
+
