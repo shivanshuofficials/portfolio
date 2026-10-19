@@ -73,12 +73,24 @@ export default function DomainsPage() {
 
       {/* Top Header */}
       <header className={styles.headerBar}>
-        <Link href="/" className={styles.backButton}>
-          <ArrowLeft size={14} />
-          <span>BACK TO MAIN PORTFOLIO</span>
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <Link href="/" className={styles.backButton}>
+            <ArrowLeft size={14} />
+            <span>BACK TO MAIN PORTFOLIO</span>
+          </Link>
+          <div className={styles.navBreadcrumbGroup}>
+            <Link href="/#projects" className={styles.breadcrumbLink}>Projects</Link>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.65rem" }}>/</span>
+            <Link href="/#process" className={styles.breadcrumbLink}>Process</Link>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.65rem" }}>/</span>
+            <Link href="/#tools" className={styles.breadcrumbLink}>Stack</Link>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.65rem" }}>/</span>
+            <Link href="/#faq" className={styles.breadcrumbLink}>FAQ</Link>
+          </div>
+        </div>
         <span className={styles.systemTag}>PRODUCTION DOMAIN SHOWCASE</span>
       </header>
+
 
       {/* Hero Headline */}
       <section className={styles.heroBanner}>
@@ -254,8 +266,13 @@ export default function DomainsPage() {
               <span>GET IN TOUCH &bull; SHIVANSHUCHAUHANOFFICIALS@GMAIL.COM</span>
               <span className={styles.pillStar}>✦</span>
             </a>
+            <Link href="/#projects" className={styles.secondaryPillBtn}>
+              <span>EXPLORE CASE STUDIES</span>
+            </Link>
+            <Link href="/#faq" className={styles.secondaryPillBtn}>
+              <span>VIEW AEO FAQ</span>
+            </Link>
             <Link href="/" className={styles.secondaryPillBtn}>
-
               <span>RETURN TO HOME</span>
             </Link>
           </div>
@@ -264,8 +281,22 @@ export default function DomainsPage() {
 
       {/* Footer */}
       <footer className={styles.pageFooter}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "0.8rem" }}>
+          <Link href="/" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>HOME</Link>
+          <span style={{ color: "var(--text-muted)" }}>&bull;</span>
+          <Link href="/#projects" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>PROJECTS</Link>
+          <span style={{ color: "var(--text-muted)" }}>&bull;</span>
+          <Link href="/#process" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>PROCESS</Link>
+          <span style={{ color: "var(--text-muted)" }}>&bull;</span>
+          <Link href="/#tools" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>TECH STACK</Link>
+          <span style={{ color: "var(--text-muted)" }}>&bull;</span>
+          <Link href="/#faq" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>FAQ</Link>
+          <span style={{ color: "var(--text-muted)" }}>&bull;</span>
+          <Link href="/#contact" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>CONTACT</Link>
+        </div>
         <span>&copy; 2026 SHIVANSHU CHAUHAN &bull; SHEFWARE, OSTTOPST &amp; SKYSTATES ECOSYSTEM</span>
       </footer>
     </div>
   );
 }
+

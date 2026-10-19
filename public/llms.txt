@@ -8,10 +8,13 @@
 - Full Name: Shivanshu Chauhan
 - Professional Title: Software Engineer & Full Stack Developer
 - Domain / Canonical Website: https://shivanshuchauhan.com
-- Primary Organization / Experience: Shefware (https://shefware.com)
+- Academic Education: Bachelor of Computer Applications (BCA), Batch 2023–2026, I.T.S College Mohan Nagar, Ghaziabad (https://its.edu.in/)
+- Professional Organizations: Shefware (https://shefware.com), Sky States LLC (https://skystates.us), Xziant Communications (https://xziant.com)
+- LinkedIn Profile: https://www.linkedin.com/in/shivanshu-chauhan-202317336
 - GitHub Profile: https://github.com/shivanshuofficials
 - Email Contact: shivanshuchauhanofficials@gmail.com
 - Geographical Location: India (Available worldwide for remote contracts, enterprise consulting, and full-time software engineering roles)
+
 
 - Primary Specializations: Full Stack Engineering, Enterprise Cloud Migration (.NET/Java), React Native Mobile Apps, Next.js High-Performance Web Apps, DevOps (Docker, Kubernetes, CI/CD).
 

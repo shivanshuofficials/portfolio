@@ -584,9 +584,88 @@
 }
 
 /* ==========================================================================
+   ACADEMIC & INDUSTRY AFFILIATION STRIP (BCA, I.T.S Ghaziabad, Shefware, SkyStates, Xziant)
+   ========================================================================== */
+.credentialsStrip {
+  border-bottom: 1px solid var(--border-line);
+  background: rgba(22, 10, 15, 0.45);
+  padding: 1rem clamp(1rem, 3.5vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.credentialsLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.credentialsBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-accent-rose);
+  border: 1px solid rgba(216, 131, 142, 0.35);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(142, 28, 48, 0.2);
+}
+
+.credentialsText {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.credentialsText a {
+  color: #ede0d4;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px dotted var(--text-accent-rose);
+  transition: all 0.2s ease;
+}
+
+.credentialsText a:hover {
+  color: #fff;
+  border-bottom-style: solid;
+}
+
+.credentialsRight {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.credentialsTag {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid rgba(225, 206, 192, 0.12);
+  padding: 0.25rem 0.55rem;
+  border-radius: 2px;
+  background: rgba(14, 7, 10, 0.6);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.credentialsTag:hover {
+  color: var(--text-primary);
+  border-color: rgba(216, 131, 142, 0.3);
+}
+
+/* ==========================================================================
    SELECTED PROJECTS SECTION (Text / Code Rendered Cards)
    ========================================================================== */
 .projectsSection {
+
   border-bottom: 1px solid var(--border-line);
   width: 100%;
 }

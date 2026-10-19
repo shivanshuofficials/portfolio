@@ -59,14 +59,16 @@ export default function Home() {
     profile: [
       { line: 1, content: <><span className={styles.codeKeyword}>const</span> <span className={styles.codeVariable}>engineer</span> = &#123;</> },
       { line: 2, content: <>  name: <span className={styles.codeString}>&quot;Shivanshu Chauhan&quot;</span>,</> },
-      { line: 3, content: <>  title: <span className={styles.codeString}>&quot;Software Engineer &amp; Full Stack&quot;</span>,</> },
-      { line: 4, content: <>  experience: <span className={styles.codeString}>&quot;Shefware (shefware.com)&quot;</span>,</> },
+      { line: 3, content: <>  education: <span className={styles.codeString}>&quot;BCA (2023-26) @ I.T.S College Mohan Nagar Ghaziabad&quot;</span>,</> },
+      { line: 4, content: <>  companies: [<span className={styles.codeString}>&quot;Shefware&quot;</span>, <span className={styles.codeString}>&quot;SkyStates LLC&quot;</span>, <span className={styles.codeString}>&quot;Xziant Communications&quot;</span>],</> },
       { line: 5, content: <>  languages: [<span className={styles.codeString}>&quot;Java&quot;</span>, <span className={styles.codeString}>&quot;C# / .NET&quot;</span>, <span className={styles.codeString}>&quot;TypeScript&quot;</span>],</> },
       { line: 6, content: <>  frameworks: [<span className={styles.codeString}>&quot;Next.js&quot;</span>, <span className={styles.codeString}>&quot;React Native&quot;</span>, <span className={styles.codeString}>&quot;Spring Boot&quot;</span>],</> },
       { line: 7, content: <>  infrastructure: [<span className={styles.codeString}>&quot;Docker&quot;</span>, <span className={styles.codeString}>&quot;Kubernetes&quot;</span>, <span className={styles.codeString}>&quot;CI/CD&quot;</span>],</> },
-      { line: 8, content: <>  availableForHire: <span className={styles.codeBool}>true</span>,</> },
-      { line: 9, content: <>&#125;;</> },
+      { line: 8, content: <>  linkedIn: <span className={styles.codeString}>&quot;linkedin.com/in/shivanshu-chauhan-202317336&quot;</span>,</> },
+      { line: 9, content: <>  availableForHire: <span className={styles.codeBool}>true</span>,</> },
+      { line: 10, content: <>&#125;;</> },
     ],
+
     shefware: [
       { line: 1, content: <><span className={styles.codeComment}>// Shefware Enterprise Cloud Migration Engine</span></> },
       { line: 2, content: <><span className={styles.codeKeyword}>public async</span> Task&lt;MigrationResult&gt; <span className={styles.codeVariable}>MigrateMailboxAsync</span>() &#123;</> },
@@ -276,8 +278,9 @@ export default function Home() {
           {/* Right Hero Column */}
           <div className={styles.heroRight}>
             <p className={styles.heroBio}>
-              Software Engineer specializing in Full Stack Web Dev, DevOps, Java, .NET, React Native, and UI/UX. Delivering robust enterprise solutions with Shefware.
+              Software Engineer &amp; Full Stack Developer &bull; BCA (2023&ndash;26) at I.T.S College Mohan Nagar Ghaziabad. Architecting systems across Shefware, Sky States LLC, and Xziant Communications.
             </p>
+
 
             <div className={styles.heroLocation}>
               <div className={styles.locationGlobe} title="Working Worldwide with Global Clients">
@@ -359,9 +362,44 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
+          ACADEMIC & INDUSTRY AFFILIATION STRIP (AEO & Entity Grounding)
+          ===================================================================== */}
+      <section className={styles.credentialsStrip} aria-label="Education & Affiliations">
+        <div className={styles.credentialsLeft}>
+          <span className={styles.credentialsBadge}>ACADEMIC &amp; INDUSTRY PROFILE</span>
+          <p className={styles.credentialsText}>
+            Bachelor of Computer Applications (BCA &bull; 2023&ndash;26) from{" "}
+            <a
+              href="https://its.edu.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="I.T.S College Mohan Nagar Ghaziabad (its.edu.in)"
+            >
+              I.T.S College Mohan Nagar Ghaziabad
+            </a>
+            . Professional software engineering across Shefware, Sky States LLC, and Xziant Communications.
+          </p>
+        </div>
+        <div className={styles.credentialsRight}>
+          <a
+            href="https://www.linkedin.com/in/shivanshu-chauhan-202317336"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.credentialsTag}
+            title="Shivanshu Chauhan LinkedIn Profile"
+          >
+            LinkedIn Profile ↗
+          </a>
+          <span className={styles.credentialsTag}>BCA &bull; 2023-26</span>
+          <span className={styles.credentialsTag}>I.T.S Ghaziabad</span>
+        </div>
+      </section>
+
+      {/* =====================================================================
           SELECTED PROJECTS SECTION (Text & Code-Rendered Preview)
           ===================================================================== */}
       <section className={styles.projectsSection} id="projects">
+
         <div className={styles.sectionHeaderBar}>
           <h2 className={styles.sectionTitle}>
             <span>FEATURED ENGINEERING WORK</span>
@@ -442,17 +480,32 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Tags */}
-              <div className={styles.projectTags}>
-                {project.tags.map((tag) => (
-                  <span key={tag} className={styles.projectTag}>
-                    {tag}
-                  </span>
-                ))}
+              {/* Tags & Direct Domain Jump */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
+                <div className={styles.projectTags}>
+                  {project.tags.map((tag) => (
+                    <span key={tag} className={styles.projectTag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {idx === 0 && (
+                  <Link
+                    href="/domains#shefware"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ fontSize: "0.62rem", color: "var(--text-accent-rose)", letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "0.3rem" }}
+                    title="View Shefware production architecture breakdown"
+                  >
+                    <span>Domain Deep Dive</span>
+                    <ArrowRight size={11} />
+                  </Link>
+                )}
               </div>
             </article>
           ))}
         </div>
+
 
         {/* Live Production Domains Banner */}
         <div className={styles.domainsShowcaseBanner}>
@@ -777,6 +830,25 @@ export default function Home() {
               <MapPin className={styles.contactIcon} />
               <span>NEW DELHI, INDIA &bull; REMOTE WORLDWIDE</span>
             </div>
+
+            {/* Internal Quick Links Group */}
+            <div style={{ marginTop: "0.8rem", paddingTop: "0.8rem", borderTop: "1px solid rgba(225, 206, 192, 0.08)", display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
+              <Link href="/domains" style={{ fontSize: "0.62rem", color: "var(--text-accent-rose)", letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600 }}>
+                Live Domains ✦
+              </Link>
+              <a href="#projects" style={{ fontSize: "0.62rem", color: "var(--text-secondary)", letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none" }}>
+                Projects
+              </a>
+              <a href="#process" style={{ fontSize: "0.62rem", color: "var(--text-secondary)", letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none" }}>
+                Process
+              </a>
+              <a href="#tools" style={{ fontSize: "0.62rem", color: "var(--text-secondary)", letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none" }}>
+                Stack
+              </a>
+              <a href="#faq" style={{ fontSize: "0.62rem", color: "var(--text-secondary)", letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none" }}>
+                FAQ
+              </a>
+            </div>
           </div>
         </div>
 
@@ -811,12 +883,26 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar with SEO Interlinks */}
       <div className={styles.bottomBar}>
-        <span>THANK YOU FOR VISITING</span>
-        <span style={{ color: "var(--text-accent-rose)" }}>✦</span>
+        <div style={{ display: "flex", gap: "1.2rem", flexWrap: "wrap", justifyContent: "center", width: "100%", marginBottom: "0.3rem" }}>
+          <a href="#hero" style={{ color: "var(--text-muted)", textDecoration: "none" }}>TOP ↑</a>
+          <span>&bull;</span>
+          <a href="#projects" style={{ color: "var(--text-muted)", textDecoration: "none" }}>FEATURED WORK</a>
+          <span>&bull;</span>
+          <Link href="/domains" style={{ color: "var(--text-accent-rose)", textDecoration: "none", fontWeight: 600 }}>PRODUCTION DOMAINS</Link>
+          <span>&bull;</span>
+          <a href="#process" style={{ color: "var(--text-muted)", textDecoration: "none" }}>ENGINEERING PROCESS</a>
+          <span>&bull;</span>
+          <a href="#tools" style={{ color: "var(--text-muted)", textDecoration: "none" }}>TECH STACK</a>
+          <span>&bull;</span>
+          <a href="#faq" style={{ color: "var(--text-muted)", textDecoration: "none" }}>AEO FAQS</a>
+          <span>&bull;</span>
+          <a href="https://its.edu.in/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)", textDecoration: "none" }}>I.T.S GHAZIABAD (BCA)</a>
+        </div>
         <span>&copy; 2026 SHIVANSHU CHAUHAN &bull; ALL RIGHTS RESERVED</span>
       </div>
+
 
       {/* Interactive Modals */}
       <ProjectModal

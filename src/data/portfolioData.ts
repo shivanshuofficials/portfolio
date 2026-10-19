@@ -151,7 +151,20 @@ export const FAQ_ITEMS: FAQItem[] = [
     question: "Is Shivanshu Chauhan available for hire, freelance, or remote contracts?",
     shortAnswer: "Yes, available worldwide for full-time engineering roles, high-impact contracts, and enterprise consulting.",
     detailedAnswer: "Shivanshu is open to full-time software engineering roles, enterprise cloud migration consulting, and high-impact contracts globally. You can initiate contact directly via email at shivanshuchauhanofficials@gmail.com or use the on-page contact modal."
-
+  },
+  {
+    id: "faq-education",
+    category: "Experience",
+    question: "What is Shivanshu Chauhan's educational qualification and college?",
+    shortAnswer: "Bachelor of Computer Applications (BCA) from I.T.S College Mohan Nagar Ghaziabad (2023–26).",
+    detailedAnswer: "Shivanshu Chauhan is pursuing his Bachelor of Computer Applications (BCA) at the prestigious I.T.S College Mohan Nagar, Ghaziabad (its.edu.in), Batch 2023–2026, combining formal computer science education with hands-on enterprise software engineering, distributed cloud systems, and modern web architectures."
+  },
+  {
+    id: "faq-companies",
+    category: "Experience",
+    question: "Which companies and brands does Shivanshu Chauhan engineer software for?",
+    shortAnswer: "Shefware (shefware.com), Sky States LLC (skystates.us), Xziant Communications (xziant.com), and OSTtoPST.us.",
+    detailedAnswer: "Shivanshu's engineering engagements span multiple technology enterprises: Shefware (enterprise cloud migration & backup suites), Sky States LLC (EdTech, AI & cloud training platforms), Xziant Communications (telecommunications & technology solutions), and OST to PST Online (high-speed mailbox data recovery)."
   },
   {
     id: "faq-github",
@@ -161,6 +174,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     detailedAnswer: "You can explore his active code repositories, architectural implementations, open-source utilities, and technical repositories directly on GitHub at https://github.com/shivanshuofficials."
   }
 ];
+
 
 export interface DomainShowcase {
   id: string;
