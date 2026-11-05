@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shivanshuchauhan.com"),
+  metadataBase: new URL("https://www.shivanshuchauhan.com"),
   title: {
     default: "Shivanshu Chauhan — Software Engineer & Full Stack Developer",
     template: "%s | Shivanshu Chauhan",
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     "Enterprise Software Solutions"
   ],
 
-  authors: [{ name: "Shivanshu Chauhan", url: "https://shivanshuchauhan.com" }],
+  authors: [{ name: "Shivanshu Chauhan", url: "https://www.shivanshuchauhan.com" }],
   creator: "Shivanshu Chauhan",
   publisher: "Shivanshu Chauhan",
   formatDetection: {
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "https://shivanshuchauhan.com",
+    canonical: "https://www.shivanshuchauhan.com",
   },
   icons: {
     icon: [
@@ -115,7 +115,7 @@ export const metadata: Metadata = {
     title: "Shivanshu Chauhan — Software Engineer & Full Stack Developer",
     description:
       "Aesthetic editorial luxury portfolio of Shivanshu Chauhan. Full Stack, DevOps, Java, .NET, React Native, UI/UX, and Shefware cloud engineering.",
-    url: "https://shivanshuchauhan.com",
+    url: "https://www.shivanshuchauhan.com",
     siteName: "Shivanshu Chauhan Portfolio",
     images: [
       {
@@ -160,7 +160,7 @@ export const metadata: Metadata = {
     "DC.description": "Official portfolio of Shivanshu Chauhan, Software Engineer specializing in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX.",
     "DC.publisher": "Shivanshu Chauhan",
     "DC.language": "en",
-    "llms": "https://shivanshuchauhan.com/llms.txt",
+    "llms": "https://www.shivanshuchauhan.com/llms.txt",
     "ai-content-declaration": "engineered-by-human,llm-ready",
   },
 };
@@ -176,15 +176,15 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://shivanshuchauhan.com/#person",
+        "@id": "https://www.shivanshuchauhan.com/#person",
         name: "Shivanshu Chauhan",
         givenName: "Shivanshu",
         familyName: "Chauhan",
         jobTitle: "Software Engineer & Full Stack Developer",
         description:
           "Software Engineer and Full Stack Developer skilled in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX design with professional experience engineering enterprise cloud migration platforms at Shefware (shefware.com).",
-        url: "https://shivanshuchauhan.com",
-        image: "https://shivanshuchauhan.com/images/coder-hero.jpg",
+        url: "https://www.shivanshuchauhan.com",
+        image: "https://www.shivanshuchauhan.com/images/coder-hero.jpg",
         email: "shivanshuchauhanofficials@gmail.com",
 
         nationality: {
@@ -260,8 +260,8 @@ export default function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://shivanshuchauhan.com/#website",
-        url: "https://shivanshuchauhan.com",
+        "@id": "https://www.shivanshuchauhan.com/#website",
+        url: "https://www.shivanshuchauhan.com",
         name: "Shivanshu Chauhan Portfolio",
         alternateName: [
           "Shivanshu Chauhan",
@@ -286,29 +286,29 @@ export default function RootLayout({
         description:
           "Official editorial portfolio of Shivanshu Chauhan, Software Engineer & Full Stack Developer (BCA from I.T.S College Mohan Nagar Ghaziabad, Batch 2023-26).",
         publisher: {
-          "@id": "https://shivanshuchauhan.com/#person",
+          "@id": "https://www.shivanshuchauhan.com/#person",
         },
         inLanguage: "en-US",
       },
 
       {
         "@type": "ProfilePage",
-        "@id": "https://shivanshuchauhan.com/#webpage",
-        url: "https://shivanshuchauhan.com",
+        "@id": "https://www.shivanshuchauhan.com/#webpage",
+        url: "https://www.shivanshuchauhan.com",
         name: "Shivanshu Chauhan — Software Engineer & Full Stack Developer Portfolio",
         isPartOf: {
-          "@id": "https://shivanshuchauhan.com/#website",
+          "@id": "https://www.shivanshuchauhan.com/#website",
         },
         about: {
-          "@id": "https://shivanshuchauhan.com/#person",
+          "@id": "https://www.shivanshuchauhan.com/#person",
         },
         mainEntity: {
-          "@id": "https://shivanshuchauhan.com/#person",
+          "@id": "https://www.shivanshuchauhan.com/#person",
         },
       },
       {
         "@type": "ItemList",
-        "@id": "https://shivanshuchauhan.com/#projects",
+        "@id": "https://www.shivanshuchauhan.com/#projects",
         name: "Featured Engineering Projects by Shivanshu Chauhan",
         itemListElement: [
           {
@@ -319,7 +319,7 @@ export default function RootLayout({
             operatingSystem: "Windows, Linux, Cloud",
             description: "High-throughput cloud data migration and automated backup engines for Microsoft 365, Google Workspace, and enterprise mailbox ecosystems.",
             creator: {
-              "@id": "https://shivanshuchauhan.com/#person",
+              "@id": "https://www.shivanshuchauhan.com/#person",
             },
           },
           {
@@ -330,7 +330,7 @@ export default function RootLayout({
             operatingSystem: "iOS, Android, Web",
             description: "Cross-platform mobile and web application built with Next.js and React Native with synchronized offline-first state and sub-80ms global API latency.",
             creator: {
-              "@id": "https://shivanshuchauhan.com/#person",
+              "@id": "https://www.shivanshuchauhan.com/#person",
             },
           },
           {
@@ -341,14 +341,14 @@ export default function RootLayout({
             operatingSystem: "Cloud, Kubernetes",
             description: "Developer dashboard and cloud orchestration platform pairing dark brutalist UI/UX with Kubernetes and Docker automation.",
             creator: {
-              "@id": "https://shivanshuchauhan.com/#person",
+              "@id": "https://www.shivanshuchauhan.com/#person",
             },
           },
         ],
       },
       {
         "@type": "FAQPage",
-        "@id": "https://shivanshuchauhan.com/#faq",
+        "@id": "https://www.shivanshuchauhan.com/#faq",
         mainEntity: [
           {
             "@type": "Question",
@@ -436,7 +436,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="alternate" type="text/plain" href="https://shivanshuchauhan.com/llms.txt" title="LLM Context" />
+        <link rel="alternate" type="text/plain" href="https://www.shivanshuchauhan.com/llms.txt" title="LLM Context" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

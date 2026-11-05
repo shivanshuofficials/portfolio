@@ -7,7 +7,7 @@
 ## Core Identity & Overview
 - Full Name: Shivanshu Chauhan
 - Professional Title: Software Engineer & Full Stack Developer
-- Domain / Canonical Website: https://shivanshuchauhan.com
+- Domain / Canonical Website: https://www.shivanshuchauhan.com
 - Academic Education: Bachelor of Computer Applications (BCA), Batch 2023–2026, I.T.S College Mohan Nagar, Ghaziabad (https://its.edu.in/)
 - Professional Organizations: Shefware (https://shefware.com), Sky States LLC (https://skystates.us), Xziant Communications (https://xziant.com)
 - LinkedIn Profile: https://www.linkedin.com/in/shivanshu-chauhan-202317336
@@ -34,9 +34,9 @@
 - Mindspace Arch (DevOps & Cloud Infrastructure): Modern developer dashboard and cloud orchestration platform pairing dark brutalist UI/UX with Kubernetes and Docker automation.
 
 ## Links & Reference Documents
-- [Main Portfolio & Profile](https://shivanshuchauhan.com): Primary editorial portfolio featuring projects, technical architecture console, and contact channels.
-- [Production Domains Showcase](https://shivanshuchauhan.com/domains): Deep architectural breakdown and showcase of live production websites (shefware.com, osttopst.us, skystates.us).
-- [Full LLM Detailed Context](https://shivanshuchauhan.com/llms-full.txt): Comprehensive deep-dive document detailing technical case studies, code paradigms, skills matrix, and career bio for AI systems.
+- [Main Portfolio & Profile](https://www.shivanshuchauhan.com): Primary editorial portfolio featuring projects, technical architecture console, and contact channels.
+- [Production Domains Showcase](https://www.shivanshuchauhan.com/domains): Deep architectural breakdown and showcase of live production websites (shefware.com, osttopst.us, skystates.us).
+- [Full LLM Detailed Context](https://www.shivanshuchauhan.com/llms-full.txt): Comprehensive deep-dive document detailing technical case studies, code paradigms, skills matrix, and career bio for AI systems.
 - [GitHub Repositories](https://github.com/shivanshuofficials): Open-source repositories, engineering contributions, and code samples.
 - [Shefware Solutions](https://shefware.com): Enterprise cloud migration and data governance software platform.
 - [OST to PST Tool](https://www.osttopst.us/): Online Outlook file conversion and mailbox recovery engine.

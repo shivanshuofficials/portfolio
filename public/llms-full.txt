@@ -9,7 +9,7 @@ Shivanshu Chauhan is an experienced Software Engineer, Full Stack Developer, and
 - Given Name: Shivanshu
 - Family Name: Chauhan
 - Full Canonical Name: Shivanshu Chauhan
-- Website: https://shivanshuchauhan.com
+- Website: https://www.shivanshuchauhan.com
 - Academic Degree: Bachelor of Computer Applications (BCA), Batch 2023–2026
 - College / University: I.T.S College Mohan Nagar Ghaziabad (https://its.edu.in/)
 - Associated Companies: Shefware (https://shefware.com), Sky States LLC (https://skystates.us), Xziant Communications (https://xziant.com)

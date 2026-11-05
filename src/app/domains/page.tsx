@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Explore the production websites, platforms, and cloud systems engineered and maintained by Shivanshu Chauhan: Shefware.com, OSTtoPST.us, and SkyStates.us.",
   alternates: {
-    canonical: "https://shivanshuchauhan.com/domains",
+    canonical: "https://www.shivanshuchauhan.com/domains",
   },
   robots: {
     index: true,
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Production Domains & Platforms | Shivanshu Chauhan",
     description:
       "Showcase of production websites and systems: Shefware.com, OSTtoPST.us, and SkyStates.us. Cloud migration, data conversion, and EdTech AI infrastructure.",
-    url: "https://shivanshuchauhan.com/domains",
+    url: "https://www.shivanshuchauhan.com/domains",
     siteName: "Shivanshu Chauhan Portfolio",
     images: [
       {
@@ -46,16 +46,16 @@ export default function DomainsPage() {
     "@graph": [
       {
         "@type": "CollectionPage",
-        "@id": "https://shivanshuchauhan.com/domains#webpage",
-        url: "https://shivanshuchauhan.com/domains",
+        "@id": "https://www.shivanshuchauhan.com/domains#webpage",
+        url: "https://www.shivanshuchauhan.com/domains",
         name: "Production Web Domains & Platforms Engineered by Shivanshu Chauhan",
         description:
           "Showcase and technical architectural breakdown of production websites: Shefware.com, OSTtoPST.us, and SkyStates.us.",
         isPartOf: {
-          "@id": "https://shivanshuchauhan.com/#website",
+          "@id": "https://www.shivanshuchauhan.com/#website",
         },
         about: {
-          "@id": "https://shivanshuchauhan.com/#person",
+          "@id": "https://www.shivanshuchauhan.com/#person",
         },
       },
       ...DOMAIN_SHOWCASE.map((domain, index) => ({
@@ -65,7 +65,7 @@ export default function DomainsPage() {
         url: domain.url,
         description: domain.description,
         creator: {
-          "@id": "https://shivanshuchauhan.com/#person",
+          "@id": "https://www.shivanshuchauhan.com/#person",
         },
       })),
     ],
