@@ -150,6 +150,11 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  verification: {
+    other: {
+      "msvalidate.01": "988456FF14BB2796D549776E883494AE",
+    },
+  },
   other: {
     "geo.region": "IN",
     "geo.placename": "India",
