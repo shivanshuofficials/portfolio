@@ -12,6 +12,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Too many attempts. Try again in 15 minutes." }, { status: 429 });
   }
 
+  if (!process.env.ADMIN_PASSWORD) {
+    return NextResponse.json(
+      { error: "Server configuration error: ADMIN_PASSWORD is not set in environment variables." },
+      { status: 500 }
+    );
+  }
+
   const { password } = await req.json().catch(() => ({ password: "" }));
   if (!checkPassword(password)) {
     attempts.set(ip, [...rec, now]);

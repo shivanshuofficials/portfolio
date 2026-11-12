@@ -13,6 +13,9 @@ export interface PostModel {
   authorAvatar: string;
   featured: boolean;
   status: "draft" | "published";
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
   createdAt: string;
   updatedAt: string;
 }

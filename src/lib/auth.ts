@@ -11,11 +11,11 @@ const getSecretKey = () => {
 export const COOKIE = "admin_session";
 
 export function checkPassword(input: string): boolean {
-  const real = process.env.ADMIN_PASSWORD;
+  const real = process.env.ADMIN_PASSWORD?.trim();
   if (!real || !input) return false;
   const hash = (s: string) => crypto.createHash("sha256").update(String(s)).digest();
   try {
-    return crypto.timingSafeEqual(hash(input), hash(real));
+    return crypto.timingSafeEqual(hash(input.trim()), hash(real));
   } catch {
     return false;
   }

@@ -38,6 +38,9 @@ async function getPost(slug: string): Promise<PostModel | null> {
       authorAvatar: String(r.authorAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"),
       featured: Boolean(r.featured),
       status: "published",
+      metaTitle: String(r.metaTitle || ""),
+      metaDescription: String(r.metaDescription || ""),
+      metaKeywords: String(r.metaKeywords || ""),
       createdAt: String(r.createdAt),
       updatedAt: String(r.updatedAt),
     };
@@ -52,16 +55,31 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
   if (!p) {
     return { title: "Post Not Found | Shivanshu Chauhan" };
   }
+  const seoTitle = p.metaTitle?.trim() || p.title;
+  const seoDesc = p.metaDescription?.trim() || p.excerpt || `Read ${p.title} on Shivanshu Chauhan's editorial blog.`;
+  const keywords = p.metaKeywords
+    ? p.metaKeywords.split(",").map((k) => k.trim()).filter(Boolean)
+    : p.tags;
+
   return {
-    title: `${p.title} — Shivanshu Chauhan`,
-    description: p.excerpt || `Read ${p.title} on Shivanshu Chauhan's editorial blog.`,
+    title: `${seoTitle} — Shivanshu Chauhan`,
+    description: seoDesc,
+    keywords,
     alternates: {
       canonical: `https://www.shivanshuchauhan.com/blog/${p.slug}`,
     },
     openGraph: {
-      title: p.title,
-      description: p.excerpt,
-      images: p.coverImage ? [{ url: p.coverImage }] : [],
+      title: seoTitle,
+      description: seoDesc,
+      url: `https://www.shivanshuchauhan.com/blog/${p.slug}`,
+      type: "article",
+      images: p.coverImage ? [{ url: p.coverImage, alt: seoTitle }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDesc,
+      images: p.coverImage ? [p.coverImage] : [],
     },
   };
 }
@@ -174,7 +192,7 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
 
 export default function BlogPostPage({ params }: RouteProps) {
   return (
-    <div className="min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30">
+    <div className="relative z-10 min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30">
       {/* Navigation */}
       <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/80 backdrop-blur-md">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">

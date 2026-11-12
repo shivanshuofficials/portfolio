@@ -49,7 +49,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-6 sm:p-12">
+    <div className="relative z-10 min-h-screen bg-[#0b0507] text-zinc-100 font-sans p-6 sm:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-zinc-800">

@@ -1,6 +1,7 @@
 import { createClient, Client } from "@libsql/client";
 
 let client: Client | null = null;
+let schemaInitialized = false;
 
 export function getTursoClient(): Client | null {
   const url = process.env.TURSO_DATABASE_URL;
@@ -22,7 +23,7 @@ export function getTursoClient(): Client | null {
 
 export async function initDb() {
   const db = getTursoClient();
-  if (!db) return;
+  if (!db || schemaInitialized) return;
 
   await db.execute(`
     CREATE TABLE IF NOT EXISTS posts (
@@ -39,8 +40,23 @@ export async function initDb() {
       authorAvatar TEXT DEFAULT 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80',
       featured INTEGER DEFAULT 0,
       status TEXT DEFAULT 'draft',
+      metaTitle TEXT DEFAULT '',
+      metaDescription TEXT DEFAULT '',
+      metaKeywords TEXT DEFAULT '',
       createdAt TEXT NOT NULL,
       updatedAt TEXT NOT NULL
     );
   `);
+
+  // Safe migrations for existing tables
+  const columns = ["metaTitle TEXT DEFAULT ''", "metaDescription TEXT DEFAULT ''", "metaKeywords TEXT DEFAULT ''"];
+  for (const col of columns) {
+    try {
+      await db.execute(`ALTER TABLE posts ADD COLUMN ${col}`);
+    } catch {
+      // Column already exists
+    }
+  }
+
+  schemaInitialized = true;
 }

@@ -34,26 +34,23 @@ export async function POST(req: NextRequest) {
   const b = await req.json();
   if (!b.title?.trim()) return NextResponse.json({ error: "Title is required" }, { status: 400 });
 
-  let slug = slugify(b.slug || b.title);
+  const baseSlug = slugify(b.slug || b.title);
+  let slug = baseSlug;
   let n = 1;
-  const existing = await db.execute({
-    sql: "SELECT id FROM posts WHERE slug = ?",
-    args: [slug],
-  });
-
-  if (existing.rows.length > 0) {
-    slug = `${slugify(b.slug || b.title)}-${++n}`;
+  while ((await db.execute({ sql: "SELECT id FROM posts WHERE slug = ?", args: [slug] })).rows.length > 0) {
+    slug = `${baseSlug}-${++n}`;
   }
 
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   const tags = JSON.stringify(Array.isArray(b.tags) ? b.tags : []);
+  const status = b.status === "published" ? "published" : "draft";
 
   await db.execute({
     sql: `
       INSERT INTO posts (
-        id, title, slug, excerpt, coverImage, content, tags, category, readTime, authorName, authorAvatar, featured, status, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        id, title, slug, excerpt, coverImage, content, tags, category, readTime, authorName, authorAvatar, featured, status, metaTitle, metaDescription, metaKeywords, createdAt, updatedAt
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `,
     args: [
       id,
@@ -68,11 +65,14 @@ export async function POST(req: NextRequest) {
       b.authorName || "Shivanshu Chauhan",
       b.authorAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
       b.featured ? 1 : 0,
-      b.status === "published" ? "published" : "draft",
+      status,
+      b.metaTitle || "",
+      b.metaDescription || "",
+      b.metaKeywords || "",
       now,
       now,
     ],
   });
 
-  return NextResponse.json({ id, _id: id, slug, status: b.status }, { status: 201 });
+  return NextResponse.json({ id, _id: id, slug, status }, { status: 201 });
 }

@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Editor, { uploadToImageKit } from "./Editor";
-import { ArrowLeft, Save, Eye, Upload, Tag, Globe, Check, AlertCircle } from "lucide-react";
+import { ArrowLeft, Save, Eye, Upload, Tag, Globe, Check, AlertCircle, Search } from "lucide-react";
 import Link from "next/link";
 
 interface PostData {
@@ -20,6 +20,9 @@ interface PostData {
   authorAvatar: string;
   featured: boolean;
   status: "draft" | "published";
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
 }
 
 const empty: PostData = {
@@ -35,6 +38,9 @@ const empty: PostData = {
   authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
   featured: false,
   status: "draft",
+  metaTitle: "",
+  metaDescription: "",
+  metaKeywords: "",
 };
 
 export default function PostForm({ id }: { id?: string }) {
@@ -53,8 +59,12 @@ export default function PostForm({ id }: { id?: string }) {
       .then((r) => r.json())
       .then((p) => {
         setPost({
+          ...empty,
           ...p,
           tags: Array.isArray(p.tags) ? p.tags : [],
+          metaTitle: p.metaTitle || "",
+          metaDescription: p.metaDescription || "",
+          metaKeywords: p.metaKeywords || "",
         });
         setLoading(false);
       })
@@ -85,6 +95,7 @@ export default function PostForm({ id }: { id?: string }) {
         return;
       }
       setSuccess("Post saved successfully!");
+      if (data.slug) setField("slug", data.slug);
       if (!id) {
         router.replace(`/admin/edit/${data._id}`);
       } else {
@@ -100,13 +111,15 @@ export default function PostForm({ id }: { id?: string }) {
     const f = e.target.files?.[0];
     if (!f) return;
     try {
-      setSuccess("Uploading image to ImageKit...");
+      setErr("");
+      setSuccess("Uploading thumbnail to ImageKit...");
       const url = await uploadToImageKit(f);
       setField("coverImage", url);
-      setSuccess("Image uploaded to ImageKit!");
+      setSuccess("Thumbnail uploaded to ImageKit!");
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "ImageKit upload failed";
       setErr(msg);
+      setSuccess("");
     }
   }
 
@@ -127,14 +140,17 @@ export default function PostForm({ id }: { id?: string }) {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto px-6 py-20 text-center text-zinc-400">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center text-zinc-400">
         Loading post details...
       </div>
     );
   }
 
+  const seoTitleLen = (post.metaTitle || post.title).length;
+  const seoDescLen = (post.metaDescription || post.excerpt).length;
+
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8 font-sans">
+    <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8 font-sans">
       {/* Top Header Controls */}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-zinc-800">
         <Link
@@ -157,7 +173,7 @@ export default function PostForm({ id }: { id?: string }) {
             type="button"
             disabled={saving}
             onClick={() => save("draft")}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-xl border border-zinc-800 text-zinc-200 hover:bg-zinc-800/80 transition disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-xl border border-zinc-800 bg-zinc-900/60 text-zinc-200 hover:bg-zinc-800/80 transition disabled:opacity-50"
           >
             <Save size={14} /> Save draft
           </button>
@@ -201,7 +217,7 @@ export default function PostForm({ id }: { id?: string }) {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs font-medium text-zinc-400 mb-1.5">Custom Slug (URL)</label>
               <input
@@ -216,9 +232,19 @@ export default function PostForm({ id }: { id?: string }) {
               <label className="block text-xs font-medium text-zinc-400 mb-1.5">Category</label>
               <input
                 type="text"
-                placeholder="Product Design, Architecture, AI"
+                placeholder="Product Design, AI"
                 value={post.category}
                 onChange={(e) => setField("category", e.target.value)}
+                className="w-full px-3.5 py-2 bg-zinc-900/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-zinc-400 mb-1.5">Read Time</label>
+              <input
+                type="text"
+                placeholder="5 min read"
+                value={post.readTime}
+                onChange={(e) => setField("readTime", e.target.value)}
                 className="w-full px-3.5 py-2 bg-zinc-900/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition"
               />
             </div>
@@ -226,29 +252,91 @@ export default function PostForm({ id }: { id?: string }) {
 
           <div>
             <label className="block text-xs font-medium text-zinc-400 mb-1.5">
-              Excerpt / SEO Description (Max 160 characters recommended)
+              Excerpt (Displayed on Blog Card)
             </label>
             <textarea
               rows={3}
-              placeholder="A brief teaser to display on the blog listing and social search cards..."
+              placeholder="A brief teaser to display on the blog listing..."
               value={post.excerpt}
               onChange={(e) => setField("excerpt", e.target.value)}
               className="w-full px-3.5 py-2.5 bg-zinc-900/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition"
             />
           </div>
+
+          {/* SEO & Social Metadata Card */}
+          <div className="p-5 rounded-2xl bg-zinc-900/50 border border-zinc-800 space-y-4">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <div className="flex items-center gap-2 text-xs font-semibold text-zinc-200 uppercase tracking-wider">
+                <Search size={14} className="text-rose-400" />
+                SEO &amp; Social Metadata
+              </div>
+              <span className="text-[11px] text-zinc-500">Google &amp; OpenGraph</span>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-medium text-zinc-400">Meta Title (optional override)</label>
+                <span className={`text-[11px] ${seoTitleLen > 60 ? "text-amber-400" : "text-zinc-500"}`}>
+                  {seoTitleLen} / 60 chars
+                </span>
+              </div>
+              <input
+                type="text"
+                placeholder={post.title || "Custom SEO title for Google search results"}
+                value={post.metaTitle}
+                onChange={(e) => setField("metaTitle", e.target.value)}
+                className="w-full px-3.5 py-2 bg-zinc-950/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-600 focus:outline-none focus:border-rose-500/50 transition"
+              />
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-medium text-zinc-400">Meta Description (25–160 chars)</label>
+                <span
+                  className={`text-[11px] ${
+                    seoDescLen > 160 || (seoDescLen > 0 && seoDescLen < 25) ? "text-amber-400" : "text-zinc-500"
+                  }`}
+                >
+                  {seoDescLen} / 160 chars
+                </span>
+              </div>
+              <textarea
+                rows={2}
+                placeholder={post.excerpt || "Concise summary shown in Google & Bing search snippets..."}
+                value={post.metaDescription}
+                onChange={(e) => setField("metaDescription", e.target.value)}
+                className="w-full px-3.5 py-2 bg-zinc-950/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-600 focus:outline-none focus:border-rose-500/50 transition"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-zinc-400 mb-1.5">
+                Meta Keywords (comma-separated)
+              </label>
+              <input
+                type="text"
+                placeholder="Next.js, Cloud Architecture, Full Stack, Shivanshu Chauhan"
+                value={post.metaKeywords}
+                onChange={(e) => setField("metaKeywords", e.target.value)}
+                className="w-full px-3.5 py-2 bg-zinc-950/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-600 focus:outline-none focus:border-rose-500/50 transition"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Sidebar Controls (Cover Image & Featured) */}
+        {/* Sidebar Controls (Cover / Thumbnail Image & Featured) */}
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-zinc-400 mb-1.5">Cover Image (ImageKit.io)</label>
+            <label className="block text-xs font-medium text-zinc-400 mb-1.5">
+              Thumbnail / Cover Image (ImageKit.io)
+            </label>
             <div className="border border-zinc-800 rounded-xl bg-zinc-900/50 p-4 space-y-3 text-center">
               {post.coverImage ? (
                 <div className="relative group rounded-lg overflow-hidden border border-zinc-800">
                   <img
                     src={post.coverImage}
-                    alt="Cover preview"
-                    className="w-full h-36 object-cover rounded-lg"
+                    alt="Thumbnail preview"
+                    className="w-full h-40 object-cover rounded-lg"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
                     <button
@@ -256,7 +344,7 @@ export default function PostForm({ id }: { id?: string }) {
                       onClick={() => fileInputRef.current?.click()}
                       className="px-3 py-1.5 rounded-lg bg-zinc-900/90 text-xs text-zinc-200 border border-zinc-700 hover:bg-black transition"
                     >
-                      Change Image
+                      Change Thumbnail
                     </button>
                   </div>
                 </div>
@@ -266,7 +354,7 @@ export default function PostForm({ id }: { id?: string }) {
                   className="border-2 border-dashed border-zinc-800 hover:border-zinc-700 rounded-xl p-6 cursor-pointer transition flex flex-col items-center justify-center gap-2"
                 >
                   <Upload size={20} className="text-zinc-500" />
-                  <span className="text-xs text-zinc-400 font-medium">Click to upload cover to ImageKit</span>
+                  <span className="text-xs text-zinc-400 font-medium">Upload thumbnail to ImageKit</span>
                 </div>
               )}
               <input
@@ -278,7 +366,7 @@ export default function PostForm({ id }: { id?: string }) {
               />
               <input
                 type="text"
-                placeholder="Or paste direct image URL"
+                placeholder="Or paste ImageKit / image URL"
                 value={post.coverImage}
                 onChange={(e) => setField("coverImage", e.target.value)}
                 className="w-full px-3 py-1.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs text-zinc-300 placeholder-zinc-600 focus:outline-none"
@@ -286,14 +374,24 @@ export default function PostForm({ id }: { id?: string }) {
             </div>
           </div>
 
-          <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl space-y-3">
+          <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-zinc-300">Featured Article</span>
+              <span className="text-xs font-medium text-zinc-300">Featured Article (Hero)</span>
               <input
                 type="checkbox"
                 checked={post.featured}
                 onChange={(e) => setField("featured", e.target.checked)}
                 className="rounded border-zinc-700 bg-zinc-950 text-rose-500 focus:ring-0 cursor-pointer h-4 w-4"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-zinc-400 mb-1">Author Name</label>
+              <input
+                type="text"
+                value={post.authorName}
+                onChange={(e) => setField("authorName", e.target.value)}
+                className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-800 rounded-lg text-xs text-zinc-200 focus:outline-none"
               />
             </div>
 

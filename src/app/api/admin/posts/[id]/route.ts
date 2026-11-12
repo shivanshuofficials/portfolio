@@ -47,7 +47,7 @@ export async function PUT(req: NextRequest, context: RouteContext) {
   const { id } = await context.params;
   const b = await req.json();
 
-  let slug = b.slug ? slugify(b.slug) : undefined;
+  const slug = b.slug ? slugify(b.slug) : undefined;
   if (slug) {
     const checkSlug = await db.execute({
       sql: "SELECT id FROM posts WHERE slug = ? AND id != ?",
@@ -76,6 +76,9 @@ export async function PUT(req: NextRequest, context: RouteContext) {
         authorAvatar = COALESCE(?, authorAvatar),
         featured = ?,
         status = COALESCE(?, status),
+        metaTitle = COALESCE(?, metaTitle),
+        metaDescription = COALESCE(?, metaDescription),
+        metaKeywords = COALESCE(?, metaKeywords),
         updatedAt = ?
       WHERE id = ?
     `,
@@ -92,12 +95,15 @@ export async function PUT(req: NextRequest, context: RouteContext) {
       b.authorAvatar || null,
       b.featured ? 1 : 0,
       b.status || null,
+      b.metaTitle !== undefined ? b.metaTitle : null,
+      b.metaDescription !== undefined ? b.metaDescription : null,
+      b.metaKeywords !== undefined ? b.metaKeywords : null,
       now,
       id,
     ],
   });
 
-  return NextResponse.json({ id, _id: id, status: b.status });
+  return NextResponse.json({ id, _id: id, slug, status: b.status });
 }
 
 export async function DELETE(_req: NextRequest, context: RouteContext) {
