@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     template: "%s | Shivanshu Chauhan",
   },
   description:
-    "Official portfolio of Shivanshu Chauhan, Software Engineer specializing in Full Stack Web Development, DevOps, Java, .NET, React Native, and UI/UX. Engineering enterprise cloud solutions with Shefware.",
+    "Official portfolio of Shivanshu Chauhan, Software Engineer specializing in Full Stack Web Development, DevOps, Cloud Migration, and UI/UX engineering.",
   keywords: [
     "Shivanshu Chauhan",
     "shivanshu chauhan",
