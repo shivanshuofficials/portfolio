@@ -3,19 +3,44 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Tag, ArrowUpRight } from "lucide-react";
 import { Suspense } from "react";
-import { connectDB } from "@/lib/db";
-import Post, { IPost } from "@/models/Post";
+import { getTursoClient, initDb } from "@/lib/turso";
 import { clean } from "@/lib/sanitize";
+import { PostModel } from "@/models/Post";
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
 };
 
-async function getPost(slug: string): Promise<IPost | null> {
+async function getPost(slug: string): Promise<PostModel | null> {
   try {
-    const conn = await connectDB();
-    if (!conn) return null;
-    return (await Post.findOne({ slug, status: "published" }).lean()) as IPost | null;
+    const db = getTursoClient();
+    if (!db) return null;
+    await initDb();
+    const result = await db.execute({
+      sql: "SELECT * FROM posts WHERE slug = ? AND status = 'published'",
+      args: [slug],
+    });
+
+    if (result.rows.length === 0) return null;
+    const r = result.rows[0];
+    return {
+      id: String(r.id),
+      _id: String(r.id),
+      title: String(r.title),
+      slug: String(r.slug),
+      excerpt: String(r.excerpt || ""),
+      coverImage: String(r.coverImage || ""),
+      content: String(r.content || ""),
+      tags: JSON.parse(String(r.tags || "[]")),
+      category: String(r.category || "Design & Engineering"),
+      readTime: String(r.readTime || "5 min read"),
+      authorName: String(r.authorName || "Shivanshu Chauhan"),
+      authorAvatar: String(r.authorAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"),
+      featured: Boolean(r.featured),
+      status: "published",
+      createdAt: String(r.createdAt),
+      updatedAt: String(r.updatedAt),
+    };
   } catch {
     return null;
   }
@@ -66,16 +91,13 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
         <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-[#e1cec0]/10">
           <div className="flex items-center gap-3">
             <img
-              src={
-                post.authorAvatar ||
-                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"
-              }
+              src={post.authorAvatar}
               alt=""
               className="w-10 h-10 rounded-full object-cover border border-rose-400/30"
             />
             <div>
               <h4 className="text-sm font-semibold text-white">
-                {post.authorName || "Shivanshu Chauhan"}
+                {post.authorName}
               </h4>
               <p className="text-xs text-[#9e8e85] flex items-center gap-2">
                 <span>
@@ -86,7 +108,7 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
                   })}
                 </span>
                 <span>•</span>
-                <span>{post.readTime || "5 min read"}</span>
+                <span>{post.readTime}</span>
               </p>
             </div>
           </div>

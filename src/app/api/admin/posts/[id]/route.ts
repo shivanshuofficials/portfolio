@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
-import { connectDB } from "@/lib/db";
-import Post from "@/models/Post";
+import { getTursoClient, initDb } from "@/lib/turso";
 import { clean, slugify } from "@/lib/sanitize";
 
 type RouteContext = {
@@ -11,50 +10,109 @@ type RouteContext = {
 export async function GET(_req: NextRequest, context: RouteContext) {
   const denied = await requireAdmin();
   if (denied) return denied;
-  await connectDB();
+
+  const db = getTursoClient();
+  if (!db) return NextResponse.json({ error: "Database unavailable" }, { status: 500 });
+  await initDb();
+
   const { id } = await context.params;
-  const post = await Post.findById(id).lean();
-  return post ? NextResponse.json(post) : NextResponse.json({ error: "Not found" }, { status: 404 });
+  const result = await db.execute({
+    sql: "SELECT * FROM posts WHERE id = ?",
+    args: [id],
+  });
+
+  if (result.rows.length === 0) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  const r = result.rows[0];
+  const post = {
+    ...r,
+    _id: r.id,
+    tags: JSON.parse(String(r.tags || "[]")),
+    featured: Boolean(r.featured),
+  };
+
+  return NextResponse.json(post);
 }
 
 export async function PUT(req: NextRequest, context: RouteContext) {
   const denied = await requireAdmin();
   if (denied) return denied;
-  await connectDB();
+
+  const db = getTursoClient();
+  if (!db) return NextResponse.json({ error: "Database unavailable" }, { status: 500 });
+  await initDb();
+
   const { id } = await context.params;
   const b = await req.json();
 
-  const update: Record<string, unknown> = {
-    title: b.title,
-    excerpt: b.excerpt,
-    coverImage: b.coverImage,
-    content: clean(b.content || ""),
-    tags: Array.isArray(b.tags) ? b.tags : [],
-    category: b.category || "Design & Engineering",
-    readTime: b.readTime || "5 min read",
-    authorName: b.authorName || "Shivanshu Chauhan",
-    authorAvatar: b.authorAvatar,
-    featured: !!b.featured,
-    status: b.status,
-  };
-
-  if (b.slug) {
-    const slug = slugify(b.slug);
-    if (await Post.exists({ slug, _id: { $ne: id } })) {
+  let slug = b.slug ? slugify(b.slug) : undefined;
+  if (slug) {
+    const checkSlug = await db.execute({
+      sql: "SELECT id FROM posts WHERE slug = ? AND id != ?",
+      args: [slug, id],
+    });
+    if (checkSlug.rows.length > 0) {
       return NextResponse.json({ error: "Slug already in use" }, { status: 409 });
     }
-    update.slug = slug;
   }
 
-  const post = await Post.findByIdAndUpdate(id, update, { new: true });
-  return post ? NextResponse.json(post) : NextResponse.json({ error: "Not found" }, { status: 404 });
+  const now = new Date().toISOString();
+  const tags = JSON.stringify(Array.isArray(b.tags) ? b.tags : []);
+
+  await db.execute({
+    sql: `
+      UPDATE posts SET
+        title = COALESCE(?, title),
+        slug = COALESCE(?, slug),
+        excerpt = COALESCE(?, excerpt),
+        coverImage = COALESCE(?, coverImage),
+        content = COALESCE(?, content),
+        tags = ?,
+        category = COALESCE(?, category),
+        readTime = COALESCE(?, readTime),
+        authorName = COALESCE(?, authorName),
+        authorAvatar = COALESCE(?, authorAvatar),
+        featured = ?,
+        status = COALESCE(?, status),
+        updatedAt = ?
+      WHERE id = ?
+    `,
+    args: [
+      b.title || null,
+      slug || null,
+      b.excerpt !== undefined ? b.excerpt : null,
+      b.coverImage !== undefined ? b.coverImage : null,
+      b.content !== undefined ? clean(b.content) : null,
+      tags,
+      b.category || null,
+      b.readTime || null,
+      b.authorName || null,
+      b.authorAvatar || null,
+      b.featured ? 1 : 0,
+      b.status || null,
+      now,
+      id,
+    ],
+  });
+
+  return NextResponse.json({ id, _id: id, status: b.status });
 }
 
 export async function DELETE(_req: NextRequest, context: RouteContext) {
   const denied = await requireAdmin();
   if (denied) return denied;
-  await connectDB();
+
+  const db = getTursoClient();
+  if (!db) return NextResponse.json({ error: "Database unavailable" }, { status: 500 });
+  await initDb();
+
   const { id } = await context.params;
-  await Post.findByIdAndDelete(id);
+  await db.execute({
+    sql: "DELETE FROM posts WHERE id = ?",
+    args: [id],
+  });
+
   return NextResponse.json({ ok: true });
 }
