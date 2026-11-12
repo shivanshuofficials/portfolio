@@ -22,34 +22,48 @@
   --font-cursive: var(--font-script), 'Pinyon Script', 'Alex Brush', cursive;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 
-html {
-  scroll-behavior: smooth;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 
-body {
-  width: 100%;
-  max-width: 100vw;
-  min-height: 100vh;
-  background: radial-gradient(circle at 50% 15%, #220b13 0%, #0d0507 45%, #080304 100%);
-  color: var(--text-primary);
-  overflow-x: hidden;
-  position: relative;
-}
+  body {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% 15%, #220b13 0%, #0d0507 45%, #080304 100%);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    position: relative;
+  }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+  }
+}
 
 /* Subtle editorial paper grain & ambient vignette */
 body::before {
@@ -84,19 +98,6 @@ body::before {
   color: #fff;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-}
-
 /* Typography Utility Classes */
 .font-serif {
   font-family: var(--font-serif);
@@ -108,6 +109,92 @@ button {
 
 .font-body {
   font-family: var(--font-body);
+}
+
+@layer components {
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+  .prose h1 {
+    font-family: var(--font-serif);
+    font-size: 2.125rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 1.5em 0 0.6em;
+    color: #ffffff;
+  }
+  .prose h2 {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.4em 0 0.55em;
+    color: #ffffff;
+  }
+  .prose h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 1.3em 0 0.5em;
+    color: #f5ede6;
+  }
+  .prose h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.2em 0 0.4em;
+    color: #f5ede6;
+  }
+  .prose p {
+    margin: 0 0 1.2em;
+    color: #d8cbc2;
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin: 0 0 1.2em;
+  }
+  .prose ol {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+    margin: 0 0 1.2em;
+  }
+  .prose li {
+    margin-bottom: 0.4em;
+  }
+  .prose a {
+    color: #fb7185;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose blockquote {
+    border-left: 3px solid #f43f5e;
+    margin: 1.4em 0;
+    padding: 0.4em 0 0.4em 1.2em;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    margin: 1.5em 0;
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+  }
+  .prose th,
+  .prose td {
+    border: 1px solid var(--border-line);
+    padding: 0.6em 0.9em;
+    text-align: left;
+  }
+  .prose mark {
+    padding: 0.1em 0.25em;
+    border-radius: 0.25em;
+  }
 }
 
 /* Animations */

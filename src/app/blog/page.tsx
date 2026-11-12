@@ -208,7 +208,7 @@ async function BlogContent() {
             <img
               src={featured.coverImage}
               alt={featured.title}
-              className="w-full h-full object-cover object-center group-hover:scale-102 transition duration-700 ease-out"
+              className="w-full h-full object-cover object-[center_20%] group-hover:scale-[1.02] transition duration-700 ease-out"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b0507] via-[#0b0507]/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0b0507]/90 via-[#0b0507]/40 to-transparent" />
@@ -394,10 +394,10 @@ async function BlogContent() {
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30">
+    <div className="relative z-10 min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30">
       {/* Top Untitled-style Navigation Bar */}
-      <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/85 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-600 to-rose-400 flex items-center justify-center font-bold text-white shadow-lg shadow-rose-900/30 group-hover:scale-105 transition">
