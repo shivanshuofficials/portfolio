@@ -7,6 +7,8 @@ import { connection } from "next/server";
 import { getTursoClient, initDb } from "@/lib/turso";
 import { clean } from "@/lib/sanitize";
 import { PostModel } from "@/models/Post";
+import BlogReactions from "@/components/BlogReactions";
+import BlogComments from "@/components/BlogComments";
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
@@ -197,6 +199,12 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
         className="prose prose-invert prose-rose max-w-none text-[#f5ede6] leading-relaxed text-base sm:text-lg space-y-6"
         dangerouslySetInnerHTML={{ __html: clean(post.content || "") }}
       />
+
+      {/* Helpful / Reaction Votes Handler */}
+      <BlogReactions slug={post.slug} />
+
+      {/* Verified Google Reviews & Comments */}
+      <BlogComments slug={post.slug} postTitle={post.title} />
 
       {/* Post footer CTA */}
       <div className="pt-12 border-t border-[#e1cec0]/15 flex flex-wrap items-center justify-between gap-4">

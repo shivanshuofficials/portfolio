@@ -49,6 +49,30 @@ export async function initDb() {
     );
   `);
 
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS comments (
+      id TEXT PRIMARY KEY,
+      postSlug TEXT NOT NULL,
+      userEmail TEXT NOT NULL,
+      userName TEXT NOT NULL,
+      userAvatar TEXT DEFAULT '',
+      content TEXT NOT NULL,
+      rating INTEGER DEFAULT 5,
+      status TEXT DEFAULT 'approved',
+      createdAt TEXT NOT NULL
+    );
+  `);
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS post_reactions (
+      id TEXT PRIMARY KEY,
+      postSlug TEXT NOT NULL,
+      userId TEXT NOT NULL,
+      reaction TEXT NOT NULL,
+      createdAt TEXT NOT NULL
+    );
+  `);
+
   // Safe migrations for existing tables
   const columns = [
     "metaTitle TEXT DEFAULT ''",
