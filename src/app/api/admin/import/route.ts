@@ -50,7 +50,27 @@ export async function POST(req: NextRequest) {
       html = textToHtml(buf.toString("utf8"));
     } else if (ext === "html" || ext === "htm") {
       const raw = buf.toString("utf8");
-      html = /<body[^>]*>([\s\S]*)<\/body>/i.exec(raw)?.[1] || raw;
+      let extracted = /<body[^>]*>([\s\S]*)<\/body>/i.exec(raw)?.[1] || raw;
+
+      // Automatically convert embedded base64 images to ImageKit URLs
+      const base64Regex = /src=["'](data:image\/([a-zA-Z0-9+]+);base64,([^"']+))["']/gi;
+      let match;
+      let count = 0;
+      while ((match = base64Regex.exec(extracted)) !== null) {
+        count++;
+        const fullDataUri = match[1];
+        let imageType = match[2];
+        if (imageType === "jpeg") imageType = "jpg";
+        const base64Content = match[3];
+        try {
+          const imgBuffer = Buffer.from(base64Content, "base64");
+          const uploadedUrl = await uploadBuffer(imgBuffer, `import-html-${Date.now()}-${count}.${imageType}`);
+          extracted = extracted.replace(fullDataUri, uploadedUrl);
+        } catch (uploadErr) {
+          console.error("Failed to upload base64 image from HTML import to ImageKit:", uploadErr);
+        }
+      }
+      html = extracted;
     } else {
       return NextResponse.json({ error: "Supported: .docx .pdf .txt .md .html" }, { status: 415 });
     }
