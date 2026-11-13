@@ -4,7 +4,15 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const redirect = searchParams.get("redirect") || "/blog";
 
-  const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
+  let clientId = process.env.GOOGLE_CLIENT_ID?.trim() || "";
+  // Strip any accidental multiline copy-paste containing GOOGLE_CLIENT_SECRET
+  if (clientId.includes("\n")) {
+    clientId = clientId.split("\n")[0].trim();
+  }
+  if (clientId.includes("GOOGLE_CLIENT_ID=")) {
+    clientId = clientId.replace("GOOGLE_CLIENT_ID=", "").trim();
+  }
+
   if (!clientId) {
     // If Google Client ID is not yet provided in .env, redirect back with error notice
     return NextResponse.redirect(

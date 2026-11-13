@@ -25,8 +25,21 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
+  let clientId = process.env.GOOGLE_CLIENT_ID?.trim() || "";
+  if (clientId.includes("\n")) {
+    clientId = clientId.split("\n")[0].trim();
+  }
+  if (clientId.includes("GOOGLE_CLIENT_ID=")) {
+    clientId = clientId.replace("GOOGLE_CLIENT_ID=", "").trim();
+  }
+
+  let clientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim() || "";
+  if (clientSecret.includes("\n")) {
+    clientSecret = clientSecret.split("\n")[0].trim();
+  }
+  if (clientSecret.includes("GOOGLE_CLIENT_SECRET=")) {
+    clientSecret = clientSecret.replace("GOOGLE_CLIENT_SECRET=", "").trim();
+  }
   const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || "";
   const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
   const origin = isLocal ? "http://localhost:3000" : "https://www.shivanshuchauhan.com";
