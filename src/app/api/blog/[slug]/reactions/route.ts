@@ -1,19 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTursoClient, initDb } from "@/lib/turso";
-import { getVisitorId } from "@/lib/userAuth";
+import { getVisitorId, getSignedUser } from "@/lib/userAuth";
 
 type RouteContext = {
   params: Promise<{ slug: string }>;
 };
 
-export async function GET(_req: NextRequest, context: RouteContext) {
+export async function GET(req: NextRequest, context: RouteContext) {
   const { slug } = await context.params;
   const db = getTursoClient();
   if (!db) return NextResponse.json({ likes: 0, dislikes: 0, userReaction: null });
 
   try {
     await initDb();
-    const visitorId = await getVisitorId();
+    const user = await getSignedUser();
+    const headerVisitor = req.headers.get("x-visitor-id");
+    const visitorId = user
+      ? `usr_${user.sub}`
+      : headerVisitor
+      ? `anon_${headerVisitor}`
+      : await getVisitorId(false);
 
     const [likesRes, dislikesRes, userRes] = await Promise.all([
       db.execute({
@@ -25,8 +31,8 @@ export async function GET(_req: NextRequest, context: RouteContext) {
         args: [slug],
       }),
       db.execute({
-        sql: "SELECT reaction FROM post_reactions WHERE postSlug = ? AND userId = ?",
-        args: [slug, visitorId],
+        sql: "SELECT reaction FROM post_reactions WHERE postSlug = ? AND (userId = ? OR userId = ?)",
+        args: [slug, visitorId, user ? `usr_${user.sub}` : visitorId],
       }),
     ]);
 
@@ -55,13 +61,20 @@ export async function POST(req: NextRequest, context: RouteContext) {
 
   try {
     await initDb();
-    const visitorId = await getVisitorId();
+    const user = await getSignedUser();
+    const headerVisitor = req.headers.get("x-visitor-id");
+    const visitorId = user
+      ? `usr_${user.sub}`
+      : headerVisitor
+      ? `anon_${headerVisitor}`
+      : await getVisitorId(true);
+
     const reactionId = `${slug}_${visitorId}`;
     const now = new Date().toISOString();
 
     const existing = await db.execute({
-      sql: "SELECT reaction FROM post_reactions WHERE id = ?",
-      args: [reactionId],
+      sql: "SELECT reaction FROM post_reactions WHERE id = ? OR (postSlug = ? AND userId = ?)",
+      args: [reactionId, slug, visitorId],
     });
 
     let currentReaction: "like" | "dislike" | null = null;

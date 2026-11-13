@@ -9,19 +9,42 @@ interface ReactionsData {
   userReaction: "like" | "dislike" | null;
 }
 
+function getClientVisitorId(): string {
+  if (typeof window === "undefined") return "ssr";
+  let id = localStorage.getItem("blog_visitor_device_id");
+  if (!id) {
+    id = "dev_" + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+    localStorage.setItem("blog_visitor_device_id", id);
+  }
+  return id;
+}
+
 export default function BlogReactions({ slug }: { slug: string }) {
-  const [data, setData] = useState<ReactionsData>({ likes: 0, dislikes: 0, userReaction: null });
+  const [data, setData] = useState<ReactionsData>(() => {
+    if (typeof window === "undefined") return { likes: 0, dislikes: 0, userReaction: null };
+    const saved = localStorage.getItem(`reaction_${slug}`) as "like" | "dislike" | null;
+    return { likes: 0, dislikes: 0, userReaction: saved || null };
+  });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/blog/${slug}/reactions`)
+    const visitorId = getClientVisitorId();
+    fetch(`/api/blog/${slug}/reactions`, {
+      headers: { "x-visitor-id": visitorId },
+    })
       .then((r) => r.json())
       .then((res) => {
+        const reaction = res.userReaction || data.userReaction || null;
         setData({
           likes: Number(res.likes || 0),
           dislikes: Number(res.dislikes || 0),
-          userReaction: res.userReaction || null,
+          userReaction: reaction,
         });
+        if (reaction) {
+          localStorage.setItem(`reaction_${slug}`, reaction);
+        } else {
+          localStorage.removeItem(`reaction_${slug}`);
+        }
       })
       .catch(() => {});
   }, [slug]);
@@ -29,6 +52,8 @@ export default function BlogReactions({ slug }: { slug: string }) {
   async function handleVote(reaction: "like" | "dislike") {
     if (loading) return;
     setLoading(true);
+
+    const visitorId = getClientVisitorId();
 
     // Optimistic UI update
     setData((prev) => {
@@ -38,6 +63,7 @@ export default function BlogReactions({ slug }: { slug: string }) {
         userReaction = null;
         if (reaction === "like") likes = Math.max(0, likes - 1);
         else dislikes = Math.max(0, dislikes - 1);
+        localStorage.removeItem(`reaction_${slug}`);
       } else {
         if (userReaction === "like") likes = Math.max(0, likes - 1);
         if (userReaction === "dislike") dislikes = Math.max(0, dislikes - 1);
@@ -45,6 +71,7 @@ export default function BlogReactions({ slug }: { slug: string }) {
         userReaction = reaction;
         if (reaction === "like") likes += 1;
         else dislikes += 1;
+        localStorage.setItem(`reaction_${slug}`, reaction);
       }
       return { likes, dislikes, userReaction };
     });
@@ -52,7 +79,10 @@ export default function BlogReactions({ slug }: { slug: string }) {
     try {
       const res = await fetch(`/api/blog/${slug}/reactions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-visitor-id": visitorId,
+        },
         body: JSON.stringify({ reaction }),
       });
       const updated = await res.json();
@@ -62,6 +92,11 @@ export default function BlogReactions({ slug }: { slug: string }) {
           dislikes: updated.dislikes,
           userReaction: updated.userReaction,
         });
+        if (updated.userReaction) {
+          localStorage.setItem(`reaction_${slug}`, updated.userReaction);
+        } else {
+          localStorage.removeItem(`reaction_${slug}`);
+        }
       }
     } catch {
       // Revert if error

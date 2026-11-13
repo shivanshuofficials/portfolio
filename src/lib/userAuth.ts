@@ -60,7 +60,7 @@ export async function clearUserSession() {
   cookieStore.delete(USER_COOKIE);
 }
 
-export async function getVisitorId(): Promise<string> {
+export async function getVisitorId(allowSet: boolean = false): Promise<string> {
   const user = await getSignedUser();
   if (user) return `usr_${user.sub}`;
 
@@ -68,13 +68,19 @@ export async function getVisitorId(): Promise<string> {
   let anonId = cookieStore.get(ANON_COOKIE)?.value;
   if (!anonId) {
     anonId = `anon_${crypto.randomUUID()}`;
-    cookieStore.set(ANON_COOKIE, anonId, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-    });
+    if (allowSet) {
+      try {
+        cookieStore.set(ANON_COOKIE, anonId, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
+          maxAge: 60 * 60 * 24 * 365, // 1 year
+        });
+      } catch {
+        // Silently ignore if cookies cannot be modified in GET context
+      }
+    }
   }
   return anonId;
 }
