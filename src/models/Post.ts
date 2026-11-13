@@ -16,6 +16,7 @@ export interface PostModel {
   metaTitle?: string;
   metaDescription?: string;
   metaKeywords?: string;
+  noIndex?: boolean;
   createdAt: string;
   updatedAt: string;
 }

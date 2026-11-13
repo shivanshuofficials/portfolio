@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Edit3, Trash2, ExternalLink, LogOut, FileText, CheckCircle2, Clock } from "lucide-react";
+import { Plus, Edit3, Trash2, ExternalLink, LogOut, FileText, CheckCircle2, Clock, EyeOff } from "lucide-react";
 
 interface PostSummary {
   _id: string;
@@ -12,6 +12,7 @@ interface PostSummary {
   category?: string;
   updatedAt: string;
   coverImage?: string;
+  noIndex?: boolean;
 }
 
 export default function AdminDashboard() {
@@ -124,7 +125,7 @@ export default function AdminDashboard() {
                     </div>
                   )}
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <h4 className="font-semibold text-zinc-100 text-base hover:text-rose-400 transition">
                         <Link href={`/admin/edit/${p._id}`}>{p.title}</Link>
                       </h4>
@@ -138,6 +139,12 @@ export default function AdminDashboard() {
                         {p.status === "published" ? <CheckCircle2 size={11} /> : <Clock size={11} />}
                         {p.status}
                       </span>
+                      {p.noIndex && (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-300 border border-rose-500/20">
+                          <EyeOff size={10} />
+                          Noindex (Out of Sitemap)
+                        </span>
+                      )}
                     </div>
                     <div className="text-xs text-zinc-500 mt-1 flex items-center gap-2">
                       <span>/blog/{p.slug}</span>

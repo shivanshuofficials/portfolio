@@ -18,6 +18,7 @@ export async function GET() {
     _id: r.id,
     tags: JSON.parse(String(r.tags || "[]")),
     featured: Boolean(r.featured),
+    noIndex: Boolean(r.noIndex),
   }));
 
   return NextResponse.json(posts);
@@ -49,8 +50,8 @@ export async function POST(req: NextRequest) {
   await db.execute({
     sql: `
       INSERT INTO posts (
-        id, title, slug, excerpt, coverImage, content, tags, category, readTime, authorName, authorAvatar, featured, status, metaTitle, metaDescription, metaKeywords, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        id, title, slug, excerpt, coverImage, content, tags, category, readTime, authorName, authorAvatar, featured, status, metaTitle, metaDescription, metaKeywords, noIndex, createdAt, updatedAt
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `,
     args: [
       id,
@@ -69,6 +70,7 @@ export async function POST(req: NextRequest) {
       b.metaTitle || "",
       b.metaDescription || "",
       b.metaKeywords || "",
+      b.noIndex ? 1 : 0,
       now,
       now,
     ],

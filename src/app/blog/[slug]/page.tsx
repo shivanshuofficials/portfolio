@@ -41,6 +41,7 @@ async function getPost(slug: string): Promise<PostModel | null> {
       metaTitle: String(r.metaTitle || ""),
       metaDescription: String(r.metaDescription || ""),
       metaKeywords: String(r.metaKeywords || ""),
+      noIndex: Boolean(r.noIndex),
       createdAt: String(r.createdAt),
       updatedAt: String(r.updatedAt),
     };
@@ -65,6 +66,23 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
     title: `${seoTitle} — Shivanshu Chauhan`,
     description: seoDesc,
     keywords,
+    robots: p.noIndex
+      ? {
+          index: false,
+          follow: false,
+          googleBot: { index: false, follow: false },
+        }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        },
     alternates: {
       canonical: `https://www.shivanshuchauhan.com/blog/${p.slug}`,
     },
@@ -96,11 +114,18 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
     <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-10">
       {/* Header section */}
       <div className="space-y-6">
-        {post.category && (
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/15 border border-rose-500/30 text-rose-300">
-            {post.category}
-          </span>
-        )}
+        <div className="flex items-center gap-3">
+          {post.category && (
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/15 border border-rose-500/30 text-rose-300">
+              {post.category}
+            </span>
+          )}
+          {post.noIndex && (
+            <span className="inline-block px-3 py-1 rounded-full text-[11px] font-medium bg-amber-500/15 border border-amber-500/30 text-amber-300">
+              Excluded from Sitemap &amp; Search (noindex)
+            </span>
+          )}
+        </div>
 
         <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white font-serif leading-tight">
           {post.title}

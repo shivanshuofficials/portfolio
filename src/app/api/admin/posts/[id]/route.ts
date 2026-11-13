@@ -31,6 +31,7 @@ export async function GET(_req: NextRequest, context: RouteContext) {
     _id: r.id,
     tags: JSON.parse(String(r.tags || "[]")),
     featured: Boolean(r.featured),
+    noIndex: Boolean(r.noIndex),
   };
 
   return NextResponse.json(post);
@@ -79,6 +80,7 @@ export async function PUT(req: NextRequest, context: RouteContext) {
         metaTitle = COALESCE(?, metaTitle),
         metaDescription = COALESCE(?, metaDescription),
         metaKeywords = COALESCE(?, metaKeywords),
+        noIndex = ?,
         updatedAt = ?
       WHERE id = ?
     `,
@@ -98,12 +100,13 @@ export async function PUT(req: NextRequest, context: RouteContext) {
       b.metaTitle !== undefined ? b.metaTitle : null,
       b.metaDescription !== undefined ? b.metaDescription : null,
       b.metaKeywords !== undefined ? b.metaKeywords : null,
+      b.noIndex ? 1 : 0,
       now,
       id,
     ],
   });
 
-  return NextResponse.json({ id, _id: id, slug, status: b.status });
+  return NextResponse.json({ id, _id: id, slug, status: b.status, noIndex: b.noIndex });
 }
 
 export async function DELETE(_req: NextRequest, context: RouteContext) {

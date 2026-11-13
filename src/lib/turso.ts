@@ -43,13 +43,19 @@ export async function initDb() {
       metaTitle TEXT DEFAULT '',
       metaDescription TEXT DEFAULT '',
       metaKeywords TEXT DEFAULT '',
+      noIndex INTEGER DEFAULT 0,
       createdAt TEXT NOT NULL,
       updatedAt TEXT NOT NULL
     );
   `);
 
   // Safe migrations for existing tables
-  const columns = ["metaTitle TEXT DEFAULT ''", "metaDescription TEXT DEFAULT ''", "metaKeywords TEXT DEFAULT ''"];
+  const columns = [
+    "metaTitle TEXT DEFAULT ''",
+    "metaDescription TEXT DEFAULT ''",
+    "metaKeywords TEXT DEFAULT ''",
+    "noIndex INTEGER DEFAULT 0",
+  ];
   for (const col of columns) {
     try {
       await db.execute(`ALTER TABLE posts ADD COLUMN ${col}`);

@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
+import { connection } from "next/server";
 import { getTursoClient, initDb } from "@/lib/turso";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  await connection();
   const baseUrl = "https://www.shivanshuchauhan.com";
   const now = new Date();
 
@@ -27,14 +29,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic published blog posts from Turso DB
+  // Dynamic published blog posts from Turso DB (excluding any marked as noIndex)
   let blogRoutes: MetadataRoute.Sitemap = [];
   try {
     const db = getTursoClient();
     if (db) {
       await initDb();
       const res = await db.execute(
-        "SELECT slug, updatedAt, createdAt FROM posts WHERE status = 'published' ORDER BY updatedAt DESC"
+        "SELECT slug, updatedAt, createdAt FROM posts WHERE status = 'published' AND (noIndex IS NULL OR noIndex = 0) ORDER BY updatedAt DESC"
       );
 
       blogRoutes = res.rows.map((row) => {

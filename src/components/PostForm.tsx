@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Editor, { uploadToImageKit } from "./Editor";
-import { ArrowLeft, Save, Eye, Upload, Tag, Globe, Check, AlertCircle, Search } from "lucide-react";
+import { ArrowLeft, Save, Eye, Upload, Tag, Globe, Check, AlertCircle, Search, EyeOff } from "lucide-react";
 import Link from "next/link";
 
 interface PostData {
@@ -23,6 +23,7 @@ interface PostData {
   metaTitle: string;
   metaDescription: string;
   metaKeywords: string;
+  noIndex: boolean;
 }
 
 const empty: PostData = {
@@ -41,6 +42,7 @@ const empty: PostData = {
   metaTitle: "",
   metaDescription: "",
   metaKeywords: "",
+  noIndex: false,
 };
 
 export default function PostForm({ id }: { id?: string }) {
@@ -65,6 +67,7 @@ export default function PostForm({ id }: { id?: string }) {
           metaTitle: p.metaTitle || "",
           metaDescription: p.metaDescription || "",
           metaKeywords: p.metaKeywords || "",
+          noIndex: Boolean(p.noIndex),
         });
         setLoading(false);
       })
@@ -320,6 +323,28 @@ export default function PostForm({ id }: { id?: string }) {
                 onChange={(e) => setField("metaKeywords", e.target.value)}
                 className="w-full px-3.5 py-2 bg-zinc-950/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-600 focus:outline-none focus:border-rose-500/50 transition"
               />
+            </div>
+
+            {/* Sitemap & Indexing toggle */}
+            <div className="pt-3 border-t border-zinc-800/80 flex items-start justify-between gap-3 bg-zinc-950/40 p-3 rounded-xl border border-zinc-800/60">
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-200">
+                  <EyeOff size={13} className="text-amber-400" />
+                  <span>Exclude from Sitemap &amp; Search Engines (noindex)</span>
+                </div>
+                <p className="text-[11px] text-zinc-400 leading-relaxed">
+                  Removes this post URL from <code className="text-zinc-300 bg-zinc-800/60 px-1 py-0.5 rounded">/sitemap.xml</code> and instructs Google / crawlers not to index this article.
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-0.5">
+                <input
+                  type="checkbox"
+                  checked={post.noIndex}
+                  onChange={(e) => setField("noIndex", e.target.checked)}
+                  className="sr-only peer"
+                />
+                <div className="w-9 h-5 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+              </label>
             </div>
           </div>
         </div>
