@@ -20,21 +20,31 @@ function getClientVisitorId(): string {
 }
 
 export default function BlogReactions({ slug }: { slug: string }) {
-  const [data, setData] = useState<ReactionsData>(() => {
-    if (typeof window === "undefined") return { likes: 0, dislikes: 0, userReaction: null };
-    const saved = localStorage.getItem(`reaction_${slug}`) as "like" | "dislike" | null;
-    return { likes: 0, dislikes: 0, userReaction: saved || null };
+  const [data, setData] = useState<ReactionsData>({
+    likes: 0,
+    dislikes: 0,
+    userReaction: null,
   });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // Sync local reaction on mount to ensure zero SSR hydration mismatch
+    const saved =
+      typeof window !== "undefined"
+        ? (localStorage.getItem(`reaction_${slug}`) as "like" | "dislike" | null)
+        : null;
+
+    if (saved) {
+      setData((prev) => ({ ...prev, userReaction: saved }));
+    }
+
     const visitorId = getClientVisitorId();
     fetch(`/api/blog/${slug}/reactions`, {
       headers: { "x-visitor-id": visitorId },
     })
       .then((r) => r.json())
       .then((res) => {
-        const reaction = res.userReaction || data.userReaction || null;
+        const reaction = res.userReaction || saved || null;
         setData({
           likes: Number(res.likes || 0),
           dislikes: Number(res.dislikes || 0),
