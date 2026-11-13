@@ -30,28 +30,18 @@ import {
 } from "lucide-react";
 
 async function uploadToImageKit(file: File): Promise<string> {
-  const authRes = await fetch("/api/admin/imagekit-auth");
-  if (!authRes.ok) throw new Error("Failed to get ImageKit authorization");
-  const auth = await authRes.json();
-
   const fd = new FormData();
   fd.append("file", file);
-  fd.append("fileName", file.name);
-  fd.append("folder", "/blog");
-  fd.append("publicKey", auth.publicKey);
-  fd.append("signature", auth.signature);
-  fd.append("expire", auth.expire);
-  fd.append("token", auth.token);
 
-  const res = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
+  const res = await fetch("/api/admin/upload", {
     method: "POST",
     body: fd,
   });
-  if (!res.ok) {
-    const errorData = await res.text();
-    throw new Error(`Image upload failed: ${errorData}`);
-  }
+
   const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "Image upload failed");
+  }
   return data.url;
 }
 
