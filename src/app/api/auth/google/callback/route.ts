@@ -27,7 +27,9 @@ export async function GET(req: NextRequest) {
 
   const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
-  const origin = req.nextUrl.origin;
+  const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || "";
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
+  const origin = isLocal ? "http://localhost:3000" : "https://www.shivanshuchauhan.com";
   const redirectUri = `${origin}/api/auth/google/callback`;
 
   if (!clientId || !clientSecret) {
