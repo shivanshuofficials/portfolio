@@ -9,6 +9,7 @@ import { clean } from "@/lib/sanitize";
 import { PostModel } from "@/models/Post";
 import BlogReactions from "@/components/BlogReactions";
 import BlogComments from "@/components/BlogComments";
+import MainFooter from "@/components/MainFooter";
 
 type RouteProps = {
   params: Promise<{ slug: string }>;
@@ -227,26 +228,30 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
 
 export default function BlogPostPage({ params }: RouteProps) {
   return (
-    <div className="relative z-10 min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30">
-      {/* Navigation */}
-      <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/80 backdrop-blur-md">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-xs font-medium text-[#c9bab0] hover:text-white transition"
-          >
-            <ArrowLeft size={15} /> All Articles
-          </Link>
+    <div className="relative z-10 min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30 flex flex-col justify-between">
+      <div>
+        {/* Navigation */}
+        <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/80 backdrop-blur-md">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-xs font-medium text-[#c9bab0] hover:text-white transition"
+            >
+              <ArrowLeft size={15} /> All Articles
+            </Link>
 
-          <Link href="/" className="text-xs font-medium text-rose-400 hover:text-rose-300">
-            Shivanshu Chauhan Portfolio →
-          </Link>
-        </div>
-      </header>
+            <Link href="/" className="text-xs font-medium text-rose-400 hover:text-rose-300">
+              Shivanshu Chauhan Portfolio →
+            </Link>
+          </div>
+        </header>
 
-      <Suspense fallback={<div className="max-w-4xl mx-auto px-6 py-24 text-center text-zinc-500">Loading article...</div>}>
-        <BlogPostContent paramsPromise={params} />
-      </Suspense>
+        <Suspense fallback={<div className="max-w-4xl mx-auto px-6 py-24 text-center text-zinc-500">Loading article...</div>}>
+          <BlogPostContent paramsPromise={params} />
+        </Suspense>
+      </div>
+
+      <MainFooter />
     </div>
   );
 }

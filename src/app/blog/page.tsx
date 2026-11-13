@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { getTursoClient, initDb } from "@/lib/turso";
 import { PostModel } from "@/models/Post";
+import BlogCardsGrid from "@/components/BlogCardsGrid";
+import MainFooter from "@/components/MainFooter";
 
 export const metadata: Metadata = {
   title: "Blog & Technical Editorial — Shivanshu Chauhan",
@@ -25,7 +27,7 @@ const FALLBACK_POSTS: PostModel[] = [
       "Let's get one thing out of the way: you don't need a fancy Bachelor's Degree to get into Product Design. We sat down with Frankie Sullivan to talk about gatekeeping in product design and how anyone can get into this growing industry.",
     coverImage:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
-    category: "Featured",
+    category: "Design & Engineering",
     readTime: "8 min read",
     authorName: "Shivanshu Chauhan",
     authorAvatar:
@@ -40,10 +42,10 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "seed-2",
     _id: "seed-2",
-    title: "Migrating to Linear 101",
+    title: "Migrating to Linear 101: Enterprise Engineering Workflows",
     slug: "migrating-to-linear-101",
     excerpt:
-      "Linear helps streamline software projects, sprints, tasks, and bug tracking. Here's how to get started smoothly across enterprise engineering teams.",
+      "Linear helps streamline software projects, sprints, tasks, and bug tracking. Here's how to get started smoothly across enterprise engineering teams without friction.",
     coverImage:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=720&q=80",
     category: "Product",
@@ -61,7 +63,7 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "seed-3",
     _id: "seed-3",
-    title: "Building your API Stack",
+    title: "Building your Production API Stack: High-Speed Microservices",
     slug: "building-your-api-stack",
     excerpt:
       "The rise of REST & GraphQL APIs has been met by a rise in tools for creating, testing, and managing them. Here is a definitive production guide.",
@@ -82,7 +84,7 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "seed-4",
     _id: "seed-4",
-    title: "Bill Walsh leadership lessons",
+    title: "Bill Walsh Leadership Lessons: Radical Precision in Engineering",
     slug: "bill-walsh-leadership-lessons",
     excerpt:
       "Like to know the secrets of transforming a 2-14 team into a 3x Super Bowl winning Dynasty? Principles of radical precision and engineering leadership.",
@@ -103,13 +105,13 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "seed-5",
     _id: "seed-5",
-    title: "PM mental models",
+    title: "Technical PM Mental Models: 7 Production Frameworks",
     slug: "pm-mental-models",
     excerpt:
-      "Mental models are simple expressions of complex processes or relationships. Here are 7 frameworks for technical product managers.",
+      "Mental models are simple expressions of complex processes or relationships. Here are 7 frameworks for technical product managers navigating scaling bottlenecks.",
     coverImage:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=720&q=80",
-    category: "Product Management",
+    category: "Product",
     readTime: "4 min read",
     authorName: "Demi Wilkinson",
     authorAvatar:
@@ -124,19 +126,19 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "seed-6",
     _id: "seed-6",
-    title: "What is Wireframing?",
+    title: "What is Modern Wireframing? Principles for Scalable Systems",
     slug: "what-is-wireframing",
     excerpt:
-      "Introduction to Wireframing and its Principles. Learn from the best in the software and design systems industry.",
+      "Introduction to Wireframing and its Principles. Learn from the best in the software and design systems industry how to bridge logic and UI.",
     coverImage:
       "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=720&q=80",
-    category: "Design",
+    category: "Design & Engineering",
     readTime: "5 min read",
     authorName: "Candice Wu",
     authorAvatar:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&q=80",
     content: "<p>Wireframing guide.</p>",
-    tags: ["UI/UX"],
+    tags: ["UI/UX", "Design"],
     createdAt: "2026-01-19",
     updatedAt: "2026-01-19",
     status: "published",
@@ -145,19 +147,19 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "seed-7",
     _id: "seed-7",
-    title: "How collaboration makes us better designers",
+    title: "How Collaboration Makes Us Better Engineers & Designers",
     slug: "how-collaboration-makes-us-better-designers",
     excerpt:
-      "Collaboration can make our teams stronger, and our individual designs significantly better. Bridging engineers and designers.",
+      "Collaboration can make our teams stronger, and our individual systems significantly better. Bridging engineers, product leads, and UI systems seamlessly.",
     coverImage:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=80",
-    category: "Design",
+    category: "Design & Engineering",
     readTime: "5 min read",
     authorName: "Natali Craig",
     authorAvatar:
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=160&q=80",
     content: "<p>Collaborative engineering design.</p>",
-    tags: ["Design"],
+    tags: ["Design", "Teamwork"],
     createdAt: "2026-01-19",
     updatedAt: "2026-01-19",
     status: "published",
@@ -186,7 +188,9 @@ async function BlogContent() {
         category: String(r.category || "Design & Engineering"),
         readTime: String(r.readTime || "5 min read"),
         authorName: String(r.authorName || "Shivanshu Chauhan"),
-        authorAvatar: String(r.authorAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"),
+        authorAvatar: String(
+          r.authorAvatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80"
+        ),
         featured: Boolean(r.featured),
         status: "published",
         createdAt: String(r.createdAt),
@@ -197,31 +201,43 @@ async function BlogContent() {
     dbPosts = [];
   }
 
-  const posts = dbPosts.length > 0 ? dbPosts : FALLBACK_POSTS;
-  const featured = posts.find((p) => p.featured) || posts[0];
-  const recentPosts = posts.filter((p) => p !== featured);
+  // Merge DB posts with curated fallback articles so that the grid is always richly populated
+  const allPosts: PostModel[] = [
+    ...dbPosts,
+    ...FALLBACK_POSTS.filter((fb) => !dbPosts.some((db) => db.slug === fb.slug)),
+  ];
+
+  // Pick hero featured post: DB featured if exists, otherwise first post
+  const featured = allPosts.find((p) => p.featured) || allPosts[0];
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-16">
-      {/* Hero Featured Article (Replicating Untitled UI Layout) */}
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 space-y-16">
+      {/* Hero Featured Article */}
       {featured && (
-        <section className="relative rounded-3xl overflow-hidden border border-[#e1cec0]/15 bg-[#140a0e] shadow-2xl group">
-          <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full min-h-[420px] overflow-hidden">
-            <img
-              src={featured.coverImage}
-              alt={featured.title}
-              className="w-full h-full object-cover object-[center_20%] group-hover:scale-[1.02] transition duration-700 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b0507] via-[#0b0507]/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0b0507]/90 via-[#0b0507]/40 to-transparent" />
+        <section className="relative rounded-3xl overflow-hidden border border-[#e1cec0]/15 bg-[#140a0e] shadow-2xl group transition duration-500 hover:border-rose-500/30">
+          <div className="relative aspect-[16/10] sm:aspect-[21/9] w-full min-h-[380px] sm:min-h-[440px] overflow-hidden">
+            {featured.coverImage ? (
+              <img
+                src={featured.coverImage}
+                alt={featured.title}
+                className="w-full h-full object-cover object-[center_25%] group-hover:scale-[1.02] transition duration-700 ease-out"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-tr from-[#170a10] to-[#0b0507]" />
+            )}
 
-            <div className="absolute inset-0 p-6 sm:p-12 lg:p-16 flex flex-col justify-end max-w-3xl space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold w-max backdrop-blur-sm">
+            {/* Gradient Overlays for High Legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b0507] via-[#0b0507]/75 to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0b0507]/95 via-[#0b0507]/60 to-transparent" />
+
+            {/* Content overlay */}
+            <div className="absolute inset-0 p-6 sm:p-10 lg:p-14 flex flex-col justify-end max-w-3xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-500/20 border border-rose-500/35 text-rose-300 text-xs font-semibold w-max backdrop-blur-md shadow-md">
                 <Sparkles size={12} />
-                {featured.category || "Featured Article"}
+                <span>{featured.category || "Featured Article"}</span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight font-serif">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight text-white leading-tight font-serif">
                 <Link
                   href={`/blog/${featured.slug}`}
                   className="hover:text-rose-200 transition"
@@ -230,22 +246,22 @@ async function BlogContent() {
                 </Link>
               </h1>
 
-              <p className="text-sm sm:text-base text-[#c9bab0] line-clamp-3 leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-sm lg:text-base text-[#c9bab0] line-clamp-3 leading-relaxed max-w-2xl">
                 {featured.excerpt}
               </p>
 
-              <div className="pt-2 flex items-center justify-between">
+              <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <img
                     src={featured.authorAvatar}
                     alt=""
-                    className="w-10 h-10 rounded-full border border-rose-400/30 object-cover"
+                    className="w-10 h-10 rounded-full border border-rose-400/40 object-cover shadow-sm"
                   />
                   <div>
-                    <h4 className="text-sm font-semibold text-white">
+                    <h4 className="text-xs sm:text-sm font-semibold text-white">
                       {featured.authorName}
                     </h4>
-                    <p className="text-xs text-[#9e8e85] flex items-center gap-2">
+                    <p className="text-[11px] text-[#9e8e85] flex items-center gap-2 font-mono">
                       <span>
                         {new Date(featured.createdAt).toLocaleDateString("en-US", {
                           month: "short",
@@ -261,9 +277,10 @@ async function BlogContent() {
 
                 <Link
                   href={`/blog/${featured.slug}`}
-                  className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white backdrop-blur-md transition group-hover:translate-x-1"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold backdrop-blur-md transition group-hover:border-rose-400/50 shadow-lg"
                 >
-                  <ArrowUpRight size={22} />
+                  <span>Read Article</span>
+                  <ArrowUpRight size={15} />
                 </Link>
               </div>
             </div>
@@ -271,106 +288,19 @@ async function BlogContent() {
         </section>
       )}
 
-      {/* Recent Blog Posts Grid (3 Columns) */}
-      <section className="space-y-8">
-        <div className="flex items-center justify-between pb-4 border-b border-[#e1cec0]/10">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-white font-serif">
-              Recent blog posts
-            </h2>
-            <p className="text-xs sm:text-sm text-[#9e8e85] mt-1">
-              Insights, engineering deep-dives, and product design explorations.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {recentPosts.map((post) => (
-            <article
-              key={post.id}
-              className="group flex flex-col rounded-2xl bg-[#12090c] border border-[#e1cec0]/10 hover:border-rose-500/30 transition-all duration-300 overflow-hidden shadow-lg hover:shadow-rose-950/20"
-            >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-900">
-                {post.coverImage ? (
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-zinc-900 text-zinc-700">
-                    No Image
-                  </div>
-                )}
-                {post.category && (
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0b0507]/80 backdrop-blur-md text-xs font-medium text-rose-300 border border-rose-500/20">
-                    {post.category}
-                  </span>
-                )}
-              </div>
-
-              <div className="p-6 flex flex-col flex-1 justify-between space-y-4">
-                <div className="space-y-2.5">
-                  <h3 className="text-lg font-bold text-white group-hover:text-rose-300 transition line-clamp-2 leading-snug">
-                    <Link href={`/blog/${post.slug}`}>
-                      {post.title}
-                    </Link>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#c9bab0] line-clamp-2 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-[#e1cec0]/10 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <img
-                      src={post.authorAvatar}
-                      alt=""
-                      className="w-7 h-7 rounded-full object-cover border border-[#e1cec0]/20"
-                    />
-                    <div className="text-xs">
-                      <span className="font-medium text-zinc-200 block">
-                        {post.authorName}
-                      </span>
-                      <span className="text-[#9e8e85] text-[11px]">
-                        {new Date(post.createdAt).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </span>
-                    </div>
-                  </div>
-
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="text-xs font-semibold text-rose-400 group-hover:text-rose-300 flex items-center gap-1"
-                  >
-                    Read <ArrowUpRight size={14} />
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="text-center pt-8">
-          <button
-            type="button"
-            className="px-6 py-2.5 rounded-xl border border-[#e1cec0]/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-xs font-medium text-white transition backdrop-blur-md"
-          >
-            Loading more...
-          </button>
-        </div>
-      </section>
+      {/* Interactive Blog Cards Grid with Category Filters & Search */}
+      <BlogCardsGrid posts={allPosts} featuredSlug={featured?.slug} />
 
       {/* Bottom CTA Banner */}
-      <section className="rounded-3xl bg-gradient-to-b from-[#170b10] to-[#0d0507] border border-[#e1cec0]/15 p-8 sm:p-14 text-center space-y-6 shadow-2xl">
+      <section className="rounded-3xl bg-gradient-to-b from-[#180b11] to-[#0c0507] border border-[#e1cec0]/15 p-8 sm:p-14 text-center space-y-6 shadow-2xl">
         <div className="space-y-2 max-w-xl mx-auto">
+          <span className="text-[11px] font-mono tracking-widest uppercase text-rose-400 font-semibold">
+            COLLABORATION &amp; PLATFORM SCALING
+          </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-serif">
             Let&apos;s build something great together
           </h2>
-          <p className="text-xs sm:text-sm text-[#c9bab0]">
+          <p className="text-xs sm:text-sm text-[#c9bab0] leading-relaxed">
             Full Stack Web Development, Cloud Migrations, Enterprise Architectures, and Design Systems.
           </p>
         </div>
@@ -382,12 +312,12 @@ async function BlogContent() {
           >
             Explore Portfolio
           </Link>
-          <Link
+          <a
             href="mailto:shivanshuchauhanofficials@gmail.com"
             className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white text-xs font-semibold shadow-lg shadow-rose-950/40 transition"
           >
             Get in touch
-          </Link>
+          </a>
         </div>
       </section>
     </main>
@@ -396,65 +326,52 @@ async function BlogContent() {
 
 export default function BlogPage() {
   return (
-    <div className="relative z-10 min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30">
-      {/* Top Untitled-style Navigation Bar */}
-      <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/85 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2 group">
-              <span className="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-600 to-rose-400 flex items-center justify-center font-bold text-white shadow-lg shadow-rose-900/30 group-hover:scale-105 transition">
-                SC
-              </span>
-              <span className="font-semibold text-lg tracking-tight text-white group-hover:text-rose-300 transition">
-                Shivanshu Chauhan
-              </span>
-            </Link>
-
-            <nav className="hidden md:flex items-center gap-6 text-sm text-[#c9bab0]">
-              <Link href="/" className="hover:text-white transition">
-                Home
+    <div className="relative z-10 min-h-screen bg-[#0b0507] text-[#f5ede6] font-sans antialiased selection:bg-rose-500/30 flex flex-col justify-between">
+      <div>
+        {/* Top Navigation Bar — Admin Sign In Hidden (Direct URL Access) */}
+        <header className="sticky top-0 z-40 border-b border-[#e1cec0]/10 bg-[#0b0507]/90 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
+            <div className="flex items-center gap-8">
+              <Link href="/" className="flex items-center gap-2.5 group">
+                <span className="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-600 to-rose-400 flex items-center justify-center font-bold text-white shadow-lg shadow-rose-900/30 group-hover:scale-105 transition">
+                  SC
+                </span>
+                <span className="font-semibold text-lg tracking-tight text-white group-hover:text-rose-300 transition">
+                  Shivanshu Chauhan
+                </span>
               </Link>
-              <Link href="/domains" className="hover:text-white transition">
-                Domains & Ecosystem
+
+              <nav className="hidden md:flex items-center gap-6 text-sm text-[#c9bab0]">
+                <Link href="/" className="hover:text-white transition">
+                  Home
+                </Link>
+                <Link href="/domains" className="hover:text-white transition">
+                  Domains &amp; Ecosystem
+                </Link>
+                <Link href="/blog" className="text-white font-medium">
+                  Blog
+                </Link>
+              </nav>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Link
+                href="/"
+                className="text-xs font-medium text-[#c9bab0] hover:text-white px-3.5 py-2 rounded-xl border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 transition"
+              >
+                ← Back to Portfolio
               </Link>
-              <Link href="/blog" className="text-white font-medium">
-                Blog
-              </Link>
-            </nav>
+            </div>
           </div>
+        </header>
 
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="text-xs text-[#c9bab0] hover:text-white px-3 py-2 rounded-lg transition"
-            >
-              ← Back to Portfolio
-            </Link>
-            <Link
-              href="/admin/login"
-              className="text-xs font-semibold px-4 py-2 rounded-xl bg-white text-zinc-900 hover:bg-zinc-100 transition shadow-sm"
-            >
-              Admin Sign In
-            </Link>
-          </div>
-        </div>
-      </header>
+        <Suspense fallback={<div className="max-w-7xl mx-auto px-6 py-24 text-center text-zinc-500">Loading blog articles...</div>}>
+          <BlogContent />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<div className="max-w-7xl mx-auto px-6 py-24 text-center text-zinc-500">Loading blog articles...</div>}>
-        <BlogContent />
-      </Suspense>
-
-      {/* Footer */}
-      <footer className="border-t border-[#e1cec0]/10 bg-[#080304] text-xs text-[#9e8e85] py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-zinc-200">Shivanshu Chauhan</span>
-            <span>•</span>
-            <span>Engineering & Architecture</span>
-          </div>
-          <div>© 2026 Shivanshu Chauhan. All rights reserved.</div>
-        </div>
-      </footer>
+      {/* Main Website Link Footer */}
+      <MainFooter />
     </div>
   );
 }
