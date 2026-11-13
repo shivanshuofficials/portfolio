@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Edit3, Trash2, ExternalLink, LogOut, FileText, CheckCircle2, Clock, EyeOff } from "lucide-react";
+import { Plus, Edit3, Trash2, ExternalLink, LogOut, FileText, CheckCircle2, Clock, EyeOff, Folder } from "lucide-react";
 
 interface PostSummary {
   _id: string;
@@ -18,6 +18,7 @@ interface PostSummary {
 export default function AdminDashboard() {
   const [posts, setPosts] = useState<PostSummary[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const loadPosts = () => {
     setLoading(true);
@@ -37,6 +38,19 @@ export default function AdminDashboard() {
   useEffect(() => {
     loadPosts();
   }, []);
+
+  const categories = Array.from(
+    new Set(
+      posts
+        ?.map((p) => p.category?.trim())
+        .filter((c): c is string => Boolean(c)) || []
+    )
+  );
+
+  const filteredPosts =
+    selectedCategory === "All"
+      ? posts
+      : posts?.filter((p) => p.category?.trim().toLowerCase() === selectedCategory.toLowerCase());
 
   async function handleDelete(p: PostSummary) {
     if (!confirm(`Are you sure you want to delete "${p.title}"? This cannot be undone.`)) return;
@@ -86,28 +100,80 @@ export default function AdminDashboard() {
           </div>
         </div>
 
+        {/* Category Filter & Quick Add in Category */}
+        {categories.length > 0 && (
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-zinc-900/60 border border-zinc-800 rounded-2xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs text-zinc-400 font-medium mr-1 flex items-center gap-1">
+                <Folder size={13} className="text-rose-400" /> Categories:
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedCategory("All")}
+                className={`px-3 py-1 text-xs rounded-xl transition font-medium ${
+                  selectedCategory === "All"
+                    ? "bg-rose-500 text-white"
+                    : "bg-zinc-800/80 text-zinc-300 hover:bg-zinc-800"
+                }`}
+              >
+                All ({posts?.length || 0})
+              </button>
+              {categories.map((cat) => {
+                const count = posts?.filter((p) => p.category?.trim().toLowerCase() === cat.toLowerCase()).length || 0;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-3 py-1 text-xs rounded-xl transition font-medium ${
+                      selectedCategory.toLowerCase() === cat.toLowerCase()
+                        ? "bg-rose-500 text-white"
+                        : "bg-zinc-800/80 text-zinc-300 hover:bg-zinc-800"
+                    }`}
+                  >
+                    {cat} ({count})
+                  </button>
+                );
+              })}
+            </div>
+
+            {selectedCategory !== "All" && (
+              <Link
+                href={`/admin/new?category=${encodeURIComponent(selectedCategory)}`}
+                className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-zinc-800 hover:bg-zinc-700 text-rose-300 border border-rose-500/30 transition flex items-center gap-1"
+              >
+                <Plus size={13} /> Add New Post in &quot;{selectedCategory}&quot;
+              </Link>
+            )}
+          </div>
+        )}
+
         {/* Content list */}
         {loading ? (
           <div className="py-20 text-center text-zinc-500">Loading your articles...</div>
-        ) : posts?.length === 0 ? (
+        ) : filteredPosts?.length === 0 ? (
           <div className="text-center py-24 border border-dashed border-zinc-800 rounded-3xl p-8 space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mx-auto text-zinc-500">
               <FileText size={24} />
             </div>
-            <h3 className="text-lg font-medium text-zinc-200">No blog posts found</h3>
+            <h3 className="text-lg font-medium text-zinc-200">No blog posts in this category</h3>
             <p className="text-sm text-zinc-500 max-w-sm mx-auto">
-              Get started by creating your first article or importing one from Word or PDF.
+              Get started by creating your first article in &quot;{selectedCategory}&quot;.
             </p>
             <Link
-              href="/admin/new"
+              href={
+                selectedCategory === "All"
+                  ? "/admin/new"
+                  : `/admin/new?category=${encodeURIComponent(selectedCategory)}`
+              }
               className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-xl bg-zinc-100 text-zinc-900 hover:bg-white transition"
             >
-              <Plus size={14} /> Create your first post
+              <Plus size={14} /> Create post in {selectedCategory}
             </Link>
           </div>
         ) : (
           <div className="divide-y divide-zinc-800/80 border border-zinc-800/80 rounded-2xl bg-zinc-900/40 overflow-hidden shadow-xl">
-            {posts?.map((p) => (
+            {filteredPosts?.map((p) => (
               <div
                 key={p._id}
                 className="p-5 flex flex-wrap items-center justify-between gap-4 hover:bg-zinc-800/30 transition"

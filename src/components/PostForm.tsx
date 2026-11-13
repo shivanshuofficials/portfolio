@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Editor, { uploadToImageKit } from "./Editor";
-import { ArrowLeft, Save, Eye, Upload, Tag, Globe, Check, AlertCircle, Search, EyeOff } from "lucide-react";
+import { ArrowLeft, Save, Eye, Upload, Tag, Globe, Check, AlertCircle, Search, EyeOff, Layers } from "lucide-react";
 import Link from "next/link";
 
 interface PostData {
@@ -45,15 +45,46 @@ const empty: PostData = {
   noIndex: false,
 };
 
+const DEFAULT_CATEGORIES = [
+  "Design & Engineering",
+  "Software Engineering",
+  "Product Design",
+  "Box Office & Entertainment",
+  "Leadership",
+  "AI & Cloud",
+];
+
 export default function PostForm({ id }: { id?: string }) {
   const router = useRouter();
-  const [post, setPost] = useState<PostData>(empty);
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams ? searchParams.get("category") : null;
+
+  const [post, setPost] = useState<PostData>(() => ({
+    ...empty,
+    category: categoryParam || empty.category,
+  }));
   const [loading, setLoading] = useState(!!id);
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
   const [tagInput, setTagInput] = useState("");
+  const [categories, setCategories] = useState<string[]>(DEFAULT_CATEGORIES);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load existing categories from DB
+  useEffect(() => {
+    fetch("/api/admin/posts")
+      .then((r) => r.json())
+      .then((posts) => {
+        if (Array.isArray(posts)) {
+          const dbCats = posts
+            .map((p) => p.category?.trim())
+            .filter((c): c is string => Boolean(c));
+          setCategories(Array.from(new Set([...DEFAULT_CATEGORIES, ...dbCats])));
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -232,14 +263,41 @@ export default function PostForm({ id }: { id?: string }) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1.5">Category</label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-medium text-zinc-400">Category</label>
+                <span className="text-[10px] text-rose-400 font-medium">Click pill or type</span>
+              </div>
               <input
                 type="text"
-                placeholder="Product Design, AI"
+                list="category-suggestions"
+                placeholder="e.g. Box Office, AI, Engineering"
                 value={post.category}
                 onChange={(e) => setField("category", e.target.value)}
-                className="w-full px-3.5 py-2 bg-zinc-900/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-500 focus:outline-none focus:border-zinc-600 transition"
+                className="w-full px-3.5 py-2 bg-zinc-900/70 border border-zinc-800 rounded-xl text-zinc-200 text-sm placeholder-zinc-500 focus:outline-none focus:border-rose-500/50 transition"
               />
+              <datalist id="category-suggestions">
+                {categories.map((c) => (
+                  <option key={c} value={c} />
+                ))}
+              </datalist>
+
+              {/* Quick Category Selection Pills */}
+              <div className="flex flex-wrap gap-1 mt-2">
+                {categories.slice(0, 5).map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setField("category", c)}
+                    className={`text-[10px] px-2 py-0.5 rounded-md border transition ${
+                      post.category.toLowerCase() === c.toLowerCase()
+                        ? "bg-rose-500/20 text-rose-300 border-rose-500/40 font-semibold"
+                        : "bg-zinc-950/60 text-zinc-400 border-zinc-800 hover:text-zinc-200 hover:border-zinc-700"
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
             </div>
             <div>
               <label className="block text-xs font-medium text-zinc-400 mb-1.5">Read Time</label>

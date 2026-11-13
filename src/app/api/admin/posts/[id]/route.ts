@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { getTursoClient, initDb } from "@/lib/turso";
 import { clean, slugify } from "@/lib/sanitize";
@@ -70,8 +71,8 @@ export async function PUT(req: NextRequest, context: RouteContext) {
         excerpt = COALESCE(?, excerpt),
         coverImage = COALESCE(?, coverImage),
         content = COALESCE(?, content),
-        tags = ?,
-        category = COALESCE(?, category),
+        tags = COALESCE(?, tags),
+        category = ?,
         readTime = COALESCE(?, readTime),
         authorName = COALESCE(?, authorName),
         authorAvatar = COALESCE(?, authorAvatar),
@@ -91,7 +92,7 @@ export async function PUT(req: NextRequest, context: RouteContext) {
       b.coverImage !== undefined ? b.coverImage : null,
       b.content !== undefined ? clean(b.content) : null,
       tags,
-      b.category || null,
+      b.category !== undefined && b.category.trim() ? b.category.trim() : "General",
       b.readTime || null,
       b.authorName || null,
       b.authorAvatar || null,
@@ -105,6 +106,11 @@ export async function PUT(req: NextRequest, context: RouteContext) {
       id,
     ],
   });
+
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${slug}`);
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/");
 
   return NextResponse.json({ id, _id: id, slug, status: b.status, noIndex: b.noIndex });
 }
@@ -122,6 +128,10 @@ export async function DELETE(_req: NextRequest, context: RouteContext) {
     sql: "DELETE FROM posts WHERE id = ?",
     args: [id],
   });
+
+  revalidatePath("/blog");
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/");
 
   return NextResponse.json({ ok: true });
 }

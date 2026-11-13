@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Tag, ArrowUpRight } from "lucide-react";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { getTursoClient, initDb } from "@/lib/turso";
 import { clean } from "@/lib/sanitize";
 import { PostModel } from "@/models/Post";
@@ -12,6 +13,7 @@ type RouteProps = {
 };
 
 async function getPost(slug: string): Promise<PostModel | null> {
+  await connection();
   try {
     const db = getTursoClient();
     if (!db) return null;

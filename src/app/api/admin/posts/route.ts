@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { getTursoClient, initDb } from "@/lib/turso";
 import { clean, slugify } from "@/lib/sanitize";
@@ -75,6 +76,11 @@ export async function POST(req: NextRequest) {
       now,
     ],
   });
+
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${slug}`);
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/");
 
   return NextResponse.json({ id, _id: id, slug, status }, { status: 201 });
 }

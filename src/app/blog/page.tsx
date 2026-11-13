@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { getTursoClient, initDb } from "@/lib/turso";
 import { PostModel } from "@/models/Post";
 
@@ -165,6 +166,7 @@ const FALLBACK_POSTS: PostModel[] = [
 ];
 
 async function BlogContent() {
+  await connection();
   let dbPosts: PostModel[] = [];
 
   try {
