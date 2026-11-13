@@ -19,6 +19,41 @@ interface GoogleUser {
   picture: string;
 }
 
+function UserAvatar({
+  src,
+  name,
+  size = "w-8 h-8",
+  borderColor = "border-zinc-700",
+}: {
+  src?: string;
+  name: string;
+  size?: string;
+  borderColor?: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const initial = (name || "U").trim().charAt(0).toUpperCase();
+
+  if (!src || failed) {
+    return (
+      <div
+        className={`${size} rounded-full bg-gradient-to-br from-rose-500 to-rose-700 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-md border ${borderColor}`}
+      >
+        {initial}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={name}
+      referrerPolicy="no-referrer"
+      onError={() => setFailed(true)}
+      className={`${size} rounded-full object-cover border ${borderColor} flex-shrink-0`}
+    />
+  );
+}
+
 export default function BlogComments({ slug, postTitle }: { slug: string; postTitle: string }) {
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -208,17 +243,12 @@ export default function BlogComments({ slug, postTitle }: { slug: string; postTi
             {/* Authenticated user indicator */}
             <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-800/80">
               <div className="flex items-center gap-3">
-                {user.picture ? (
-                  <img
-                    src={user.picture}
-                    alt={user.name}
-                    className="w-9 h-9 rounded-full object-cover border border-emerald-500/50"
-                  />
-                ) : (
-                  <div className="w-9 h-9 rounded-full bg-rose-500/20 text-rose-300 flex items-center justify-center font-bold text-xs">
-                    {user.name.charAt(0).toUpperCase()}
-                  </div>
-                )}
+                <UserAvatar
+                  src={user.picture}
+                  name={user.name}
+                  size="w-9 h-9"
+                  borderColor="border-emerald-500/50"
+                />
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold text-white">{user.name}</span>
@@ -327,17 +357,12 @@ export default function BlogComments({ slug, postTitle }: { slug: string; postTi
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-3">
-                    {cmt.userAvatar ? (
-                      <img
-                        src={cmt.userAvatar}
-                        alt=""
-                        className="w-8 h-8 rounded-full object-cover border border-zinc-700"
-                      />
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-rose-500/15 text-rose-300 font-bold text-xs flex items-center justify-center">
-                        {cmt.userName.charAt(0).toUpperCase()}
-                      </div>
-                    )}
+                    <UserAvatar
+                      src={cmt.userAvatar}
+                      name={cmt.userName}
+                      size="w-8 h-8"
+                      borderColor="border-zinc-700"
+                    />
                     <div>
                       <div className="flex items-center gap-1.5">
                         <span className="text-xs font-semibold text-zinc-200">{cmt.userName}</span>
