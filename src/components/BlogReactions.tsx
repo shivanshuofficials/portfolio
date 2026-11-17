@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ThumbsUp, ThumbsDown, Sparkles } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface ReactionsData {
   likes: number;
@@ -119,17 +119,24 @@ export default function BlogReactions({ slug }: { slug: string }) {
   const likeRatio = total > 0 ? Math.round((data.likes / total) * 100) : 100;
 
   return (
-    <div className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md space-y-4">
+    <div className="p-6 rounded-2xl bg-gradient-to-b from-[#111827]/70 to-[#0b101c]/90 border border-zinc-800 shadow-xl backdrop-blur-md space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h4 className="text-sm font-semibold text-zinc-100 flex items-center gap-1.5">
-            <Sparkles size={14} className="text-rose-400" />
-            Was this article helpful?
+          <h4 className="text-sm font-bold text-zinc-100 flex items-center gap-1.5 font-serif">
+            <Sparkles size={14} className="text-amber-400" />
+            Was this technical breakdown helpful?
           </h4>
-          <p className="text-xs text-zinc-400 mt-0.5">
-            {total > 0
-              ? `${likeRatio}% of readers found this insightful (${total} total votes)`
-              : "Be the first to share your feedback"}
+          <p className="text-xs text-zinc-400 mt-0.5 flex items-center gap-1.5">
+            {total > 0 ? (
+              <>
+                <CheckCircle2 size={12} className="text-emerald-400" />
+                <span>
+                  <strong className="text-emerald-400 font-semibold">{likeRatio}%</strong> of engineers found this actionable ({total} verified votes)
+                </span>
+              </>
+            ) : (
+              "Cast the first vote on this architectural deep dive"
+            )}
           </p>
         </div>
 
@@ -139,17 +146,17 @@ export default function BlogReactions({ slug }: { slug: string }) {
             type="button"
             disabled={loading}
             onClick={() => handleVote("like")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition cursor-pointer ${
               data.userReaction === "like"
-                ? "bg-rose-500 text-white shadow-lg shadow-rose-950/50 scale-105 border border-rose-400/50"
-                : "bg-zinc-800/80 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700/60"
+                ? "bg-amber-400 text-black shadow-lg shadow-amber-950/50 scale-105 border border-amber-300"
+                : "bg-zinc-800/80 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-zinc-700/60"
             }`}
           >
-            <ThumbsUp size={14} className={data.userReaction === "like" ? "fill-white" : ""} />
-            <span>Helpful</span>
+            <ThumbsUp size={14} className={data.userReaction === "like" ? "fill-black" : ""} />
+            <span>Insightful</span>
             <span
-              className={`px-1.5 py-0.5 rounded-full text-[11px] ${
-                data.userReaction === "like" ? "bg-white/20 text-white" : "bg-zinc-700/60 text-zinc-300"
+              className={`px-1.5 py-0.5 rounded-full text-[11px] font-mono ${
+                data.userReaction === "like" ? "bg-black/20 text-black" : "bg-zinc-700/70 text-zinc-300"
               }`}
             >
               {data.likes}
@@ -160,17 +167,17 @@ export default function BlogReactions({ slug }: { slug: string }) {
             type="button"
             disabled={loading}
             onClick={() => handleVote("dislike")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition cursor-pointer ${
               data.userReaction === "dislike"
                 ? "bg-zinc-700 text-white border border-zinc-500 scale-105"
                 : "bg-zinc-800/80 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 border border-zinc-700/60"
             }`}
           >
             <ThumbsDown size={14} className={data.userReaction === "dislike" ? "fill-white" : ""} />
-            <span>Needs Work</span>
+            <span>Needs Revision</span>
             <span
-              className={`px-1.5 py-0.5 rounded-full text-[11px] ${
-                data.userReaction === "dislike" ? "bg-white/20 text-white" : "bg-zinc-700/60 text-zinc-400"
+              className={`px-1.5 py-0.5 rounded-full text-[11px] font-mono ${
+                data.userReaction === "dislike" ? "bg-white/20 text-white" : "bg-zinc-700/70 text-zinc-400"
               }`}
             >
               {data.dislikes}
@@ -180,13 +187,13 @@ export default function BlogReactions({ slug }: { slug: string }) {
       </div>
 
       {total > 0 && (
-        <div className="w-full bg-zinc-800/80 rounded-full h-1.5 overflow-hidden flex">
+        <div className="w-full bg-zinc-800/90 rounded-full h-2 overflow-hidden flex">
           <div
-            className="bg-gradient-to-r from-rose-500 to-rose-400 h-full transition-all duration-500"
+            className="bg-gradient-to-r from-amber-400 to-emerald-400 h-full transition-all duration-500"
             style={{ width: `${likeRatio}%` }}
           />
           <div
-            className="bg-zinc-600 h-full transition-all duration-500"
+            className="bg-zinc-700 h-full transition-all duration-500"
             style={{ width: `${100 - likeRatio}%` }}
           />
         </div>
