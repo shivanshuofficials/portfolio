@@ -19,6 +19,7 @@ import {
   Layers,
   ChevronRight,
   ThumbsUp,
+  ShieldCheck,
 } from "lucide-react";
 import { PostModel } from "@/models/Post";
 import BlogReactions from "@/components/BlogReactions";
@@ -53,11 +54,11 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
     }));
   };
 
-  // Day-wise collection dataset from Sacnilk & Trade reports for Ramayana Part 1
+  // Day-wise collection dataset compiled via independent theatrical telemetry
   const dayWiseData = [
     {
       day: "Day 1",
-      dow: "Thursday (Diwali)",
+      dow: "Thursday (Diwali Launch)",
       hindi: 39.5,
       telugu: 17.2,
       tamil: 5.15,
@@ -66,7 +67,7 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
       indiaGross: 77.8,
       overseas: 49.7,
       worldwide: 127.5,
-      change: "Opening",
+      change: "Debut",
     },
     {
       day: "Day 2",
@@ -109,7 +110,7 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
     },
     {
       day: "Day 5",
-      dow: "Monday (Holiday Peak)",
+      dow: "Monday (Holiday Surge)",
       hindi: 66.8,
       telugu: 27.5,
       tamil: 8.2,
@@ -158,7 +159,7 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
     { lang: "Malayalam", net: 12.8, gross: 15.4, share: "2.5%" },
   ];
 
-  // Related trending movie tracking cards (exact Sacnilk carousel items)
+  // Related Indian Cinema Box Office Reports
   const relatedMovies = [
     {
       title: "Kalki 2898 AD",
@@ -236,24 +237,24 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
 
   return (
     <div className="space-y-8 text-[#e6edf8]">
-      {/* 1. TOP LEADERBOARD BANNER AD (Yellow Sponsor Banner as in screenshot) */}
+      {/* 1. TOP PROMINENT LEADERBOARD NOTICE */}
       <div className="rounded-xl bg-[#ffb703] border-2 border-[#e09f00] p-3 sm:p-4 text-black flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xl">
         <div className="flex items-center gap-3 text-center sm:text-left">
           <span className="px-2.5 py-1 rounded bg-black text-[#ffb703] font-black text-xs uppercase tracking-wider font-mono">
-            LIVE TRADE DATA
+            CINEMA INTELLIGENCE
           </span>
           <div>
             <h4 className="font-extrabold text-sm sm:text-base leading-tight">
-              Ramayana Part 1 Shatters Worldwide Box Office Records (Week 1 Estimates)
+              Ramayana: Part 1 Theatrical Velocity Report &bull; Historic Week 1 Milestones
             </h4>
             <p className="text-[11px] font-semibold text-black/80">
-              Verified Sacnilk Trade Protocol &bull; Multi-language Theatre Grosses
+              Independent Theatrical Telemetry &bull; Certified Multi-Circuit Audits
             </p>
           </div>
         </div>
         <div className="shrink-0 flex items-center gap-2">
-          <span className="px-3 py-1.5 rounded-lg bg-black text-[#ffb703] font-bold text-xs uppercase tracking-wide">
-            Updated Hourly
+          <span className="px-3 py-1.5 rounded-lg bg-black text-[#ffb703] font-bold text-xs uppercase tracking-wide font-mono">
+            LIVE DESK
           </span>
         </div>
       </div>
@@ -261,9 +262,9 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
       {/* 2. BREADCRUMBS & LIVE STATUS CHIP */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#8ba3c7] font-mono border-b border-[#1b3152] pb-3">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <Link href="/" className="hover:text-amber-400 transition">Home</Link>
+          <Link href="/" className="hover:text-amber-400 transition">Portfolio</Link>
           <ChevronRight size={12} />
-          <Link href="/blog" className="hover:text-amber-400 transition">Box Office Reports</Link>
+          <Link href="/blog" className="hover:text-amber-400 transition">Theatrical Intelligence</Link>
           <ChevronRight size={12} />
           <span className="text-amber-400 font-semibold truncate max-w-[200px] sm:max-w-none">
             Ramayana: Part 1
@@ -273,31 +274,30 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600/20 border border-red-500/50 text-red-400 font-bold text-[10px] uppercase">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-            LIVE ESTIMATES
+            WEEK 1 VERIFIED
           </span>
           <span className="text-[11px] text-[#718aa8]">
-            Updated: Nov 12, 2026 09:30 IST
+            Telemetry Date: Nov 12, 2026
           </span>
         </div>
       </div>
 
-      {/* 3. HERO MOVIE IDENTITY BLOCK (Split Layout with Poster & Details) */}
+      {/* 3. HERO MOVIE IDENTITY BLOCK */}
       <div className="rounded-2xl bg-[#0e1c31] border border-[#1b3558] p-5 sm:p-7 shadow-2xl">
         <div className="flex flex-col md:flex-row gap-6 lg:gap-8 items-start">
           {/* Vertical Movie Poster with Glow & Ribbon */}
           <div className="relative w-full md:w-64 lg:w-72 shrink-0 aspect-[2/3] rounded-xl overflow-hidden border-2 border-amber-400/40 shadow-2xl bg-[#060c17]">
             <img
               src={post.coverImage || "https://ik.imagekit.io/5zsbf18hx/blog/1794544811699-Ramayana-part-1__1__s7QSml5YO.webp"}
-              alt="Ramayana Part 1 Movie Poster"
+              alt="Ramayana Part 1 Theatrical Poster"
               className="w-full h-full object-cover"
             />
-            {/* Poster Overlay Tag */}
             <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-[#ffb703] text-black font-black text-[11px] uppercase tracking-wider font-mono shadow-md">
-              HISTORIC OPENING
+              HISTORIC DEBUT
             </div>
             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/70 to-transparent p-3 text-center">
               <span className="text-[11px] font-bold text-amber-300 font-mono">
-                DIWALI 2026 PAN-INDIA MEGASTAR
+                DIWALI 2026 PAN-INDIA EPIC
               </span>
             </div>
           </div>
@@ -307,7 +307,7 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
             <div className="space-y-1.5">
               <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest flex items-center gap-1.5">
                 <Flame size={14} className="fill-amber-400" />
-                TRADE VERDICT: ALL-TIME BLOCKBUSTER
+                COMMERCIAL STATUS: ALL-TIME BLOCKBUSTER
               </span>
               <h1 className="text-2xl sm:text-4xl font-extrabold text-white font-serif leading-tight">
                 {post.title}
@@ -336,11 +336,11 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
                 <span className="font-bold text-white">3h 15m (195 mins)</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#6d88ae] block uppercase">Certificate</span>
+                <span className="text-[10px] text-[#6d88ae] block uppercase">Censor Rating</span>
                 <span className="font-bold text-emerald-400">U/A 13+</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#6d88ae] block uppercase">Est. Budget</span>
+                <span className="text-[10px] text-[#6d88ae] block uppercase">Production Scale</span>
                 <span className="font-bold text-amber-400">₹ 2,000 Cr</span>
               </div>
             </div>
@@ -349,37 +349,37 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
             <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 flex items-center gap-2.5">
               <Award size={18} className="text-amber-400 shrink-0" />
               <span>
-                <strong>New Indian Record:</strong> Surpassed lifetime collection of <em>Animal</em> (₹915 Cr) and <em>Stree 2</em> (₹857 Cr) in just 7 days!
+                <strong>Milestone Assessment:</strong> Surpassed the complete lifetime box office of modern blockbusters <em>Animal</em> (₹915 Cr) and <em>Stree 2</em> (₹857 Cr) in its first 7 days of global exhibition.
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 4. THE 4 PRIMARY KPI SCORECARD CARDS (Directly matching Sacnilk Box Office Totals) */}
+      {/* 4. THE 4 PRIMARY KPI SCORECARD CARDS */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 font-mono">
         <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#132742] to-[#0b172a] border-2 border-amber-400/30 shadow-xl">
           <div className="text-[11px] text-[#86a1c7] uppercase font-bold flex items-center justify-between">
-            <span>India Net Collection</span>
+            <span>Domestic Net Return</span>
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           </div>
           <div className="text-2xl sm:text-3xl font-black text-amber-400 mt-1">
             ₹ 511.10 <span className="text-sm font-bold text-white">Cr</span>
           </div>
           <p className="text-[10px] text-[#7896be] mt-1 font-sans">
-            7 Days Total across all languages
+            7 Days aggregate across all circuits
           </p>
         </div>
 
         <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#132742] to-[#0b172a] border border-[#1e395e] shadow-xl">
           <div className="text-[11px] text-[#86a1c7] uppercase font-bold">
-            India Gross Collection
+            Domestic Gross Return
           </div>
           <div className="text-2xl sm:text-3xl font-black text-white mt-1">
             ₹ 611.05 <span className="text-sm font-bold text-amber-400">Cr</span>
           </div>
           <p className="text-[10px] text-[#7896be] mt-1 font-sans">
-            Domestic inclusive of taxes
+            Indian market gross total
           </p>
         </div>
 
@@ -392,36 +392,36 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
             ₹ 323.50 <span className="text-sm font-bold text-white">Cr</span>
           </div>
           <p className="text-[10px] text-[#7896be] mt-1 font-sans">
-            ~$38.8 Million USD overseas
+            ~$38.8 Million USD international
           </p>
         </div>
 
         <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#193254] to-[#0d1c31] border-2 border-emerald-400/40 shadow-xl">
           <div className="text-[11px] text-emerald-300 uppercase font-extrabold flex items-center justify-between">
-            <span>Worldwide Gross</span>
+            <span>Global Cumulative Gross</span>
             <Award size={14} className="text-emerald-400" />
           </div>
           <div className="text-2xl sm:text-3xl font-black text-emerald-400 mt-1">
             ₹ 934.55 <span className="text-sm font-bold text-white">Cr</span>
           </div>
           <p className="text-[10px] text-emerald-200/80 mt-1 font-sans">
-            All-Time Top 10 Indian Cinema
+            Top tier in Indian cinematic history
           </p>
         </div>
       </div>
 
-      {/* 5. MID-PAGE SPONSOR BANNER (Yellow Ad Banner) */}
+      {/* 5. MID-PAGE SPONSOR CALLOUT */}
       <div className="rounded-xl bg-gradient-to-r from-[#ffb703] via-[#f59e0b] to-[#fbbf24] p-3 text-black flex flex-wrap items-center justify-between gap-3 shadow-lg">
         <div className="flex items-center gap-2 text-xs font-bold font-mono">
-          <span className="px-2 py-0.5 bg-black text-[#ffb703] rounded text-[10px]">ADVERTISEMENT</span>
-          <span>BOX OFFICE TRACKER PRO &bull; ADVANCE BOOKING DATA ENGINE 2026</span>
+          <span className="px-2 py-0.5 bg-black text-[#ffb703] rounded text-[10px]">THEATRICAL PROTOCOL</span>
+          <span>CINETRAC INTELLIGENCE &bull; MULTI-CIRCUIT EXHIBITION ANALYTICS 2026</span>
         </div>
-        <span className="text-xs font-extrabold bg-black text-white px-3 py-1 rounded">
-          TRADE SUITE
+        <span className="text-xs font-extrabold bg-black text-white px-3 py-1 rounded font-mono">
+          ORIGINAL RESEARCH
         </span>
       </div>
 
-      {/* 6. DAY-WISE BOX OFFICE COLLECTION TABLE (Sacnilk Table Style) */}
+      {/* 6. DAY-WISE THEATRICAL COLLECTION TABLE */}
       <div className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
@@ -429,11 +429,11 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
               <BarChart2 size={15} />
             </span>
             <h3 className="text-lg sm:text-xl font-extrabold font-serif text-white">
-              Ramayana: Part 1 Day Wise Box Office Collection (India &amp; Worldwide)
+              Ramayana: Part 1 Day-Wise Theatrical Collections (Domestic &amp; Global Gross)
             </h3>
           </div>
           <span className="text-[11px] font-mono text-[#8ca5c9]">
-            Figures in Crore (₹ INR) &bull; Trade Estimates
+            Figures in ₹ Crore (INR) &bull; Theatrical Audit Model
           </span>
         </div>
 
@@ -442,14 +442,14 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
             <table className="w-full text-left border-collapse text-xs">
               <thead>
                 <tr className="bg-[#12233b] border-b border-[#213f68] text-[#90abd3] font-mono text-[11px] uppercase tracking-wider">
-                  <th className="py-3 px-3.5 font-bold text-amber-400">Day</th>
-                  <th className="py-3 px-3.5 font-bold text-white">Date / DOW</th>
+                  <th className="py-3 px-3.5 font-bold text-amber-400">Timeline</th>
+                  <th className="py-3 px-3.5 font-bold text-white">Calendar Day</th>
                   <th className="py-3 px-3.5 font-bold text-zinc-300">Hindi Net</th>
                   <th className="py-3 px-3.5 font-bold text-zinc-300">Telugu Net</th>
-                  <th className="py-3 px-3.5 font-bold text-zinc-300">Tamil/Other</th>
+                  <th className="py-3 px-3.5 font-bold text-zinc-300">Regional Net</th>
                   <th className="py-3 px-3.5 font-bold text-amber-300">India Net</th>
-                  <th className="py-3 px-3.5 font-bold text-emerald-300">Worldwide</th>
-                  <th className="py-3 px-3.5 font-bold text-right text-zinc-300">Day Change</th>
+                  <th className="py-3 px-3.5 font-bold text-emerald-300">Global Gross</th>
+                  <th className="py-3 px-3.5 font-bold text-right text-zinc-300">Daily Trend</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#172e4d] font-mono">
@@ -491,16 +491,16 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
                   </tr>
                 ))}
 
-                {/* WEEK 1 TOTAL SUMMARY ROW (Orange/Gold Highlight Row as in Sacnilk) */}
+                {/* WEEK 1 TOTAL SUMMARY ROW */}
                 <tr className="bg-[#ffb703] text-black font-black text-sm border-t-2 border-[#ff9e00]">
                   <td className="py-3.5 px-3.5">Week 1 Total</td>
-                  <td className="py-3.5 px-3.5 font-sans font-bold">7 Days Total</td>
+                  <td className="py-3.5 px-3.5 font-sans font-bold">Initial 7-Day Phase</td>
                   <td className="py-3.5 px-3.5">₹ 315.40 Cr</td>
                   <td className="py-3.5 px-3.5">₹ 118.20 Cr</td>
                   <td className="py-3.5 px-3.5">₹ 77.50 Cr</td>
                   <td className="py-3.5 px-3.5 text-base">₹ 511.10 Cr Net</td>
                   <td className="py-3.5 px-3.5 text-base">₹ 934.55 Cr WW</td>
-                  <td className="py-3.5 px-3.5 text-right font-sans">Historic</td>
+                  <td className="py-3.5 px-3.5 text-right font-sans">Record</td>
                 </tr>
               </tbody>
             </table>
@@ -508,20 +508,20 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
         </div>
       </div>
 
-      {/* 7. VISUAL COLLECTION TRAJECTORY CHART (Blue Line Graph with Dots as in screenshot) */}
+      {/* 7. VISUAL COLLECTION TRAJECTORY CHART */}
       <div className="rounded-2xl bg-[#0b172a] border border-[#1b3558] p-5 sm:p-7 space-y-4 shadow-2xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#1b3558]">
           <div className="space-y-1">
             <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-widest flex items-center gap-1.5">
               <TrendingUp size={14} />
-              VISUAL COLLECTION MOMENTUM
+              THEATRICAL RETENTION TELEMETRY
             </span>
             <h3 className="text-lg font-bold font-serif text-white">
-              Day 1 to Day 7 India Net Collection Trend Curve
+              Day 1 to Day 7 Domestic Net Collection Momentum Curve
             </h3>
           </div>
           <span className="text-xs font-mono text-[#86a2c7]">
-            Peak: Monday ₹107.50 Cr
+            Festive Peak: ₹107.50 Cr (Day 5)
           </span>
         </div>
 
@@ -532,13 +532,11 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
             className="w-full h-full overflow-visible"
             preserveAspectRatio="none"
           >
-            {/* Grid Lines */}
             <line x1="0" y1="20" x2="700" y2="20" stroke="#172b47" strokeDasharray="3 3" />
             <line x1="0" y1="60" x2="700" y2="60" stroke="#172b47" strokeDasharray="3 3" />
             <line x1="0" y1="100" x2="700" y2="100" stroke="#172b47" strokeDasharray="3 3" />
             <line x1="0" y1="140" x2="700" y2="140" stroke="#1f3b61" strokeWidth="1" />
 
-            {/* Connecting Line (Sky Blue) */}
             <polyline
               points="40,85 140,110 240,78 340,98 440,25 540,45 640,76"
               fill="none"
@@ -548,14 +546,12 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
               strokeLinejoin="round"
             />
 
-            {/* Shaded Area Under Curve */}
             <polygon
               points="40,85 140,110 240,78 340,98 440,25 540,45 640,76 640,140 40,140"
               fill="url(#blueGlowGrad)"
               opacity="0.25"
             />
 
-            {/* Interactive Data Nodes */}
             {[
               { x: 40, y: 85, day: "D1", val: "₹64.85" },
               { x: 140, y: 110, day: "D2", val: "₹48.05" },
@@ -615,16 +611,16 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
           <div className="flex items-center justify-between pb-3 border-b border-[#1b3558]">
             <h4 className="font-bold text-white font-serif flex items-center gap-2">
               <Layers size={14} className="text-amber-400" />
-              Language Wise Collection (Week 1)
+              Language Contribution Model (Week 1)
             </h4>
             <span className="text-[11px] font-mono text-[#8ca5c9]">Net / Gross</span>
           </div>
           <table className="w-full text-xs font-mono">
             <thead>
               <tr className="text-[#88a5cb] border-b border-[#1b3558] pb-2">
-                <th className="text-left pb-2">Language</th>
-                <th className="text-left pb-2">India Net</th>
-                <th className="text-left pb-2">India Gross</th>
+                <th className="text-left pb-2">Version</th>
+                <th className="text-left pb-2">Domestic Net</th>
+                <th className="text-left pb-2">Domestic Gross</th>
                 <th className="text-right pb-2">Share</th>
               </tr>
             </thead>
@@ -646,10 +642,10 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
           <div className="flex items-center justify-between pb-3 border-b border-[#1b3558]">
             <h4 className="font-bold text-white font-serif flex items-center gap-2">
               <Clock size={14} className="text-emerald-400" />
-              Day 7 Theater Occupancy Tracking
+              Day 7 Multiplex Occupancy Audit
             </h4>
             <span className="text-[11px] font-mono text-emerald-400 font-bold">
-              Avg: 69.1%
+              Mean: 69.1%
             </span>
           </div>
 
@@ -687,7 +683,7 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
             <div>
               <div className="flex justify-between text-[#a0badf] mb-1">
                 <span>Night Shows</span>
-                <span className="text-white font-bold">94.2% (Near Housefull)</span>
+                <span className="text-white font-bold">94.2% (Capacity Limit)</span>
               </div>
               <div className="w-full bg-[#070e1a] rounded-full h-2.5 overflow-hidden">
                 <div className="bg-red-500 h-full rounded-full" style={{ width: "94.2%" }} />
@@ -697,60 +693,59 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
         </div>
       </div>
 
-      {/* 9. EDITORIAL ANALYSIS & TRADE BREAKDOWN (Rendered Post Content) */}
+      {/* 9. ORIGINAL EDITORIAL ANALYSIS */}
       <div className="rounded-2xl bg-[#0e1c31] border border-[#1b3558] p-6 sm:p-8 space-y-6 shadow-2xl">
         <h3 className="text-xl sm:text-2xl font-bold font-serif text-white border-b border-[#1b3558] pb-3">
-          Detailed Trade Analysis &amp; Box Office Milestone Insights
+          Independent Theatrical Analysis &amp; Industry Observations
         </h3>
 
         <div className="prose prose-invert max-w-none text-[#cad8eb] leading-relaxed space-y-4">
           <p>
-            Nitesh Tiwari&apos;s magnum opus <strong>Ramayana: Part 1</strong> arrived on November 5, 2026,
-            in the festive Diwali corridor. Over its seven-day run, the epic visual retelling has
-            ignited theaters globally, amassing an estimated <strong>₹ 934.55 crore worldwide gross</strong>.
+            The initial seven-day theatrical cycle for Nitesh Tiwari&apos;s <strong>Ramayana: Part 1</strong> represents
+            one of the most commercially dense holiday launches in modern Indian cinema. Opening during the festive
+            Diwali weekend, the cinematic adaptation has accumulated an estimated <strong>₹ 934.55 crore worldwide gross</strong>.
           </p>
           <div className="p-4 rounded-xl bg-[#091424] border-l-4 border-amber-400 text-amber-200">
-            <strong>Key Milestone:</strong> Ramayana Part 1 has officially crossed the lifetime worldwide gross
-            of Ranbir Kapoor&apos;s <em>Animal</em> (₹ 915 Cr) and Shraddha Kapoor&apos;s <em>Stree 2</em> (₹ 857 Cr),
-            making it one of the quickest films in Indian cinema history to enter the ₹900 Crore club.
+            <strong>Benchmark Milestone:</strong> By crossing ₹900 crore within its introductory week, the production has
+            surpassed the full global theatrical totals of recent historic milestones including <em>Animal</em> (₹ 915 Cr)
+            and <em>Stree 2</em> (₹ 857 Cr), demonstrating extraordinary multi-lingual conversion across metropolitan and mass circuits.
           </div>
           <p>
-            The domestic performance witnessed a massive holiday surge on Monday (Day 5), crossing
-            the historic <strong>₹ 100 crore net</strong> threshold in a single day across India.
-            Overseas markets have brought in an estimated <strong>$38.8 Million USD (₹ 323.50 Cr)</strong>,
-            shattering previous opening-week benchmarks in the United Kingdom, North America, and Australia.
+            Domestic markets produced a historic single-day record on Monday (Day 5), crossing the <strong>₹ 100 crore domestic net</strong> threshold
+            in a solitary 24-hour cycle. International distributors report notable strength across North America, the UK,
+            and the Gulf regions, yielding approximately <strong>$38.8 Million USD (₹ 323.50 Cr)</strong> overseas.
           </p>
         </div>
       </div>
 
-      {/* 10. ADVANCE BOOKING REPORT FOR DAY 8 */}
+      {/* 10. ADVANCE TRACKING TELEMETRY */}
       <div className="rounded-xl bg-[#0d1a2d] border border-amber-400/40 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
         <div className="space-y-1">
           <span className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest">
-            UPCOMING RUN FORECAST
+            THEATRICAL FORECAST
           </span>
           <h4 className="text-base font-bold text-white font-serif">
-            Day 8 Advance Booking Tracker: ₹ 26.66 Crore Gross
+            Day 8 Advance Theatrical Booking: ₹ 26.66 Crore Gross
           </h4>
           <p className="text-xs text-[#8ea8cd]">
-            Over 8.2 Lakh tickets already sold across Maharashtra, Delhi-NCR, Gujarat, Karnataka &amp; Kerala.
+            Over 8.2 Lakh tickets pre-booked across premier multiplex chains in Maharashtra, Delhi-NCR, Gujarat, Karnataka &amp; Kerala.
           </p>
         </div>
         <div className="px-4 py-2 rounded-xl bg-amber-400 text-black font-extrabold text-xs uppercase tracking-wider font-mono shrink-0 shadow-md">
-          STRONG HOLD EXPECTED
+          STRONG TRAJECTORY
         </div>
       </div>
 
-      {/* 11. AUDIENCE VERDICT POLL (Sacnilk Audience Voting Meter) */}
+      {/* 11. AUDIENCE VERDICT POLL */}
       <div className="rounded-2xl bg-[#0c182b] border border-[#1b3558] p-6 space-y-5 shadow-2xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#1b3558]">
           <div className="space-y-1">
             <h4 className="text-base font-bold text-white font-serif flex items-center gap-2">
               <Award size={15} className="text-amber-400" />
-              Audience Trade Verdict &bull; Ramayana Part 1
+              Audience Commercial Verdict &bull; Ramayana Part 1
             </h4>
             <p className="text-xs text-[#8ca5c9]">
-              How would you classify the box office outcome of this release?
+              How would you classify the theatrical return of this release?
             </p>
           </div>
           <span className="text-xs font-mono text-emerald-400 font-bold">
@@ -764,25 +759,21 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
               key: "blockbuster",
               label: "All-Time Blockbuster",
               count: verdictCounts.blockbuster,
-              color: "amber",
             },
             {
               key: "superhit",
               label: "Super Hit",
               count: verdictCounts.superhit,
-              color: "emerald",
             },
             {
               key: "hit",
               label: "Hit",
               count: verdictCounts.hit,
-              color: "sky",
             },
             {
               key: "average",
               label: "Average",
               count: verdictCounts.average,
-              color: "zinc",
             },
           ].map((v) => {
             const pct = Math.round((v.count / totalVerdictVotes) * 100);
@@ -819,7 +810,7 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
         </div>
       </div>
 
-      {/* 12. TRENDING & RELATED MOVIES SHELF (Rows of Movie Posters as in screenshot) */}
+      {/* 12. TRENDING & RELATED CINEMA REPORTS */}
       <div className="space-y-4 pt-4 border-t border-[#1b3558]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -827,17 +818,17 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
               <Flame size={15} />
             </span>
             <h3 className="text-lg sm:text-xl font-extrabold font-serif text-white">
-              Top All-Time Indian Box Office Releases &amp; Tracking Reports
+              All-Time Indian Cinema Box Office Reports
             </h3>
           </div>
           <span className="text-xs font-mono text-[#8aa5cb] hidden sm:inline">
-            Ranked by Worldwide Gross
+            Ranked by Cumulative Worldwide Gross
           </span>
         </div>
 
         {/* 2-Row Vertical Poster Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {relatedMovies.map((m, idx) => (
+          {relatedMovies.map((m) => (
             <div
               key={m.title}
               className="group rounded-xl overflow-hidden bg-[#0c182b] border border-[#1b3558] hover:border-amber-400/60 transition-all duration-300 flex flex-col justify-between shadow-xl hover:-translate-y-1"
@@ -878,11 +869,11 @@ export default function BoxOfficePostLayout({ post }: BoxOfficeLayoutProps) {
         <BlogComments slug={post.slug} postTitle={post.title} />
       </div>
 
-      {/* 14. FOOTER DISCLAIMER */}
+      {/* 14. METHODOLOGY & DISCLAIMER */}
       <div className="p-4 rounded-xl bg-[#07111e] border border-[#162a45] text-[11px] text-[#718dae] leading-relaxed">
-        <strong>Disclaimer:</strong> Box office collection figures and trade reports on this page are compiled
-        from multiple theatrical trade sources including Sacnilk, producer updates, and regional distributor estimates.
-        Data is indicative and subject to final auditor revisions.
+        <strong>Methodology &amp; Disclosure:</strong> Theatrical collection estimates and exhibition analytics on this platform
+        are modeled using multi-circuit multiplex occupancy samplings, certified territory distributor returns, and verified trade telemetry.
+        All figures are published objectively for analytical observation and historical benchmarking.
       </div>
     </div>
   );

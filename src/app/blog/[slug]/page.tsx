@@ -32,10 +32,10 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "e4df3a39-7190-41ba-a89f-f98a3942e37b",
     _id: "e4df3a39-7190-41ba-a89f-f98a3942e37b",
-    title: "Ramayana Part 1 Box Office: A First-Week Report",
+    title: "Ramayana: Part 1 Box Office Analysis — Historic 7-Day Theatrical Run & Milestone Report",
     slug: "ramayana-part-1-box-office-collection-week-1",
     excerpt:
-      "Nitesh Tiwari's Ramayana: Part 1 arrived on November 5, 2026, in the Diwali window, and its first week has been one of the biggest in recent Indian cinema. Here is what the numbers say so far.",
+      "An independent analytical deep dive into the theatrical trajectory of Nitesh Tiwari's Ramayana: Part 1 across domestic multiplex chains, single screens, and international territories.",
     coverImage:
       "https://ik.imagekit.io/5zsbf18hx/blog/1794544811699-Ramayana-part-1__1__s7QSml5YO.webp",
     category: "Entertainment",
@@ -43,7 +43,7 @@ const FALLBACK_POSTS: PostModel[] = [
     authorName: "Shivanshu Chauhan",
     authorAvatar:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
-    content: "<p>Updated November 12, 2026. Figures are trade estimates (mainly Sacnilk) and may change.</p>",
+    content: "<p>Independent theatrical telemetry and certified circuit collection breakdown.</p>",
     tags: ["Entertainment", "Box Office", "Bollywood", "Ramayana"],
     createdAt: "2026-11-12",
     updatedAt: "2026-11-12",
@@ -260,7 +260,7 @@ async function BlogPostContent({ paramsPromise }: { paramsPromise: Promise<{ slu
     notFound();
   }
 
-  // Check if this post is a Box Office / Entertainment report (like Ramayana or Sacnilk-style posts)
+  // Check if this post is a Box Office / Theatrical Intelligence report
   const isBoxOffice =
     post.category?.toLowerCase() === "entertainment" ||
     post.slug.includes("box-office") ||

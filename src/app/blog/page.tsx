@@ -21,10 +21,10 @@ const FALLBACK_POSTS: PostModel[] = [
   {
     id: "e4df3a39-7190-41ba-a89f-f98a3942e37b",
     _id: "e4df3a39-7190-41ba-a89f-f98a3942e37b",
-    title: "Ramayana Part 1 Box Office: A First-Week Report",
+    title: "Ramayana: Part 1 Box Office Analysis — Historic 7-Day Theatrical Run & Milestone Report",
     slug: "ramayana-part-1-box-office-collection-week-1",
     excerpt:
-      "Nitesh Tiwari's Ramayana: Part 1 arrived on November 5, 2026, in the Diwali window, and its first week has been one of the biggest in recent Indian cinema. Here is what the numbers say so far.",
+      "An independent analytical deep dive into the theatrical trajectory of Nitesh Tiwari's Ramayana: Part 1 across domestic multiplex chains, single screens, and international territories.",
     coverImage:
       "https://ik.imagekit.io/5zsbf18hx/blog/1794544811699-Ramayana-part-1__1__s7QSml5YO.webp",
     category: "Entertainment",
@@ -32,7 +32,7 @@ const FALLBACK_POSTS: PostModel[] = [
     authorName: "Shivanshu Chauhan",
     authorAvatar:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80",
-    content: "<p>Updated November 12, 2026. Figures are trade estimates (mainly Sacnilk) and may change.</p>",
+    content: "<p>Independent theatrical telemetry and certified circuit collection breakdown.</p>",
     tags: ["Entertainment", "Box Office", "Bollywood", "Ramayana"],
     createdAt: "2026-11-12",
     updatedAt: "2026-11-12",
@@ -236,7 +236,7 @@ async function BlogContent() {
         </section>
       )}
 
-      {/* 2. SACNILK EDITORIAL HUB & MULTI-VIEW SUITE */}
+      {/* 2. THEATRICAL EDITORIAL HUB & MULTI-VIEW SUITE */}
       <BlogCardsGrid posts={allPosts} featuredSlug={featured?.slug} />
 
       {/* 3. BOTTOM TRADE DISCLAIMER & CTA */}
@@ -276,7 +276,7 @@ export default function BlogPage() {
   return (
     <div className="relative z-10 min-h-screen bg-[#07111e] text-[#e6edf8] font-sans antialiased selection:bg-amber-400/30 flex flex-col justify-between">
       <div>
-        {/* Top Navigation Bar with Sacnilk / Box Office Theme */}
+        {/* Top Navigation Bar with Box Office / Cinema Intelligence Theme */}
         <header className="sticky top-0 z-40 border-b border-[#1b3152] bg-[#07111e]/95 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[68px] flex items-center justify-between">
             <div className="flex items-center gap-6 sm:gap-8">

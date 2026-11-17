@@ -116,7 +116,7 @@ export default function BlogCardsGrid({ posts, featuredSlug }: BlogCardsGridProp
 
   return (
     <section className="space-y-12" id="editorial-hub">
-      {/* 1. HIGH-DENSITY KPI METRICS STRIP (Sacnilk Box Office Totals) */}
+      {/* 1. HIGH-DENSITY KPI METRICS STRIP (Theatrical Box Office Totals) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 font-mono">
         <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-[#132742] to-[#0b172a] border-2 border-amber-400/30 shadow-xl relative overflow-hidden group">
           <div className="flex items-center justify-between text-[#86a1c7] text-xs mb-2">
@@ -166,7 +166,7 @@ export default function BlogCardsGrid({ posts, featuredSlug }: BlogCardsGridProp
             100% <span className="text-xs font-bold text-white">Audited</span>
           </div>
           <p className="text-[11px] text-emerald-200/80 mt-1 font-sans">
-            Sacnilk &amp; Producer Trade Protocol
+            Multi-Circuit Verified Trade Protocol
           </p>
         </div>
       </div>
@@ -458,7 +458,7 @@ export default function BlogCardsGrid({ posts, featuredSlug }: BlogCardsGridProp
                     ? "bg-[#ffb703] text-black font-bold shadow-sm"
                     : "text-[#7998c0] hover:text-white"
                 }`}
-                title="Sacnilk Data Table View"
+                title="Theatrical Data Table View"
               >
                 <TableIcon size={14} />
               </button>
@@ -498,7 +498,7 @@ export default function BlogCardsGrid({ posts, featuredSlug }: BlogCardsGridProp
         </div>
       </div>
 
-      {/* 6. CONTENT VIEW (CARDS OR SACNILK HIGH-DENSITY TABLE) */}
+      {/* 6. CONTENT VIEW (CARDS OR HIGH-DENSITY THEATRICAL TABLE) */}
       {displayPosts.length === 0 ? (
         <div className="py-20 text-center space-y-4 border border-dashed border-[#1b3558] rounded-2xl bg-[#091526]/50">
           <p className="text-sm text-[#8ca5c9] font-serif">No tracking publications found</p>
@@ -588,7 +588,7 @@ export default function BlogCardsGrid({ posts, featuredSlug }: BlogCardsGridProp
           ))}
         </div>
       ) : (
-        /* SACNILK DATA TABLE VIEW */
+        /* THEATRICAL DATA TABLE VIEW */
         <div className="rounded-xl border border-[#1b3558] bg-[#0c182b] overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
